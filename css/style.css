@@ -35,9 +35,9 @@
   --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
   
   --radius-sm: 6px;
-  --radius-md: 10px;
-  --radius-lg: 16px;
-  --radius-full: 9999px;
+  --radius-md: 6px;
+  --radius-lg: 8px;
+  --radius-full: 6px; /* Updated to almost square 6px edge to match lime badges */
   --transition-fast: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
   --transition-normal: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
@@ -149,7 +149,7 @@ button {
   background: rgba(132, 204, 22, 0.2);
   color: #BEF264;
   padding: 0.2rem 0.65rem;
-  border-radius: var(--radius-full);
+  border-radius: var(--radius-sm);
   font-size: 0.75rem;
   font-weight: 700;
   border: 1px solid rgba(132, 204, 22, 0.4);
@@ -1349,7 +1349,7 @@ button {
   padding: 0.45rem 1.25rem;
   font-size: 0.85rem;
   font-weight: 700;
-  border-radius: var(--radius-full);
+  border-radius: var(--radius-sm);
   background: var(--bg-white);
   color: var(--text-body);
   border: 1px solid var(--border-light);
@@ -1375,7 +1375,7 @@ button {
 .team-carousel-viewport {
   width: 100%;
   overflow: hidden;
-  border-radius: var(--radius-lg);
+  border-radius: var(--radius-md);
   padding: 0.5rem 0;
 }
 
@@ -1390,7 +1390,7 @@ button {
   flex: 0 0 calc(25% - 1.125rem); /* Exactly 4 cards at a time on desktop */
   min-width: calc(25% - 1.125rem);
   background: var(--bg-white);
-  border-radius: var(--radius-lg);
+  border-radius: var(--radius-md);
   border: 1px solid var(--border-light);
   padding: 1.25rem;
   text-align: center;
@@ -1412,7 +1412,7 @@ button {
 .team-image-container {
   width: 100%;
   aspect-ratio: 1 / 1;
-  border-radius: 14px;
+  border-radius: var(--radius-sm);
   overflow: hidden;
   margin-bottom: 1.25rem;
   position: relative;
@@ -1441,7 +1441,7 @@ button {
   font-size: 0.7rem;
   font-weight: 800;
   padding: 0.2rem 0.65rem;
-  border-radius: var(--radius-full);
+  border-radius: var(--radius-sm);
   letter-spacing: 0.05em;
   text-transform: uppercase;
   border: 1px solid rgba(255, 255, 255, 0.15);
@@ -1492,7 +1492,7 @@ button {
 .team-social-link {
   width: 32px;
   height: 32px;
-  border-radius: 50%;
+  border-radius: var(--radius-sm);
   background: var(--bg-slate);
   color: var(--primary-navy);
   display: flex;
@@ -1511,7 +1511,7 @@ button {
 .team-carousel-nav {
   width: 44px;
   height: 44px;
-  border-radius: 50%;
+  border-radius: var(--radius-sm);
   background: var(--bg-white);
   border: 1.5px solid var(--border-light);
   color: var(--primary-navy);
@@ -1543,7 +1543,7 @@ button {
 .team-dot {
   width: 10px;
   height: 10px;
-  border-radius: 50%;
+  border-radius: var(--radius-sm);
   background: #CBD5E1;
   cursor: pointer;
   transition: var(--transition-fast);
@@ -1551,7 +1551,7 @@ button {
 
 .team-dot.active {
   width: 28px;
-  border-radius: 12px;
+  border-radius: var(--radius-sm);
   background: var(--primary-green);
 }
 
