@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Ruach Executive Learning &amp; Consultancy | Verified Corporate Training System</title>
+  <meta name="description"
+    content="Ruach Business Consortia Limited - Premier executive learning and corporate development with verified global exposure. Search upcoming executive training schedules in Abuja, Lagos, Port Harcourt, Dubai, and London.">
+  <meta name="keywords"
+    content="Ruach training, executive courses Abuja, GLOMACS alternative, corporate training Nigeria, financial risk masterclass, intelligent process automation, leadership development">
+
+  <!-- Favicon & Stylesheets -->
+  <link rel="icon" href="assets/images/ruach_logo.png" type="image/png">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+  <!-- 1. TOP ANNOUNCEMENT & CONTACT BAR -->
+  <div class="top-bar">
+    <div class="container top-bar-inner">
+      <div class="top-contacts">
+        <div class="top-contact-item">
+          <i class="fa-solid fa-location-dot"></i>
+          <span>Abuja HQ: Central Business District | Global Enquiries</span>
+        </div>
+        <div class="top-contact-item">
+          <i class="fa-solid fa-envelope"></i>
+          <a href="mailto:info@ruach.ng">info@ruach.ng</a>
+        </div>
+        <div class="top-contact-item">
+          <i class="fa-solid fa-phone"></i>
+          <a href="tel:+23494618000">+234 (09) 461 8000</a>
+        </div>
+      </div>
+      <div class="top-actions">
+        <span class="badge-location">Dual-Pathway Enrolment System</span>
+        <a href="#admin" class="top-btn-admin">
+          <i class="fa-solid fa-user-shield"></i>
+          Staff Dashboard
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- 2. MAIN HEADER & NAVIGATION -->
+  <header class="header">
+    <div class="container header-inner">
+      <a href="#home" class="brand-logo-wrapper">
+        <img src="assets/images/ruach_logo.png" alt="Ruach Logo" class="brand-logo-img">
+        <div class="brand-divider"></div>
+        <div class="logo-text">
+          <span class="logo-title">RUACH</span>
+          <span class="logo-subtitle">Executive Learning</span>
+        </div>
+      </a>
+
+      <nav class="nav-menu" id="navMenu">
+        <a href="#home" class="nav-link active">Home</a>
+
+        <div class="nav-item-dropdown">
+          <a href="#programmes" class="nav-link">
+            Subject Areas
+            <i class="fa-solid fa-chevron-down" style="font-size: 0.75rem;"></i>
+          </a>
+          <div class="mega-menu">
+            <div class="mega-menu-grid" id="megaMenuGrid">
+              <!-- Dynamically Populated -->
+            </div>
+          </div>
+        </div>
+
+        <a href="#schedule" class="nav-link">Training Schedule</a>
+        <a href="#why-us" class="nav-link">Why Ruach</a>
+      </nav>
+
+      <div class="nav-actions">
+        <a href="#schedule" class="btn btn-outline-green btn-sm">Find Schedule</a>
+        <a href="#schedule" class="btn btn-primary btn-sm">Request Invoice</a>
+        <button class="mobile-nav-toggle" id="mobileNavToggle"><i class="fa-solid fa-bars"></i></button>
+      </div>
+    </div>
+  </header>
+
+  <!-- 3. VIEW: HOME -->
+  <div id="view-home">
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+      <div class="container hero-content">
+        <div class="hero-pill">
+          <span><i class="fa-solid fa-building-columns"></i> Ruach Business Consortia Ltd &bull; Abuja</span>
+        </div>
+        <h1 class="hero-title">
+          WorldClass Executive Learning with <span>Global Exposure</span>
+        </h1>
+        <p class="hero-subtitle">
+          Search verified executive masterclasses and physical training schedules. Whether self-funding with a grant or
+          submitting an employer invoice, access verified course outlines and dates.
+        </p>
+
+        <!-- Multi-Criteria Search Card -->
+        <div class="search-card">
+          <div class="search-grid">
+            <div class="form-group">
+              <label class="form-label">Search Masterclass / Keyword</label>
+              <input type="text" id="heroSearchInput" class="form-control"
+                placeholder="e.g. Financial Risk, Automation, Leadership...">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Subject Category</label>
+              <select id="heroSubjectSelect" class="form-control">
+                <option value="all">All 10 Subject Areas</option>
+                <option value="tech">AI, Digital Transformation &amp; IT</option>
+                <option value="finance">Finance, Budgeting &amp; Risk</option>
+                <option value="leadership">Leadership &amp; Executive</option>
+                <option value="project">Project &amp; Procurement</option>
+                <option value="hr">Human Resources &amp; Talent</option>
+                <option value="energy">Oil &amp; Gas Economics</option>
+                <option value="hse">HSE &amp; Safety Governance</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Training Venue City</label>
+              <select id="heroVenueSelect" class="form-control">
+                <option value="all">All Global Venues</option>
+                <option value="Abuja">Abuja, Nigeria</option>
+                <option value="Lagos">Lagos, Nigeria</option>
+                <option value="Port Harcourt">Port Harcourt, Nigeria</option>
+                <option value="Dubai">Dubai, UAE</option>
+                <option value="London">London, UK</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Funding Pathway</label>
+              <select id="heroFundingSelect" class="form-control">
+                <option value="all">Both Options</option>
+                <option value="employer">Employer Sponsored (Invoice)</option>
+                <option value="grant">Self-Funded / Grant</option>
+              </select>
+            </div>
+            <button class="btn-search" id="heroSearchBtn">
+              <i class="fa-solid fa-magnifying-glass"></i>
+              Search Schedule
+            </button>
+          </div>
+        </div>
+
+        <div class="hero-quick-links">
+          <span>Popular Searches:</span>
+          <span class="quick-chip" onclick="filterByCategory('tech')">Process Automation</span>
+          <span class="quick-chip" onclick="filterByCategory('finance')">Financial Risk</span>
+          <span class="quick-chip" onclick="filterByCategory('leadership')">High-Performance Leadership</span>
+          <span class="quick-chip" onclick="filterByCategory('project')">Agile Project Management</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Stats Bar -->
+    <div class="stats-bar">
+      <div class="container stats-grid">
+        <div class="stat-item">
+          <div class="stat-icon-wrapper"><i class="fa-solid fa-book-open"></i></div>
+          <div>
+            <div class="stat-number">70+</div>
+            <div class="stat-label">Verified Masterclasses</div>
+          </div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-icon-wrapper"><i class="fa-solid fa-location-dot"></i></div>
+          <div>
+            <div class="stat-number">5</div>
+            <div class="stat-label">Global Physical Venues</div>
+          </div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-icon-wrapper"><i class="fa-solid fa-graduation-cap"></i></div>
+          <div>
+            <div class="stat-number">10,000+</div>
+            <div class="stat-label">Corporate Executives Trained</div>
+          </div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-icon-wrapper"><i class="fa-solid fa-award"></i></div>
+          <div>
+            <div class="stat-number">99.6%</div>
+            <div class="stat-label">Delegate Satisfaction Score</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Featured Flagship Masterclasses -->
+    <section class="section" id="programmes">
+      <div class="container">
+        <div class="section-header">
+          <div class="section-subtitle">Flagship Offerings &bull; Executive Masterclasses</div>
+          <h2 class="section-title">Featured Executive Masterclasses</h2>
+          <p class="section-description">
+            Explore our flagship executive programmes with verified outcomes, comprehensive 5-day module outlines, and
+            confirmed session dates in Abuja, Lagos, Dubai, and London.
+          </p>
+        </div>
+
+        <div class="courses-grid" id="featuredCoursesGrid">
+          <!-- Dynamically Rendered by app.js -->
+        </div>
+      </div>
+    </section>
+
+    <!-- 10 Subject Categories Grid -->
+    <section class="section" style="background: var(--bg-white); border-top: 1px solid var(--border-light);">
+      <div class="container">
+        <div class="section-header">
+          <div class="section-subtitle">Comprehensive Scope</div>
+          <h2 class="section-title">Explore 10 Training Subject Areas</h2>
+          <p class="section-description">
+            From emerging AI technology to oil &amp; gas fiscal economics, Ruach delivers structured learning across all
+            key corporate disciplines.
+          </p>
+        </div>
+
+        <div class="categories-grid-container" id="categoriesGrid">
+          <!-- Dynamically Rendered -->
+        </div>
+      </div>
+    </section>
+
+    <!-- Why Ruach & Dual Conversion Pathway -->
+    <section class="why-section" id="why-us">
+      <div class="container">
+        <div class="section-header">
+          <div class="section-subtitle" style="color: #BEF264;">Institutional Integrity &bull; Trust First</div>
+          <h2 class="section-title" style="color: var(--bg-white);">Why Corporate Leaders Choose Ruach</h2>
+          <p class="section-description" style="color: #CBD5E1;">
+            We build trust through verified session facts, transparent facilitator proof, and a friction-free conversion
+            model for both attendees and employers.
+          </p>
+        </div>
+
+        <div class="why-grid">
+          <div class="why-card">
+            <div class="why-icon"><i class="fa-solid fa-building-flag"></i></div>
+            <h3 class="why-title">Strategic Abuja Headquarters</h3>
+            <p class="why-text">
+              Headquartered in Abuja's administrative capital, Ruach brings deep understanding of governance frameworks,
+              public sector procurement, and regional enterprise challenges.
+            </p>
+          </div>
+          <div class="why-card">
+            <div class="why-icon"><i class="fa-solid fa-globe"></i></div>
+            <h3 class="why-title">Global Exposure &amp; Venues</h3>
+            <p class="why-text">
+              Delivering physical masterclasses in premier global learning hubs including London, Dubai, Abuja, Lagos,
+              and Port Harcourt.
+            </p>
+          </div>
+          <div class="why-card">
+            <div class="why-icon"><i class="fa-solid fa-certificate"></i></div>
+            <h3 class="why-title">Truthful &amp; Verified Proof</h3>
+            <p class="why-text">
+              Zero unverified partner claims or fake accreditation logos. Every course outline, fee, and session date is
+              audited and published with staff accountability.
+            </p>
+          </div>
+        </div>
+
+        <!-- Dual Pathway Explanation Box -->
+        <div class="pathway-banner">
+          <div class="pathway-box">
+            <h4 class="pathway-title">
+              <span><i class="fa-solid fa-credit-card" style="color: #BEF264; margin-right: 0.3rem;"></i></span> Path 1:
+              Self-Funded / Grant Learners
+            </h4>
+            <p class="pathway-desc">
+              For attendees utilizing personal professional development funds or educational support grants. Select your
+              session, complete secure online payment, and receive an instant enrolment receipt.
+            </p>
+            <a href="#schedule" class="btn btn-lime btn-sm">Pay Online (Self-Funded)</a>
+          </div>
+          <div class="pathway-box">
+            <h4 class="pathway-title">
+              <span><i class="fa-solid fa-file-invoice" style="color: #BEF264; margin-right: 0.3rem;"></i></span> Path
+              2: Employer-Sponsored Invoice
+            </h4>
+            <p class="pathway-desc">
+              For staff whose training is funded by their organization. Submit your staff and organization details to
+              receive an official Ruach Pro-Forma Invoice/Proposal for workplace payment approval.
+            </p>
+            <a href="#schedule" class="btn btn-primary btn-sm">Request Employer Invoice</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+  <!-- 4. VIEW: TRAINING SCHEDULE (SIDE-FILTER) -->
+  <div id="view-schedule" style="display: none;">
+    <section class="section">
+      <div class="container">
+        <div class="section-header">
+          <div class="section-subtitle">Interactive Schedule Matrix</div>
+          <h2 class="section-title">2026 Executive Training Schedule</h2>
+          <p class="section-description">Filter upcoming physical sessions by subject category, global venue city, or
+            month.</p>
+        </div>
+
+        <div class="schedule-layout">
+          <!-- Side Filters Sidebar -->
+          <div class="filter-sidebar">
+            <div class="sidebar-title">
+              <span>Filter Schedule</span>
+              <button class="btn-reset" onclick="resetFilters()">Reset All</button>
+            </div>
+
+            <div class="filter-group">
+              <label class="filter-label">Subject Category</label>
+              <div class="checkbox-list">
+                <label class="checkbox-item"><input type="radio" name="catFilter" checked
+                    onclick="filterByCategory('all')"> All Categories</label>
+                <label class="checkbox-item"><input type="radio" name="catFilter" onclick="filterByCategory('tech')"> AI
+                  &amp; Digital Tech</label>
+                <label class="checkbox-item"><input type="radio" name="catFilter" onclick="filterByCategory('finance')">
+                  Finance &amp; Risk</label>
+                <label class="checkbox-item"><input type="radio" name="catFilter"
+                    onclick="filterByCategory('leadership')"> Leadership &amp; Exec</label>
+                <label class="checkbox-item"><input type="radio" name="catFilter" onclick="filterByCategory('project')">
+                  Project &amp; Procurement</label>
+                <label class="checkbox-item"><input type="radio" name="catFilter" onclick="filterByCategory('hr')">
+                  Human Resources</label>
+                <label class="checkbox-item"><input type="radio" name="catFilter" onclick="filterByCategory('energy')">
+                  Oil &amp; Gas Economics</label>
+              </div>
+            </div>
+
+            <div class="filter-group">
+              <label class="filter-label">Venue City</label>
+              <select class="form-control"
+                onchange="APP_STATE.currentVenueFilter = this.value; renderScheduleCourses();">
+                <option value="all">All Cities</option>
+                <option value="Abuja">Abuja, Nigeria</option>
+                <option value="Lagos">Lagos, Nigeria</option>
+                <option value="Port Harcourt">Port Harcourt, Nigeria</option>
+                <option value="Dubai">Dubai, UAE</option>
+                <option value="London">London, UK</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Main Schedule List -->
+          <div id="scheduleCoursesList">
+            <!-- Rendered by app.js -->
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- 5. VIEW: STAFF ADMIN DASHBOARD -->
+  <div id="view-admin" class="admin-section" style="display: none;">
+    <div class="container">
+      <div class="admin-header">
+        <div>
+          <h2 style="font-size: 1.75rem; color: var(--bg-white);">Ruach Operations Staff Portal</h2>
+          <p style="color: #94A3B8; font-size: 0.9rem;">Review employer invoice requests, track self-funded enrolments,
+            and audit active sessions.</p>
+        </div>
+        <a href="#home" class="btn btn-outline-green"
+          style="color: var(--bg-white); border-color: rgba(255,255,255,0.2);">Return to Public Site</a>
+      </div>
+
+      <div id="adminDashboardContent">
+        <!-- Rendered by app.js -->
+      </div>
+    </div>
+  </div>
+
+  <!-- 6. MODALS CONTAINER -->
+
+  <!-- Course Details Modal -->
+  <div class="modal-overlay" id="modalCourseDetails">
+    <div class="modal-container">
+      <div class="modal-header">
+        <h3 class="modal-title">Masterclass Details &amp; Curriculum</h3>
+        <span class="modal-close" onclick="closeAllModals()">&times;</span>
+      </div>
+      <div class="modal-body" id="courseModalBody">
+        <!-- Rendered dynamically -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Employer Invoice Intake Modal -->
+  <div class="modal-overlay" id="modalEmployerInvoice">
+    <div class="modal-container">
+      <div class="modal-header">
+        <h3 class="modal-title">Request Employer Pro-Forma Invoice</h3>
+        <span class="modal-close" onclick="closeAllModals()">&times;</span>
+      </div>
+      <div class="modal-body" id="invoiceModalBody">
+        <!-- Rendered dynamically -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Invoice Preview & Print Modal -->
+  <div class="modal-overlay" id="modalInvoicePreview">
+    <div class="modal-container" style="max-width: 900px;">
+      <div class="modal-header">
+        <h3 class="modal-title">Official Pro-Forma Invoice Document</h3>
+        <span class="modal-close" onclick="closeAllModals()">&times;</span>
+      </div>
+      <div class="modal-body" id="invoicePreviewBody">
+        <!-- Rendered dynamically -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Self-Funded Payment Modal -->
+  <div class="modal-overlay" id="modalSelfFunded">
+    <div class="modal-container" style="max-width: 550px;">
+      <div class="modal-header">
+        <h3 class="modal-title">Self-Funded / Grant Enrolment</h3>
+        <span class="modal-close" onclick="closeAllModals()">&times;</span>
+      </div>
+      <div class="modal-body" id="selfFundedModalBody">
+        <!-- Rendered dynamically -->
+      </div>
+    </div>
+  </div>
+
+  <!-- 6.5. TEAM & LEADERSHIP CAROUSEL SECTION -->
+  <section class="section team-section" id="leadership">
+    <div class="container">
+      <div class="section-header" style="margin-bottom: 2rem;">
+        <div class="section-subtitle">Leadership &amp; Governance</div>
+        <h2 class="section-title">Board of Advisors &amp; Executive Management</h2>
+        <p class="section-description">
+          Guided by seasoned industry leaders, governance experts, and corporate strategists dedicated to delivering world-class executive learning.
+        </p>
+        
+        <!-- Filter Tabs -->
+        <div class="team-tabs">
+          <button class="team-tab-btn active" onclick="filterTeamCategory('all', this)">All Leadership</button>
+          <button class="team-tab-btn" onclick="filterTeamCategory('management', this)">Executive Management</button>
+          <button class="team-tab-btn" onclick="filterTeamCategory('board', this)">Board of Advisors</button>
+        </div>
+      </div>
+
+      <!-- Carousel Container -->
+      <div class="team-carousel-container" id="teamCarouselContainer">
+        <button class="team-carousel-nav team-nav-prev" id="teamNavPrev" onclick="prevTeamSlide()" aria-label="Previous Team Member">
+          <i class="fa-solid fa-chevron-left"></i>
+        </button>
+
+        <div class="team-carousel-viewport" id="teamCarouselViewport">
+          <div class="team-carousel-track" id="teamCarouselTrack">
+            <!-- Dynamically Rendered by app.js -->
+          </div>
+        </div>
+
+        <button class="team-carousel-nav team-nav-next" id="teamNavNext" onclick="nextTeamSlide()" aria-label="Next Team Member">
+          <i class="fa-solid fa-chevron-right"></i>
+        </button>
+      </div>
+
+      <!-- Pagination Dots -->
+      <div class="team-dots-wrapper" id="teamDotsWrapper">
+        <!-- Dynamically Rendered by app.js -->
+      </div>
+    </div>
+  </section>
+
+  <!-- 7. FOOTER -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <div class="brand-logo-wrapper" style="margin-bottom: 0.5rem;">
+            <img src="assets/images/ruach_logo.png" alt="Ruach Logo" class="brand-logo-img" style="height: 36px;">
+            <div class="brand-divider"></div>
+            <div class="logo-text">
+              <span class="logo-title" style="color: var(--bg-white);">RUACH</span>
+              <span class="logo-subtitle">Executive Learning</span>
+            </div>
+          </div>
+          <p style="font-size: 0.88rem; line-height: 1.6; color: #CBD5E1;">
+            Ruach Business Consortia Limited is an executive training and business consulting firm based in Abuja,
+            Nigeria. Delivering world-class masterclasses across Africa, Europe, and the Middle East.
+          </p>
+          <p style="font-size: 0.8rem; color: #94A3B8;">
+            Headquarters: Plot 412, Central Business District, Abuja, FCT, Nigeria.
+          </p>
+        </div>
+
+        <div>
+          <h4 class="footer-title">Quick Links</h4>
+          <div class="footer-links">
+            <a href="#home">Home</a>
+            <a href="#programmes">Flagship Masterclasses</a>
+            <a href="#schedule">2026 Training Schedule</a>
+            <a href="#why-us">Why Ruach</a>
+            <a href="#admin">Staff Portal</a>
+          </div>
+        </div>
+
+        <div>
+          <h4 class="footer-title">Global Venues</h4>
+          <div class="footer-links">
+            <a href="#schedule">Abuja, Nigeria (HQ)</a>
+            <a href="#schedule">Lagos, Nigeria</a>
+            <a href="#schedule">Port Harcourt, Nigeria</a>
+            <a href="#schedule">Dubai, UAE</a>
+            <a href="#schedule">London, UK</a>
+          </div>
+        </div>
+
+        <div>
+          <h4 class="footer-title">Newsletter &amp; Schedule Updates</h4>
+          <p style="font-size: 0.85rem; color: #CBD5E1; margin-bottom: 1rem;">
+            Subscribe to receive quarterly executive training calendars and updates.
+          </p>
+          <form onsubmit="event.preventDefault(); showToast('Subscribed to Ruach Training updates!'); this.reset();">
+            <div style="display: flex; gap: 0.5rem;">
+              <input type="email" class="form-control" placeholder="Enter work email" required
+                style="font-size: 0.85rem; padding: 0.6rem;">
+              <button type="submit" class="btn btn-lime btn-sm">Subscribe</button>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <div>&copy; 2026 Ruach Business Consortia Limited. All rights reserved.</div>
+        <div style="display: flex; gap: 1.5rem;">
+          <a href="#why-us">Privacy Policy</a>
+          <a href="#why-us">Terms of Enrolment</a>
+          <a href="#why-us">Accreditation Disclaimer</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Javascript Scripts -->
+  <script src="js/app.js"></script>
+</body>
+
+</html>
