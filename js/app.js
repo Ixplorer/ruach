@@ -219,16 +219,24 @@ const COURSES_DATA = [
 
 // 1.5. Official Leadership & Board of Advisors Store
 const TEAM_DATA = [
-  // --- MANAGEMENT ---
+  // --- DIRECTORS & EXECUTIVE MANAGEMENT ---
   {
     id: 'mgt-1',
-    name: 'Engr. Olukayode Ashaolu',
+    name: 'Engr. (Dr) Olukayode Ashaolu',
     role: 'Chief Executive Officer',
     badge: 'CEO',
     category: 'management',
-    categoryLabel: 'Management',
-    image: 'assets/images/team_olukayode_ashaolu.png',
-    bio: 'Executive Director leading strategic transformation and corporate learning at Ruach Consortia.'
+    categoryLabel: 'Executive Management',
+    image: 'assets/images/Engr.(Dr) Olukayode Ashaolu.jpg',
+    bio: 'Founder & CEO of Ruach Business Consortia Ltd, distinguished management executive and development strategist across agribusiness, energy, and infrastructure.',
+    fullBio: [
+      'He is a distinguished management executive and development strategist with extensive experience leading complex, high-impact projects across agribusiness, renewable energy, construction, mining, oil & gas, finance and investment, SME development, and sustainable development. He is the Founder and CEO of Ruach Business Consortia Ltd, and has served as a trusted consultant and strategic partner to major national institutions and development-focused agencies.',
+      'His consulting expertise spans agriculture, power, mining, oil and gas, digital solutions, healthcare, real estate and financial services.',
+      'A visionary leader, Engr. Ashaolu combines technical engineering competence with strategic financial acumen and deep contextual knowledge of Nigeria’s agribusiness and rural development landscape. His proven ability to mobilize resources, build high-level partnerships, and design transformative interventions.',
+      'He holds a Ph.D. in Renewable Energy Applications for Agricultural Production, an MBA in Finance & Investments from Ahmadu Bello University, an MSc in Sustainable Energy Technologies & Management from Brunel University (UK), and a B.Eng. in Civil Engineering from the University of Ilorin.',
+      'Widely recognized for his expertise in strategic planning, program development, new-market creation, and large-scale sustainable infrastructure delivery, he has advised governments, private sector actors, and development organizations on integrated agriculture, smart irrigation systems, renewable energy deployment, and climate-resilient production systems.',
+      'Driven by a strong commitment to nation-building and transformative impact, Dr. Ashaolu continues to champion innovative solutions that enhance food security, expand productive capacity, and strengthen economic competitiveness across Nigeria and Africa.'
+    ]
   },
   {
     id: 'mgt-2',
@@ -236,9 +244,15 @@ const TEAM_DATA = [
     role: 'Non-Executive Director',
     badge: 'Director',
     category: 'management',
-    categoryLabel: 'Management',
-    image: 'assets/images/team_busola_ashaolu.png',
-    bio: 'Director overseeing institutional strategy, stakeholder partnerships, and executive development.'
+    categoryLabel: 'Executive Management',
+    image: 'assets/images/Mrs Busola Ashaolu.jpg',
+    bio: 'Accomplished operations executive overseeing Food Chest Inc. (Ruach’s major food processing subsidiary).',
+    fullBio: [
+      'Busola Ashaolu is an accomplished operations and business management professional with extensive experience spanning agribusiness, finance, compliance, customer service, and corporate operations. She is currently a Non-Executive Director at Ruach Business Consortia and plays a pivotal executive role in overseeing the day-to-day operations of Food Chest Inc., Ruach’s major subsidiary engaged in food processing for both Nigerian and export markets. In this role, she provides strong operational leadership, ensures quality standards, drives efficiency across production and distribution, and supports strategic growth initiatives.',
+      'Busola brings a strong background in strategy execution, business operations, performance management, and process optimization, developed through her role as Quality and Performance Supervisory roles at Bhartel and Spanco BP. She has demonstrated capacity in setting KPIs, supervising cross-functional teams, conducting financial and operational analysis, and improving profitability through innovation and market-focused strategies.',
+      'Her professional experience also includes roles in financial compliance and regulatory reporting within the foreign exchange sector, as well as quality assurance and customer experience management in the telecommunications industry. These roles have shaped her detail-oriented, systems-driven, and customer-centric approach to leadership.',
+      'Busola holds an MBA in Business Administration from Nile University of Nigeria and a BSc in Computer Science from the University of Ilorin. She is recognized for her professionalism, versatility, and commitment to operational excellence and sustainable business growth.'
+    ]
   },
   {
     id: 'mgt-3',
@@ -246,21 +260,50 @@ const TEAM_DATA = [
     role: 'Non-Executive Director',
     badge: 'Director',
     category: 'management',
-    categoryLabel: 'Management',
-    image: 'assets/images/team_halimat_raji.png',
-    bio: 'Director steering corporate governance, human capital development, and public sector relations.'
+    categoryLabel: 'Executive Management',
+    image: 'assets/images/Hajia Halimat Raji.jpg',
+    bio: 'Seasoned finance executive with 20+ years in Financial Services & Energy (Access Bank, TotalEnergies, TD Bank Canada). Fellow of ICAN & CPA Ontario.',
+    fullBio: [
+      'Halimat Raji is a seasoned finance professional with over 20 years of experience spanning the Financial Services and Energy sectors, where she has held diverse and progressively senior roles. Her expertise cuts across strategy development, accounting, compliance, internal controls, credit management, budgeting, and financial reporting, positioning her as a well-rounded leader with deep technical and strategic capability.',
+      'Halimat is a strategic and results-driven executive with a proven track record in investment decision-making, portfolio optimization, and driving sustainable growth across diverse business portfolios. She is widely recognized for her ability to deliver impactful results by aligning financial discipline with organizational strategy. Her strong business acumen, developed through close collaboration with multiple core business units, enables her to critically evaluate the financial and operational implications of key business decisions and their effect on overall corporate performance.',
+      'A visionary leader, Halimat has a strong interest in leveraging financial insight to empower businesses, strengthen governance structures, and foster long-term, sustainable value creation. She brings clarity, rigor, and foresight to complex financial and business challenges. She has demonstrated leadership in her various capacities in several multinational organizations—Access Bank Plc, TotalEnergies & Toronto Dominion Bank, Canada.',
+      'Halimat holds a bachelor’s degree in accounting from the University of Ilorin and an MBA in Finance from the University of Manchester. She is a Fellow of the Institute of Chartered Accountants of Nigeria (ICAN), a member of ACCA UK, and a Certified Public Accountant (CPA), Ontario, reflecting her strong global professional standing.'
+    ]
+  },
+  {
+    id: 'mgt-4',
+    name: 'Engr. (Dr) Yunus Hamuda',
+    role: 'International Director',
+    badge: 'Intl Director',
+    category: 'management',
+    categoryLabel: 'Executive Management',
+    image: 'assets/images/Eng.(Dr) Yunus Hamuda.jpg',
+    bio: 'Distinguished construction, project management, and oil & gas logistics professional with over 22 years of international experience based in Istanbul.',
+    fullBio: [
+      'Dr. Eng. Yunus Hamuda is a distinguished construction, project management, and oil & gas logistics professional with over 22 years of international experience across infrastructure development, industrial operations, energy logistics, consultancy, and academia. Based in Istanbul, he has successfully led multidisciplinary projects within the construction, oil and gas, and industrial sectors, delivering operational excellence through strategic planning, cost optimization, risk management, and effective stakeholder coordination.',
+      'His expertise spans project management, construction management, oil and gas facilities, offshore pipeline engineering, logistics coordination, procurement strategy, contract administration, supply chain operations, and facility management. Dr. Hamuda is highly experienced in managing complex logistics frameworks that support upstream and downstream oil and gas operations, ensuring efficiency, regulatory compliance, safety, and uninterrupted project execution.',
+      'An internationally recognized trainer and consultant, he delivers executive and technical training in Agile Project Management, PRINCE2 methodology, ISO management systems, HSE, crisis management, procurement, arbitration, and organizational leadership. He has also contributed extensively to academia as a lecturer, researcher, and supervisor for Master’s and PhD students in engineering and management disciplines.',
+      'Dr. Hamuda combines technical expertise with strategic leadership, emotional intelligence, and a commitment to sustainable development, making him a valuable advisor and practitioner across the engineering, energy, and logistics industries.'
+    ]
   },
 
-  // --- BOARD OF ADVISORS ---
+  // --- RUACH BOARD OF ADVISORS ---
   {
     id: 'adv-1',
-    name: 'Dr. Kayode John Akinade',
+    name: 'Dr. Kayode John Akinade, MBA, MCP, PhD',
     role: 'Board of Advisors',
     badge: 'Advisor',
     category: 'board',
     categoryLabel: 'Board of Advisors',
-    image: 'assets/images/team_kayode_akinade.png',
-    bio: 'Senior Advisor specialising in health economics, strategic policy, and corporate governance.'
+    image: 'assets/images/Dr. Kayode John Akınade, MBA, MCP, PhD.jpg',
+    bio: 'Founder of Glovis Almonds Group & former MD/CEO of Microvis MFB for a decade. Seasoned financial services leader and entrepreneur.',
+    fullBio: [
+      'He is a seasoned Nigerian financial services leader and entrepreneur, currently serving as the Founder, Glovis Almonds Group. He has played a central role in driving the strategic vision, growth, and development of Microvis MFB since its establishment in 2015, focusing on expanding access to finance for micro, small & medium enterprises (MSMEs), underbanked communities, and individual clients across Nigeria serving for a Decade as its MD/CEO.',
+      'He holds advanced academic credentials including an MBA, professional certification (MCP), and a PhD, reflecting his strong commitment to both leadership excellence and lifelong learning. Kayode’s career spans over two decades in banking and financial services, where he has built deep expertise in inclusive banking, entrepreneurship, and business development.',
+      'Under his leadership, Microvis MFB has grown steadily as a licensed financial institution regulated by the Central Bank of Nigeria (CBN), providing a broad range of financial products and services to diverse clientele, particularly focusing on economic empowerment and financial inclusion.',
+      'Beyond his primary role, Dr. Akinade is also associated with several entrepreneurial initiatives and social impact activities, such as Glovis Multi Inc. and GELD Foundation, showcasing his broader interest in business development and community empowerment.',
+      'He is recognized by colleagues, clients, and industry peers as a visionary leader committed to excellence, resilience, and ethical leadership, often celebrated publicly on corporate and social platforms.'
+    ]
   },
   {
     id: 'adv-2',
@@ -269,58 +312,80 @@ const TEAM_DATA = [
     badge: 'Advisor',
     category: 'board',
     categoryLabel: 'Board of Advisors',
-    image: 'assets/images/team_oluwabunmi_ajilore.png',
-    bio: 'Financial risk management expert and strategic advisor to enterprise leadership.'
+    image: 'assets/images/Mr. Oluwabunmi Ajilore.jpg',
+    bio: 'Food security expert & strategic foresight specialist at Global Center on Adaptation (GCA), Visiting Faculty at Lagos Business School.',
+    fullBio: [
+      'He is a food security expert and strategic foresight specialist working at the intersection of food systems, anticipatory governance, early warning systems and early decision support, climate resilience, anticipatory / long-term decision-making. He serves as a Food Security Specialist at the Global Center on Adaptation (GCA), supporting governments and international partners—including the World Bank, AfDB, IFAD, Islamic Development Bank and CGIAR Centers—to design and implement climate-resilient agrifood programs across Africa.',
+      'His work has helped integrate climate intelligence and digital climate advisory services in major agrifood systems investments across Africa.',
+      'Bunmi is a Visiting Faculty in Strategic Foresight at Lagos Business School, where he teaches executives, managers and decision makers on anticipatory systems, systems thinking, scenarios, and practical foresight tools for strategic decision-making.',
+      'He is also the Founder of the Centre for Anticipation, Strategic Insights & Preparedness (CASIP)—a new initiative advancing foresight, early warning, and preparedness capabilities for institutions and emerging leaders in Nigeria.',
+      'Bunmi previously served as a Foresight Adviser at the Global Forum on Agricultural Research and Innovation (GFAR) Secretariat at the UN Food and Agriculture Organization (FAO) in Rome, leading global futures work for agricultural systems. He has consulted for UNDP Regional Bureau for Asia-Pacific also as a Foresight Adviser, where he co-designed a playbook for integrating strategic foresight and anticipatory systems into program design and pipeline program development for UNDP country offices across the region.',
+      'He has consulted for the Commonwealth Secretariat, CIAT, governments institutions and has authored and co-authored journal articles, book chapters, foresight papers, global reports, and blogs. His work has been published by the Journal of Futures Studies, AGRA, GFAR, and other international platforms.',
+      'He is an alumnus of the Center for Strategic and International Studies (CSIS) AILA Fellowship in Washington D.C., and a recipient of the SOIF NGFP Foresight Practitioner Global/Africa Prizes.'
+    ]
   },
   {
     id: 'adv-3',
-    name: 'Mr. Taopheek Babayeju',
-    role: 'Board of Advisors',
-    badge: 'Advisor',
-    category: 'board',
-    categoryLabel: 'Board of Advisors',
-    image: 'assets/images/team_taopheek_babayeju.png',
-    bio: 'Renowned project management consultant, agile governance strategist, and board advisor.'
-  },
-  {
-    id: 'adv-4',
-    name: 'Mrs. Rose Saiki-Onaiyi',
-    role: 'Board of Advisors',
-    badge: 'Advisor',
-    category: 'board',
-    categoryLabel: 'Board of Advisors',
-    image: 'assets/images/team_rose_saiki.png',
-    bio: 'Human capital development consultant and strategic organizational design advisor.'
-  },
-  {
-    id: 'adv-5',
-    name: 'Mr. Ifedolapo A. Falope',
-    role: 'Board of Advisors',
-    badge: 'Advisor',
-    category: 'board',
-    categoryLabel: 'Board of Advisors',
-    image: 'assets/images/team_ifedolapo_falope.png',
-    bio: 'Legal counsel and corporate governance strategist providing board oversight.'
-  },
-  {
-    id: 'adv-6',
     name: 'Mrs. Abiola Osareimen Oduwusi',
     role: 'Board of Advisors',
     badge: 'Advisor',
     category: 'board',
     categoryLabel: 'Board of Advisors',
-    image: 'assets/images/team_abiola_oduwusi.png',
-    bio: 'Executive coach and talent analytics expert advising on leadership development.'
+    image: 'assets/images/Mrs Abiola Osareimen Oduwusi.jpg',
+    bio: 'Distinguished educationist, Founder & Executive Director of Lela Blossom Schools, Abuja, World Bank/YouWIN Award winner & Lagos Business School Alumna.',
+    fullBio: [
+      'She is a distinguished educationist, social entrepreneur, and institutional leader with over two decades of experience in teaching, academic administration, and school management. She is the Founder and Executive Director of Lela Blossom Schools, Abuja, a faith-based educational institution recognized for its strong academic standards, character development, and holistic approach to child education. Since establishing the school in 2009, Abiola has successfully expanded its curriculum, strengthened faculty capacity, and built a nurturing learning environment that supports both intellectual excellence and moral formation.',
+      'A recipient of the World Bank/Federal Government YouWIN Award (2012/2013), Abiola has demonstrated outstanding innovation and leadership in educational entrepreneurship. She holds a B.Sc. in Economics and Mathematics from the University of Benin, a Postgraduate Diploma in Education, and is currently pursuing a master’s degree in organizational leadership at ECWA Theological Seminary. She is also an alumna of the Goldman Sachs Women’s Enterprise and Leadership Programme at Lagos Business School.',
+      'Abiola has participated in several professional development programs in Nigeria, South Africa, Dubai, and the United States, equipping her with a global perspective on quality education and leadership. She brings to the Ruach Business Consortia Board of Advisors deep expertise in leadership development, institutional governance, human capital development, and values-driven organizational growth.'
+    ]
   },
   {
-    id: 'adv-7',
-    name: 'Engr. Babatunde Oluwole Longe',
+    id: 'adv-4',
+    name: 'Mr. Taopheek Babayeju',
     role: 'Board of Advisors',
     badge: 'Advisor',
     category: 'board',
     categoryLabel: 'Board of Advisors',
-    image: 'assets/images/team_babatunde_longe.png',
-    bio: 'Engineering operations and infrastructure asset management strategic advisor.'
+    image: 'assets/images/Mr Taopheek Babayeju.jpg',
+    bio: 'Transformation expert, CEO of iCentra, Forbes contributor, founder of ProMaCon, and PMI Eric Jenett Person of the Year (2024).',
+    fullBio: [
+      'Mr Taopheek Babayeju is a seasoned transformation expert, dynamic leadpreneur, and published author with over two decades of diverse professional experience spanning IT, telecoms, finance, agriculture, health, education, government, and development sectors.',
+      'His entrepreneurial drive led to the founding of ICTech and subsequently The Phone Clinic, his first successful venture. In 2009, he established iCentra, a business and technology solutions firm that has since grown into a global organization with operations in the United States, the United Kingdom, and Nigeria. As CEO, he has led high-impact transformation programs and multi-million-dollar portfolios, specializing in strategy, digital and agile transformation, PMO delivery, risk management, technology consulting, information security, and organizational change.',
+      'Taopheek holds an MBA from Lagos Business School and completed executive programs at Harvard Business School and IESE Business School. He also trained in telecommunications network and infrastructure engineering at the United Kingdom Telecommunications Academy (UKTA). He is a Forbes contributor, BusinessDay columnist, thought leader, and author.',
+      'Passionate about social impact, he pioneered Nigeria’s first National Project Management Conference (ProMaCon) in 2009 and later established the ProMaCon Project Management Foundation to advance project management practice across Africa. His leadership earned him the PMI Most Outstanding Contribution to Project Management Award (2010) and the prestigious PMI Eric Jenett Person of the Year Award (2024).',
+      'Taopheek also co-founded initiatives such as LeadPreneur and TAB W40, which empower individuals and communities through leadership and enterprise development. He serves on multiple boards and continues to inspire a new generation of leaders committed to excellence, innovation, and sustainable impact.'
+    ]
+  },
+  {
+    id: 'adv-5',
+    name: 'Mrs. Rose Saiki-Onaiyi',
+    role: 'Board of Advisors',
+    badge: 'Advisor',
+    category: 'board',
+    categoryLabel: 'Board of Advisors',
+    image: 'assets/images/Mrs. Rose Saiki-Onaiyi.jpg',
+    bio: 'Aviation and travel professional with 10+ years experience, Founder & CEO of Stanzar Travels & Tours Ltd, certified IATA travel expert.',
+    fullBio: [
+      'Mrs. Rose Saiki-Onaiyi is a highly accomplished aviation and travel professional with over a decade of experience across airline operations, regulatory compliance, and corporate travel management. She began her professional career with Lufthansa Airways in Germany, where she developed strong competencies in international ticketing, reservations, customer service, and airline operations within a global aviation environment. She further strengthened her industry expertise at the Nigerian Civil Aviation Authority (NCAA), gaining valuable exposure to aviation regulation, safety oversight, and operational standards.',
+      'She is the Founder and Chief Executive Officer of Stanzar Travels & Tours Ltd, a client-centered travel management company known for delivering seamless, end-to-end travel solutions. Under her leadership, the company provides comprehensive services including flight ticketing, hotel reservations, travel planning, logistics coordination, destination management, and corporate travel support. Mrs. Saiki-Onaiyi has successfully managed travel portfolios for reputable organizations such as NIRSAL Plc, Electron Nigeria Limited, and Permanent Secretary Development Limited, Ruach Business earning a reputation for reliability and service excellence.',
+      'A certified travel professional, she holds an IATA Travel Agency Functionality Certificate and is an active member of IATA and the National Association of Nigerian Travel Agencies (NANTA). She is widely respected for her professionalism, attention to detail, and commitment to delivering high-quality travel experiences tailored to client needs.'
+    ]
+  },
+  {
+    id: 'adv-6',
+    name: 'Mr. Ifedolapo A. Falope',
+    role: 'Board of Advisors',
+    badge: 'Advisor',
+    category: 'board',
+    categoryLabel: 'Board of Advisors',
+    image: 'assets/images/Ifedolapo A. Falope.jpg',
+    bio: 'Public policy & government relations expert, Senior Government Liaison Officer at Nigerian Economic Summit Group (NESG) with 17+ years experience.',
+    fullBio: [
+      'Mr. Ifedolapo Falope is a seasoned public policy and government relations professional with over 17 years of progressive work experience, having been active in the workforce since 2007. Since 2014, his professional focus has been on public policy engagement, government relations, and strategic stakeholder management, working at the intersection of policy, governance, and development. His experience spans public policy formulation, analysis, and implementation support, as well as structured public policy advocacy aimed at influencing reforms, strengthening institutions, and improving development outcomes.',
+      'He holds a master’s degree in International Affairs and Diplomacy from Ahmadu Bello University, Zaria, which has provided a strong foundation for his work in governance, diplomacy, and public sector engagement. Mr. Falope currently serves as a Senior Government Liaison Officer at the Nigerian Economic Summit Group (NESG), where he has spent the last seven years supporting high-level engagement between government, the private sector, and other key stakeholders. In this role, he facilitates policy dialogue, coordinates strategic engagements with ministries, departments, and agencies, and supports consensus-building on critical national development priorities.',
+      'Over the course of his career, he has been a member of several high-level presidential and ministerial policy committees, contributing technical input, coordination support, and stakeholder perspectives to the development, review, and reform of over 15 national public policies. In addition to policy design and analysis, Mr. Falope has led and supported public policy advocacy efforts, engaging senior policymakers, legislators, regulators, and development partners to advance evidence-based reforms and promote policy adoption and implementation.',
+      'He is driven by a strong commitment to inclusive growth, effective governance, and sustainable socio-economic development.'
+    ]
   }
 ];
 
@@ -1054,6 +1119,70 @@ let currentTeamCategory = 'all';
 let currentTeamIndex = 0;
 let teamAutoScrollInterval = null;
 
+function showTeamProfileModal(memberId) {
+  const member = TEAM_DATA.find(m => m.id === memberId);
+  if (!member) return;
+
+  const modal = document.getElementById('modalTeamProfile');
+  const modalTitle = document.getElementById('teamModalTitle');
+  const modalBody = document.getElementById('teamModalBody');
+  if (!modal || !modalBody) return;
+
+  if (modalTitle) {
+    modalTitle.textContent = `${member.name} - Profile`;
+  }
+
+  const bioParagraphs = member.fullBio && member.fullBio.length > 0 
+    ? member.fullBio 
+    : [member.bio];
+
+  modalBody.innerHTML = `
+    <div class="team-modal-content">
+      <div class="team-modal-header">
+        <div class="team-modal-avatar-wrapper">
+          <img src="${member.image}" alt="${member.name}" class="team-modal-avatar">
+          <span class="team-modal-badge">${member.badge}</span>
+        </div>
+        <div class="team-modal-meta">
+          <h2 class="team-modal-name">${member.name}</h2>
+          <div class="team-modal-role">${member.role}</div>
+          <div class="team-modal-category-chip">
+            <i class="fa-solid fa-award" style="color: var(--accent-lime); margin-right: 0.35rem;"></i>
+            ${member.categoryLabel}
+          </div>
+          <div class="team-modal-quote-box">
+            <p>${member.bio}</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="team-modal-divider"></div>
+
+      <div class="team-modal-bio-body">
+        <h4 class="team-bio-section-title">
+          <i class="fa-solid fa-user-tie" style="color: var(--primary-green); margin-right: 0.5rem;"></i>
+          Full Professional Biography
+        </h4>
+        <div class="team-bio-text">
+          ${bioParagraphs.map(p => `<p class="bio-p">${p}</p>`).join('')}
+        </div>
+      </div>
+
+      <div class="team-modal-footer">
+        <button class="btn btn-outline-green btn-sm" onclick="closeAllModals()">
+          <i class="fa-solid fa-xmark" style="margin-right: 0.3rem;"></i> Close Profile
+        </button>
+        <a href="#schedule" onclick="closeAllModals()" class="btn btn-primary btn-sm">
+          <i class="fa-solid fa-calendar-check" style="margin-right: 0.3rem;"></i> View Masterclass Schedule
+        </a>
+      </div>
+    </div>
+  `;
+
+  modal.classList.add('active');
+  document.body.style.overflow = 'hidden';
+}
+
 function renderTeamCarousel() {
   const track = document.getElementById('teamCarouselTrack');
   if (!track) return;
@@ -1064,17 +1193,22 @@ function renderTeamCarousel() {
   });
 
   track.innerHTML = filteredTeam.map(m => `
-    <div class="team-card">
+    <div class="team-card" onclick="showTeamProfileModal('${m.id}')" role="button" tabindex="0" title="Click to view full bio of ${m.name}">
       <div class="team-image-container">
         <img src="${m.image}" alt="${m.name}" class="team-image" loading="lazy">
         <span class="team-role-tag">${m.badge}</span>
+        <div class="team-image-hover-overlay">
+          <span><i class="fa-solid fa-arrow-up-right-from-square"></i> View Profile</span>
+        </div>
       </div>
       <h3 class="team-name">${m.name}</h3>
       <div class="team-role">${m.role}</div>
       <p class="team-bio">${m.bio}</p>
       <div class="team-card-footer">
         <span class="team-cat-badge">${m.categoryLabel}</span>
-        <a href="#leadership" class="team-social-link" title="LinkedIn Profile"><i class="fa-brands fa-linkedin-in"></i></a>
+        <button class="team-card-action-btn" onclick="event.stopPropagation(); showTeamProfileModal('${m.id}')">
+          Full Bio <i class="fa-solid fa-angle-right"></i>
+        </button>
       </div>
     </div>
   `).join('');
