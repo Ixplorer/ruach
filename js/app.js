@@ -1198,18 +1198,18 @@ const CORE_VALUES_DATA = [
 
 // 1.9. Strategic Partners Store (With Institutional Logos & Badges)
 const PARTNERS_DATA = [
-  { name: 'Bank of Industry', type: 'Development Finance Institution', icon: 'fa-building-columns', color: '#1E3A8A', badge: 'BOI' },
-  { name: 'Sterling Bank Plc', type: 'Commercial Banking Partner', icon: 'fa-building', color: '#DC2626', badge: 'STERLING' },
-  { name: 'ProvidusBank', type: 'Financial Institution', icon: 'fa-landmark-dome', color: '#4F46E5', badge: 'PROVIDUS' },
-  { name: 'iCentra', type: 'Tech & Advisory', icon: 'fa-microchip', color: '#0D9488', badge: 'ICENTRA' },
-  { name: 'Food Chest Inc.', type: 'Agribusiness & Logistics', icon: 'fa-wheat-awn', color: '#16A34A', badge: 'FOODCHEST' },
-  { name: 'Lela Blossom Schools', type: 'Educational Network', icon: 'fa-graduation-cap', color: '#D97706', badge: 'LELA' },
-  { name: 'Glovis Almonds Properties', type: 'Enterprise Real Estate', icon: 'fa-city', color: '#2563EB', badge: 'GLOVIS' },
-  { name: 'Judicial Council of Nigeria', type: 'Public Sector Governance', icon: 'fa-scale-balanced', color: '#15803D', badge: 'JCN' },
-  { name: 'DataScribe Analytics', type: 'Data Intelligence', icon: 'fa-chart-network', color: '#7C3AED', badge: 'DATASCRIBE' },
-  { name: 'GrandVille Medical Group', type: 'Healthcare Network', icon: 'fa-hospital-user', color: '#E11D48', badge: 'GRANDVILLE' },
-  { name: 'Scope Training', type: 'Executive Education', icon: 'fa-book-open-reader', color: '#2A5235', badge: 'SCOPE' },
-  { name: 'Celebrations', type: 'Corporate Partner', icon: 'fa-gifts', color: '#C026D3', badge: 'CELEBRATIONS' }
+  { name: 'Bank of Industry', type: 'Development Finance Institution', logo: 'partners/bank_of_industry_limited_logo.jfif', icon: 'fa-building-columns', color: '#1E3A8A', badge: 'BOI' },
+  { name: 'Sterling Bank Plc', type: 'Commercial Banking Partner', logo: 'partners/sterling-bank-plc-logo-png_seeklogo-510247.png', icon: 'fa-building', color: '#DC2626', badge: 'STERLING' },
+  { name: 'ProvidusBank', type: 'Financial Institution', logo: 'partners/09c66ba0bb9a49fbe28afda33e652529.png', icon: 'fa-landmark-dome', color: '#4F46E5', badge: 'PROVIDUS' },
+  { name: 'iCentra', type: 'Tech & Advisory', logo: 'partners/images.png', icon: 'fa-microchip', color: '#0D9488', badge: 'ICENTRA' },
+  { name: 'Food Chest Inc.', type: 'Agribusiness & Logistics', logo: 'partners/Food Chest.png', icon: 'fa-wheat-awn', color: '#16A34A', badge: 'FOODCHEST' },
+  { name: 'Lela Blossom Schools', type: 'Educational Network', logo: 'partners/Lela Blossom Schools.jfif', icon: 'fa-graduation-cap', color: '#D97706', badge: 'LELA' },
+  { name: 'Glovis Almonds Properties', type: 'Enterprise Real Estate', logo: 'partners/Glovis Almonds Properties.png', icon: 'fa-city', color: '#2563EB', badge: 'GLOVIS' },
+  { name: 'Judicial Council of Nigeria', type: 'Public Sector Governance', logo: 'partners/Judicial Council of Nigeria.jfif', icon: 'fa-scale-balanced', color: '#15803D', badge: 'JCN' },
+  { name: 'DataScribe Analytics', type: 'Data Intelligence', logo: 'partners/DataScribe Analytics.jfif', icon: 'fa-chart-network', color: '#7C3AED', badge: 'DATASCRIBE' },
+  { name: 'GrandVille Medical Group', type: 'Healthcare Network', logo: 'partners/GrandVille Medical Group.jfif', icon: 'fa-hospital-user', color: '#E11D48', badge: 'GRANDVILLE' },
+  { name: 'Scope Training', type: 'Executive Education', logo: 'partners/Scope Training.jfif', icon: 'fa-book-open-reader', color: '#2A5235', badge: 'SCOPE' },
+  { name: 'Celebrations', type: 'Corporate Partner', logo: 'partners/Celebrations.jfif', icon: 'fa-gifts', color: '#C026D3', badge: 'CELEBRATIONS' }
 ];
 
 // 2. Application Global State
@@ -2460,15 +2460,21 @@ function renderCoreValues() {
   `).join('');
 }
 
+let partnersCurrentIndex = 0;
+let partnersAutoScrollInterval = null;
+
 function renderPartners() {
   const container = document.getElementById('partnersGrid');
   if (!container) return;
 
   container.innerHTML = PARTNERS_DATA.map(p => `
     <div class="partner-logo-card">
-      <div class="partner-emblem-badge" style="background: ${p.color}15; color: ${p.color}; border: 1.5px solid ${p.color}35;">
-        <i class="fa-solid ${p.icon}"></i>
-        <span>${p.badge}</span>
+      <div class="partner-img-wrapper">
+        <img src="${p.logo}" alt="${p.name} Logo" class="partner-logo-img" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+        <div class="partner-emblem-badge" style="display: none; background: ${p.color}15; color: ${p.color}; border: 1.5px solid ${p.color}35;">
+          <i class="fa-solid ${p.icon}"></i>
+          <span>${p.badge}</span>
+        </div>
       </div>
       <div class="partner-info-box">
         <div class="partner-name-text">${p.name}</div>
@@ -2476,6 +2482,70 @@ function renderPartners() {
       </div>
     </div>
   `).join('');
+
+  setupPartnersCarousel();
+}
+
+function setupPartnersCarousel() {
+  const track = document.getElementById('partnersGrid');
+  const prevBtn = document.getElementById('partnerPrevBtn');
+  const nextBtn = document.getElementById('partnerNextBtn');
+  const container = document.getElementById('partnersTrackContainer');
+  if (!track) return;
+
+  const getVisibleCount = () => {
+    const w = window.innerWidth;
+    if (w <= 420) return 1;
+    if (w <= 640) return 2;
+    if (w <= 1024) return 3;
+    return 4;
+  };
+
+  const updateCarousel = () => {
+    const visible = getVisibleCount();
+    const maxIndex = Math.max(0, PARTNERS_DATA.length - visible);
+    if (partnersCurrentIndex > maxIndex) partnersCurrentIndex = 0;
+    if (partnersCurrentIndex < 0) partnersCurrentIndex = maxIndex;
+
+    const moveStepPercent = 100 / visible;
+    track.style.transform = `translateX(-${partnersCurrentIndex * moveStepPercent}%)`;
+  };
+
+  if (prevBtn) {
+    prevBtn.onclick = () => {
+      partnersCurrentIndex--;
+      updateCarousel();
+    };
+  }
+
+  if (nextBtn) {
+    nextBtn.onclick = () => {
+      partnersCurrentIndex++;
+      updateCarousel();
+    };
+  }
+
+  // Auto Scroll Carousel
+  clearInterval(partnersAutoScrollInterval);
+  partnersAutoScrollInterval = setInterval(() => {
+    const visible = getVisibleCount();
+    const maxIndex = Math.max(0, PARTNERS_DATA.length - visible);
+    partnersCurrentIndex = partnersCurrentIndex >= maxIndex ? 0 : partnersCurrentIndex + 1;
+    updateCarousel();
+  }, 3500);
+
+  if (container) {
+    container.onmouseenter = () => clearInterval(partnersAutoScrollInterval);
+    container.onmouseleave = () => {
+      clearInterval(partnersAutoScrollInterval);
+      partnersAutoScrollInterval = setInterval(() => {
+        const visible = getVisibleCount();
+        const maxIndex = Math.max(0, PARTNERS_DATA.length - visible);
+        partnersCurrentIndex = partnersCurrentIndex >= maxIndex ? 0 : partnersCurrentIndex + 1;
+        updateCarousel();
+      }, 3500);
+    };
+  }
 }
 
 function showConsultingDemoModal(serviceName = 'eBAS Platform Demo') {
