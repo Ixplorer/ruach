@@ -1348,6 +1348,7 @@ document.addEventListener('DOMContentLoaded', () => {
   setupSearchControls();
   setupModalListeners();
   updateCurrencyButtonUI();
+  initWhatsappLiveChat();
 
   // Route hash & window resize check
   window.addEventListener('hashchange', handleHashRouting);
@@ -1355,12 +1356,18 @@ document.addEventListener('DOMContentLoaded', () => {
   handleHashRouting();
 });
 
-// Close currency dropdown on document click
+// Close currency dropdown and WhatsApp chat box on outside document click
 document.addEventListener('click', (e) => {
   const selector = document.getElementById('currencySelector');
   if (selector && !selector.contains(e.target)) {
     const dd = document.getElementById('currencyDropdown');
     if (dd) dd.classList.remove('active');
+  }
+
+  const waWidget = document.getElementById('whatsappChatWidget');
+  if (waWidget && !waWidget.contains(e.target)) {
+    const waBox = document.getElementById('waChatBox');
+    if (waBox) waBox.classList.remove('active');
   }
 });
 
@@ -3165,3 +3172,96 @@ function handleConsultingDemoSubmit(e) {
   showToast(`Consulting & eBAS Request Received! Our Advisory Team will contact ${name} at ${org} (${email}) within 24 hours.`);
   if (e.target) e.target.reset();
 }
+
+// ── LIVE WHATSAPP CHAT WIDGET ───────────────────────────────────────────────
+function initWhatsappLiveChat() {
+  if (document.getElementById('whatsappChatWidget')) return;
+
+  const widget = document.createElement('div');
+  widget.id = 'whatsappChatWidget';
+  widget.className = 'wa-widget-container';
+  widget.innerHTML = `
+    <!-- Floating Trigger Button -->
+    <button type="button" class="wa-trigger-btn" id="waTriggerBtn" onclick="toggleWaChatBox(event)" title="Chat with Ruach Advisory Team">
+      <i class="fa-brands fa-whatsapp"></i>
+      <span class="wa-badge-pulse"></span>
+      <span class="wa-tooltip-label">Chat with Us</span>
+    </button>
+
+    <!-- Interactive Chat Box Popup -->
+    <div class="wa-chat-box" id="waChatBox">
+      <div class="wa-chat-header">
+        <div class="wa-header-avatar">
+          <img src="assets/images/ruach_logo_new.png" alt="Ruach Support" onerror="this.src='https://ui-avatars.com/api/?name=Ruach+Support&background=25D366&color=fff'">
+          <span class="wa-online-dot"></span>
+        </div>
+        <div class="wa-header-info">
+          <div class="wa-agent-name">Ruach Executive Support</div>
+          <div class="wa-agent-status"><i class="fa-solid fa-circle" style="font-size:0.5rem;color:#25D366;margin-right:0.25rem;"></i>Online | Replies instantly</div>
+        </div>
+        <button type="button" class="wa-close-btn" onclick="toggleWaChatBox(event)">&times;</button>
+      </div>
+
+      <div class="wa-chat-body">
+        <div class="wa-time-divider"><span>Today</span></div>
+        <div class="wa-chat-bubble wa-bubble-incoming">
+          <div class="wa-bubble-sender">Ruach Advisory Desk</div>
+          <div class="wa-bubble-message">
+            Hello! 👋 Welcome to Ruach Business Consortia.<br><br>
+            How can we assist you with our Executive Masterclasses, Training Schedule, or eBAS Consulting today?
+          </div>
+          <div class="wa-bubble-time">${new Date().toLocaleTimeString([], {hour:'2-digit', minute:'2-digit'})}</div>
+        </div>
+
+        <div class="wa-quick-pills">
+          <button type="button" class="wa-pill" onclick="sendWaQuickMsg('Hi, I would like to enquire about your upcoming executive training courses.')">📚 Course Enquiry</button>
+          <button type="button" class="wa-pill" onclick="sendWaQuickMsg('Hello, I want to request a Pro-Forma Invoice for my organization.')">📄 Pro-Forma Invoice</button>
+          <button type="button" class="wa-pill" onclick="sendWaQuickMsg('Hi, I am interested in your eBAS Consulting & Business Analytics Services.')">💼 eBAS Consulting</button>
+        </div>
+      </div>
+
+      <div class="wa-chat-footer">
+        <input type="text" id="waMsgInput" class="wa-msg-input" placeholder="Type your message here..." onkeydown="if(event.key==='Enter'){event.preventDefault();sendWaChatMsg();}">
+        <button type="button" class="wa-send-btn" onclick="sendWaChatMsg()" title="Send via WhatsApp">
+          <i class="fa-solid fa-paper-plane"></i>
+        </button>
+      </div>
+    </div>
+  `;
+
+  document.body.appendChild(widget);
+}
+
+function toggleWaChatBox(e) {
+  if (e) e.stopPropagation();
+  const box = document.getElementById('waChatBox');
+  if (box) {
+    box.classList.toggle('active');
+    if (box.classList.contains('active')) {
+      const input = document.getElementById('waMsgInput');
+      if (input) setTimeout(() => input.focus(), 150);
+    }
+  }
+}
+
+function sendWaQuickMsg(text) {
+  const input = document.getElementById('waMsgInput');
+  if (input) input.value = text;
+  sendWaChatMsg();
+}
+
+function sendWaChatMsg() {
+  const input = document.getElementById('waMsgInput');
+  const msg = input ? input.value.trim() : '';
+  const defaultMsg = 'Hello Ruach Team, I am visiting your website and would like to make an enquiry.';
+  const finalMsg = msg || defaultMsg;
+  const phone = '2348032798904';
+  const url = `https://api.whatsapp.com/send?phone=${phone}&text=${encodeURIComponent(finalMsg)}`;
+
+  window.open(url, '_blank');
+
+  if (input) input.value = '';
+  const box = document.getElementById('waChatBox');
+  if (box) box.classList.remove('active');
+}
+
