@@ -2222,3 +2222,87 @@ button {
   .ebas-flagship-card { padding: 1.5rem; }
   .ebas-title { font-size: 1.4rem; }
 }
+
+/* Explore 10 Training Subject Areas Section */
+.categories-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 1.25rem;
+}
+
+.category-card {
+  background: #FFFFFF;
+  border: 1.5px solid var(--border-light);
+  border-radius: 14px;
+  padding: 1.75rem 1.1rem;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 220px;
+  transition: all 0.25s ease;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(15, 23, 42, 0.03);
+}
+
+.category-card:hover {
+  border-color: var(--primary-green);
+  box-shadow: 0 12px 24px -6px rgba(15, 23, 42, 0.09);
+  transform: translateY(-4px);
+}
+
+.category-icon-wrapper {
+  width: 58px;
+  height: 58px;
+  border-radius: 14px;
+  background: #DCFCE7;
+  color: #166534;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.45rem;
+  margin-bottom: 1rem;
+  transition: all 0.25s ease;
+}
+
+.category-card:hover .category-icon-wrapper {
+  background: var(--primary-green);
+  color: var(--accent-lime);
+}
+
+.category-card-title {
+  font-size: 1.02rem;
+  font-weight: 700;
+  color: var(--primary-navy);
+  line-height: 1.35;
+  margin-bottom: 0.75rem;
+}
+
+.category-card-count {
+  background: #F1F5F9;
+  color: #475569;
+  font-size: 0.78rem;
+  font-weight: 700;
+  padding: 0.3rem 0.85rem;
+  border-radius: 50px;
+  display: inline-block;
+}
+
+@media (max-width: 1100px) {
+  .categories-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .categories-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 480px) {
+  .categories-grid {
+    grid-template-columns: 1fr;
+  }
+}
