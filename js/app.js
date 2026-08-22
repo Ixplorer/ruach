@@ -2460,56 +2460,24 @@ function renderCoreValues() {
   `).join('');
 }
 
-let partnersCurrentIndex = 0;
-let partnersAutoScrollInterval = null;
-
 function renderPartners() {
-  const wrapper = document.getElementById('partnersCarouselWrapper');
-  if (!wrapper) return;
+  const track = document.getElementById('partnersCarouselWrapper');
+  if (!track) return;
 
-  // Build card HTML for each partner
-  const cardHTML = PARTNERS_DATA.map(p => `
+  // Build one set of cards
+  const makeCards = () => PARTNERS_DATA.map(p => `
     <div class="partner-slide-card">
       <div class="partner-logo-frame">
         <img src="${p.logo}" alt="${p.name}" class="partner-logo-img"
-             onerror="this.parentElement.innerHTML='<span class=\\'partner-text-badge\\' style=\\'color:${p.color};\\'>${p.name}</span>';">
+             onerror="this.style.display='none';this.nextElementSibling.style.display='block';">
+        <span class="partner-text-badge" style="color:${p.color};display:none;">${p.name}</span>
       </div>
       <div class="partner-slide-name">${p.name}</div>
     </div>
   `).join('');
 
-  // Duplicate the set for seamless infinite loop
-  wrapper.innerHTML = cardHTML + cardHTML;
-
-  startPartnersAutoScroll(wrapper);
-
-  // Pause on hover
-  wrapper.parentElement.addEventListener('mouseenter', () => stopPartnersAutoScroll());
-  wrapper.parentElement.addEventListener('mouseleave', () => startPartnersAutoScroll(wrapper));
-}
-
-let partnersAnimFrame = null;
-let partnersScrollPos = 0;
-let partnersScrollSpeed = 0.6; // px per frame
-
-function stopPartnersAutoScroll() {
-  if (partnersAnimFrame) cancelAnimationFrame(partnersAnimFrame);
-  partnersAnimFrame = null;
-}
-
-function startPartnersAutoScroll(wrapper) {
-  stopPartnersAutoScroll();
-  const singleSetWidth = wrapper.scrollWidth / 2;
-
-  function step() {
-    partnersScrollPos += partnersScrollSpeed;
-    if (partnersScrollPos >= singleSetWidth) {
-      partnersScrollPos = 0;
-    }
-    wrapper.style.transform = `translateX(-${partnersScrollPos}px)`;
-    partnersAnimFrame = requestAnimationFrame(step);
-  }
-  partnersAnimFrame = requestAnimationFrame(step);
+  // Duplicate for seamless CSS loop
+  track.innerHTML = makeCards() + makeCards();
 }
 
 function showConsultingDemoModal(serviceName = 'eBAS Platform Demo') {
