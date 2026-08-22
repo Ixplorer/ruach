@@ -342,7 +342,7 @@
     </section>
 
     <!-- STRATEGIC PARTNERS SHOWCASE CAROUSEL SECTION -->
-    <section class="section partners-section" id="partners" style="background: var(--bg-white); border-top: 1px solid var(--border-light); padding: 4.5rem 0;">
+    <section class="section partners-section" id="partners" style="background: var(--bg-white); border-top: 1px solid var(--border-light); padding: 4.5rem 0; overflow: hidden;">
       <div class="container">
         <div class="section-header" style="margin-bottom: 2.25rem; text-align: center;">
           <div class="section-subtitle"><i class="fa-solid fa-handshake-angle" style="color: var(--primary-green);"></i> Institutional Trust</div>
@@ -352,20 +352,11 @@
           </p>
         </div>
 
-        <div class="partners-carousel-wrapper">
-          <button class="partners-carousel-btn prev-btn" id="partnerPrevBtn" aria-label="Previous Partners">
-            <i class="fa-solid fa-chevron-left"></i>
-          </button>
-          
-          <div class="partners-carousel-track-container" id="partnersTrackContainer">
-            <div class="partners-carousel-track" id="partnersGrid">
-              <!-- Dynamically Rendered with Partner Logos by app.js -->
-            </div>
+        <!-- Infinite auto-scroll marquee -->
+        <div class="partners-marquee-viewport" id="partnersMarqueeViewport">
+          <div class="partners-marquee-track" id="partnersCarouselWrapper">
+            <!-- Dynamically injected by renderPartners() in app.js -->
           </div>
-
-          <button class="partners-carousel-btn next-btn" id="partnerNextBtn" aria-label="Next Partners">
-            <i class="fa-solid fa-chevron-right"></i>
-          </button>
         </div>
       </div>
     </section>

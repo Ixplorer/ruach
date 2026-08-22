@@ -1198,18 +1198,18 @@ const CORE_VALUES_DATA = [
 
 // 1.9. Strategic Partners Store (With Institutional Logos & Badges)
 const PARTNERS_DATA = [
-  { name: 'Bank of Industry', type: 'Development Finance Institution', logo: 'Partners/bank_of_industry_limited_logo.jfif', icon: 'fa-building-columns', color: '#1E3A8A', badge: 'BOI' },
-  { name: 'Sterling Bank Plc', type: 'Commercial Banking Partner', logo: 'Partners/sterling-bank-plc-logo-png_seeklogo-510247.png', icon: 'fa-building', color: '#DC2626', badge: 'STERLING' },
-  { name: 'ProvidusBank', type: 'Financial Institution', logo: 'Partners/09c66ba0bb9a49fbe28afda33e652529.png', icon: 'fa-landmark-dome', color: '#4F46E5', badge: 'PROVIDUS' },
-  { name: 'iCentra', type: 'Tech & Advisory', logo: 'Partners/images.png', icon: 'fa-microchip', color: '#0D9488', badge: 'ICENTRA' },
-  { name: 'Food Chest Inc.', type: 'Agribusiness & Logistics', logo: 'Partners/Food Chest.png', icon: 'fa-wheat-awn', color: '#16A34A', badge: 'FOODCHEST' },
-  { name: 'Lela Blossom Schools', type: 'Educational Network', logo: 'Partners/Lela Blossom Schools.jfif', icon: 'fa-graduation-cap', color: '#D97706', badge: 'LELA' },
-  { name: 'Glovis Almonds Properties', type: 'Enterprise Real Estate', logo: 'Partners/Glovis Almonds Properties.png', icon: 'fa-city', color: '#2563EB', badge: 'GLOVIS' },
-  { name: 'Judicial Council of Nigeria', type: 'Public Sector Governance', logo: 'Partners/Judicial Council of Nigeria.jfif', icon: 'fa-scale-balanced', color: '#15803D', badge: 'JCN' },
-  { name: 'DataScribe Analytics', type: 'Data Intelligence', logo: 'Partners/DataScribe Analytics.jfif', icon: 'fa-chart-network', color: '#7C3AED', badge: 'DATASCRIBE' },
-  { name: 'GrandVille Medical Group', type: 'Healthcare Network', logo: 'Partners/GrandVille Medical Group.jfif', icon: 'fa-hospital-user', color: '#E11D48', badge: 'GRANDVILLE' },
-  { name: 'Scope Training', type: 'Executive Education', logo: 'Partners/Scope Training.jfif', icon: 'fa-book-open-reader', color: '#2A5235', badge: 'SCOPE' },
-  { name: 'Celebrations', type: 'Corporate Partner', logo: 'Partners/Celebrations.jfif', icon: 'fa-gifts', color: '#C026D3', badge: 'CELEBRATIONS' }
+  { name: 'Bank of Industry',        type: 'Development Finance Institution', logo: 'partners/bank_of_industry_limited_logo.jfif', color: '#1E3A8A' },
+  { name: 'Sterling Bank Plc',       type: 'Commercial Banking Partner',       logo: 'partners/sterling-bank-plc-logo-png_seeklogo-510247.png', color: '#DC2626' },
+  { name: 'ProvidusBank',            type: 'Financial Institution',            logo: 'partners/09c66ba0bb9a49fbe28afda33e652529.png', color: '#4F46E5' },
+  { name: 'iCentra',                 type: 'Tech & Advisory',                  logo: 'partners/images.png', color: '#0D9488' },
+  { name: 'Food Chest Inc.',         type: 'Agribusiness & Logistics',         logo: 'partners/Food Chest.png', color: '#16A34A' },
+  { name: 'Lela Blossom Schools',    type: 'Educational Network',              logo: 'partners/Lela Blossom Schools.jfif', color: '#D97706' },
+  { name: 'Glovis Almonds',         type: 'Enterprise Real Estate',           logo: 'partners/Glovis Almonds Properties.png', color: '#2563EB' },
+  { name: 'Judicial Council of Nigeria', type: 'Public Sector Governance',   logo: 'partners/Judicial Council of Nigeria.jfif', color: '#15803D' },
+  { name: 'DataScribe Analytics',    type: 'Data Intelligence',               logo: 'partners/DataScribe Analytics.jfif', color: '#7C3AED' },
+  { name: 'GrandVille Medical',      type: 'Healthcare Network',              logo: 'partners/GrandVille Medical Group.jfif', color: '#E11D48' },
+  { name: 'Scope Training',          type: 'Executive Education',             logo: 'partners/Scope Training.jfif', color: '#2A5235' },
+  { name: 'Celebrations',            type: 'Corporate Partner',               logo: 'partners/Celebrations.jfif', color: '#C026D3' }
 ];
 
 // 2. Application Global State
@@ -2464,88 +2464,52 @@ let partnersCurrentIndex = 0;
 let partnersAutoScrollInterval = null;
 
 function renderPartners() {
-  const container = document.getElementById('partnersGrid');
-  if (!container) return;
+  const wrapper = document.getElementById('partnersCarouselWrapper');
+  if (!wrapper) return;
 
-  container.innerHTML = PARTNERS_DATA.map(p => `
-    <div class="partner-logo-card">
-      <div class="partner-img-wrapper">
-        <img src="${p.logo}" alt="${p.name} Logo" class="partner-logo-img" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-        <div class="partner-emblem-badge" style="display: none; background: ${p.color}15; color: ${p.color}; border: 1.5px solid ${p.color}35;">
-          <i class="fa-solid ${p.icon}"></i>
-          <span>${p.badge}</span>
-        </div>
+  // Build card HTML for each partner
+  const cardHTML = PARTNERS_DATA.map(p => `
+    <div class="partner-slide-card">
+      <div class="partner-logo-frame">
+        <img src="${p.logo}" alt="${p.name}" class="partner-logo-img"
+             onerror="this.parentElement.innerHTML='<span class=\\'partner-text-badge\\' style=\\'color:${p.color};\\'>${p.name}</span>';">
       </div>
-      <div class="partner-info-box">
-        <div class="partner-name-text">${p.name}</div>
-        <div class="partner-type-text">${p.type}</div>
-      </div>
+      <div class="partner-slide-name">${p.name}</div>
     </div>
   `).join('');
 
-  setupPartnersCarousel();
+  // Duplicate the set for seamless infinite loop
+  wrapper.innerHTML = cardHTML + cardHTML;
+
+  startPartnersAutoScroll(wrapper);
+
+  // Pause on hover
+  wrapper.parentElement.addEventListener('mouseenter', () => stopPartnersAutoScroll());
+  wrapper.parentElement.addEventListener('mouseleave', () => startPartnersAutoScroll(wrapper));
 }
 
-function setupPartnersCarousel() {
-  const track = document.getElementById('partnersGrid');
-  const prevBtn = document.getElementById('partnerPrevBtn');
-  const nextBtn = document.getElementById('partnerNextBtn');
-  const container = document.getElementById('partnersTrackContainer');
-  if (!track) return;
+let partnersAnimFrame = null;
+let partnersScrollPos = 0;
+let partnersScrollSpeed = 0.6; // px per frame
 
-  const getVisibleCount = () => {
-    const w = window.innerWidth;
-    if (w <= 420) return 1;
-    if (w <= 640) return 2;
-    if (w <= 1024) return 3;
-    return 4;
-  };
+function stopPartnersAutoScroll() {
+  if (partnersAnimFrame) cancelAnimationFrame(partnersAnimFrame);
+  partnersAnimFrame = null;
+}
 
-  const updateCarousel = () => {
-    const visible = getVisibleCount();
-    const maxIndex = Math.max(0, PARTNERS_DATA.length - visible);
-    if (partnersCurrentIndex > maxIndex) partnersCurrentIndex = 0;
-    if (partnersCurrentIndex < 0) partnersCurrentIndex = maxIndex;
+function startPartnersAutoScroll(wrapper) {
+  stopPartnersAutoScroll();
+  const singleSetWidth = wrapper.scrollWidth / 2;
 
-    const moveStepPercent = 100 / visible;
-    track.style.transform = `translateX(-${partnersCurrentIndex * moveStepPercent}%)`;
-  };
-
-  if (prevBtn) {
-    prevBtn.onclick = () => {
-      partnersCurrentIndex--;
-      updateCarousel();
-    };
+  function step() {
+    partnersScrollPos += partnersScrollSpeed;
+    if (partnersScrollPos >= singleSetWidth) {
+      partnersScrollPos = 0;
+    }
+    wrapper.style.transform = `translateX(-${partnersScrollPos}px)`;
+    partnersAnimFrame = requestAnimationFrame(step);
   }
-
-  if (nextBtn) {
-    nextBtn.onclick = () => {
-      partnersCurrentIndex++;
-      updateCarousel();
-    };
-  }
-
-  // Auto Scroll Carousel
-  clearInterval(partnersAutoScrollInterval);
-  partnersAutoScrollInterval = setInterval(() => {
-    const visible = getVisibleCount();
-    const maxIndex = Math.max(0, PARTNERS_DATA.length - visible);
-    partnersCurrentIndex = partnersCurrentIndex >= maxIndex ? 0 : partnersCurrentIndex + 1;
-    updateCarousel();
-  }, 3500);
-
-  if (container) {
-    container.onmouseenter = () => clearInterval(partnersAutoScrollInterval);
-    container.onmouseleave = () => {
-      clearInterval(partnersAutoScrollInterval);
-      partnersAutoScrollInterval = setInterval(() => {
-        const visible = getVisibleCount();
-        const maxIndex = Math.max(0, PARTNERS_DATA.length - visible);
-        partnersCurrentIndex = partnersCurrentIndex >= maxIndex ? 0 : partnersCurrentIndex + 1;
-        updateCarousel();
-      }, 3500);
-    };
-  }
+  partnersAnimFrame = requestAnimationFrame(step);
 }
 
 function showConsultingDemoModal(serviceName = 'eBAS Platform Demo') {
