@@ -1198,18 +1198,18 @@ const CORE_VALUES_DATA = [
 
 // 1.9. Strategic Partners Store (With Institutional Logos & Badges)
 const PARTNERS_DATA = [
-  { name: 'Bank of Industry', type: 'Development Finance Institution', logo: 'partners/bank_of_industry_limited_logo.jfif', icon: 'fa-building-columns', color: '#1E3A8A', badge: 'BOI' },
-  { name: 'Sterling Bank Plc', type: 'Commercial Banking Partner', logo: 'partners/sterling-bank-plc-logo-png_seeklogo-510247.png', icon: 'fa-building', color: '#DC2626', badge: 'STERLING' },
-  { name: 'ProvidusBank', type: 'Financial Institution', logo: 'partners/09c66ba0bb9a49fbe28afda33e652529.png', icon: 'fa-landmark-dome', color: '#4F46E5', badge: 'PROVIDUS' },
-  { name: 'iCentra', type: 'Tech & Advisory', logo: 'partners/images.png', icon: 'fa-microchip', color: '#0D9488', badge: 'ICENTRA' },
-  { name: 'Food Chest Inc.', type: 'Agribusiness & Logistics', logo: 'partners/Food Chest.png', icon: 'fa-wheat-awn', color: '#16A34A', badge: 'FOODCHEST' },
-  { name: 'Lela Blossom Schools', type: 'Educational Network', logo: 'partners/Lela Blossom Schools.jfif', icon: 'fa-graduation-cap', color: '#D97706', badge: 'LELA' },
-  { name: 'Glovis Almonds Properties', type: 'Enterprise Real Estate', logo: 'partners/Glovis Almonds Properties.png', icon: 'fa-city', color: '#2563EB', badge: 'GLOVIS' },
-  { name: 'Judicial Council of Nigeria', type: 'Public Sector Governance', logo: 'partners/Judicial Council of Nigeria.jfif', icon: 'fa-scale-balanced', color: '#15803D', badge: 'JCN' },
-  { name: 'DataScribe Analytics', type: 'Data Intelligence', logo: 'partners/DataScribe Analytics.jfif', icon: 'fa-chart-network', color: '#7C3AED', badge: 'DATASCRIBE' },
-  { name: 'GrandVille Medical Group', type: 'Healthcare Network', logo: 'partners/GrandVille Medical Group.jfif', icon: 'fa-hospital-user', color: '#E11D48', badge: 'GRANDVILLE' },
-  { name: 'Scope Training', type: 'Executive Education', logo: 'partners/Scope Training.jfif', icon: 'fa-book-open-reader', color: '#2A5235', badge: 'SCOPE' },
-  { name: 'Celebrations', type: 'Corporate Partner', logo: 'partners/Celebrations.jfif', icon: 'fa-gifts', color: '#C026D3', badge: 'CELEBRATIONS' }
+  { name: 'Bank of Industry', type: 'Development Finance Institution', logo: 'Partners/bank_of_industry_limited_logo.jfif', icon: 'fa-building-columns', color: '#1E3A8A', badge: 'BOI' },
+  { name: 'Sterling Bank Plc', type: 'Commercial Banking Partner', logo: 'Partners/sterling-bank-plc-logo-png_seeklogo-510247.png', icon: 'fa-building', color: '#DC2626', badge: 'STERLING' },
+  { name: 'ProvidusBank', type: 'Financial Institution', logo: 'Partners/09c66ba0bb9a49fbe28afda33e652529.png', icon: 'fa-landmark-dome', color: '#4F46E5', badge: 'PROVIDUS' },
+  { name: 'iCentra', type: 'Tech & Advisory', logo: 'Partners/images.png', icon: 'fa-microchip', color: '#0D9488', badge: 'ICENTRA' },
+  { name: 'Food Chest Inc.', type: 'Agribusiness & Logistics', logo: 'Partners/Food Chest.png', icon: 'fa-wheat-awn', color: '#16A34A', badge: 'FOODCHEST' },
+  { name: 'Lela Blossom Schools', type: 'Educational Network', logo: 'Partners/Lela Blossom Schools.jfif', icon: 'fa-graduation-cap', color: '#D97706', badge: 'LELA' },
+  { name: 'Glovis Almonds Properties', type: 'Enterprise Real Estate', logo: 'Partners/Glovis Almonds Properties.png', icon: 'fa-city', color: '#2563EB', badge: 'GLOVIS' },
+  { name: 'Judicial Council of Nigeria', type: 'Public Sector Governance', logo: 'Partners/Judicial Council of Nigeria.jfif', icon: 'fa-scale-balanced', color: '#15803D', badge: 'JCN' },
+  { name: 'DataScribe Analytics', type: 'Data Intelligence', logo: 'Partners/DataScribe Analytics.jfif', icon: 'fa-chart-network', color: '#7C3AED', badge: 'DATASCRIBE' },
+  { name: 'GrandVille Medical Group', type: 'Healthcare Network', logo: 'Partners/GrandVille Medical Group.jfif', icon: 'fa-hospital-user', color: '#E11D48', badge: 'GRANDVILLE' },
+  { name: 'Scope Training', type: 'Executive Education', logo: 'Partners/Scope Training.jfif', icon: 'fa-book-open-reader', color: '#2A5235', badge: 'SCOPE' },
+  { name: 'Celebrations', type: 'Corporate Partner', logo: 'Partners/Celebrations.jfif', icon: 'fa-gifts', color: '#C026D3', badge: 'CELEBRATIONS' }
 ];
 
 // 2. Application Global State

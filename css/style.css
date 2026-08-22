@@ -2355,14 +2355,19 @@ button {
 }
 
 .partners-carousel-track {
-  display: flex;
-  gap: 1.25rem;
+  display: flex !important;
+  flex-direction: row !important;
+  flex-wrap: nowrap !important;
+  gap: 1.25rem !important;
   transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1);
   will-change: transform;
+  width: 100%;
 }
 
 .partner-logo-card {
-  flex: 0 0 calc(25% - 0.95rem);
+  flex: 0 0 calc(25% - 0.94rem) !important;
+  min-width: calc(25% - 0.94rem) !important;
+  max-width: calc(25% - 0.94rem) !important;
   background: #FFFFFF;
   border: 1.5px solid var(--border-light);
   border-radius: 16px;
@@ -2396,9 +2401,12 @@ button {
 .partner-logo-img {
   max-width: 140px;
   max-height: 55px;
+  width: auto;
+  height: auto;
   object-fit: contain;
   filter: contrast(105%);
   transition: all 0.3s ease;
+  display: block !important;
 }
 
 .partner-logo-card:hover .partner-logo-img {
@@ -2454,18 +2462,24 @@ button {
 
 @media (max-width: 1024px) {
   .partner-logo-card {
-    flex: 0 0 calc(33.333% - 0.85rem);
+    flex: 0 0 calc(33.333% - 0.85rem) !important;
+    min-width: calc(33.333% - 0.85rem) !important;
+    max-width: calc(33.333% - 0.85rem) !important;
   }
 }
 
 @media (max-width: 640px) {
   .partner-logo-card {
-    flex: 0 0 calc(50% - 0.65rem);
+    flex: 0 0 calc(50% - 0.65rem) !important;
+    min-width: calc(50% - 0.65rem) !important;
+    max-width: calc(50% - 0.65rem) !important;
   }
 }
 
 @media (max-width: 420px) {
   .partner-logo-card {
-    flex: 0 0 100%;
+    flex: 0 0 100% !important;
+    min-width: 100% !important;
+    max-width: 100% !important;
   }
 }
