@@ -1,0 +1,678 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Business Consulting &amp; eBAS Platform | Ruach Business Consortia Ltd</title>
+  <meta name="description" content="Ruach Business Consortia delivers enterprise business consulting, Enterprise Business Analytics Solutions (eBAS), process mining, performance monitoring, and MEL dashboards for corporate organizations across Africa and globally.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,600&family=Outfit:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    .consulting-hero{background:linear-gradient(135deg,var(--primary-green-dark) 0%,var(--primary-navy) 100%);padding:5rem 0 4rem;color:#fff;position:relative;overflow:hidden;}
+    .consulting-hero::before{content:'';position:absolute;inset:0;background-image:radial-gradient(circle at 80% 20%,rgba(132,204,22,.1) 0%,transparent 50%),radial-gradient(circle at 10% 80%,rgba(132,204,22,.06) 0%,transparent 40%);pointer-events:none;}
+    .hero-pill2{display:inline-flex;align-items:center;gap:.5rem;background:rgba(132,204,22,.15);border:1px solid rgba(132,204,22,.35);color:#BEF264;font-size:.82rem;font-weight:700;padding:.4rem 1rem;border-radius:50px;margin-bottom:1.25rem;text-transform:uppercase;letter-spacing:.05em;}
+    .consulting-hero h1{font-size:clamp(2rem,4vw,3.25rem);font-weight:800;line-height:1.12;color:#fff;margin-bottom:1.25rem;}
+    .consulting-hero h1 span{color:#BEF264;}
+    .consulting-hero p{font-size:1.05rem;color:#CBD5E1;line-height:1.75;max-width:780px;margin-bottom:2rem;}
+    .hero-btns{display:flex;gap:1rem;flex-wrap:wrap;}
+
+    /* eBAS flagship card */
+    .ebas-flagship-card{background:linear-gradient(135deg,var(--primary-green-dark) 0%,#1E293B 100%);border-radius:16px;padding:2.5rem;color:#fff;position:relative;overflow:hidden;}
+    .ebas-flagship-card::before{content:'';position:absolute;top:-40px;right:-40px;width:200px;height:200px;border-radius:50%;background:rgba(132,204,22,.08);pointer-events:none;}
+    .ebas-badge{display:inline-flex;align-items:center;gap:.4rem;background:rgba(132,204,22,.2);border:1px solid rgba(132,204,22,.4);color:#BEF264;font-size:.72rem;font-weight:800;padding:.25rem .75rem;border-radius:50px;text-transform:uppercase;margin-bottom:1rem;}
+    .ebas-title{font-size:1.75rem;font-weight:800;color:#fff;margin-bottom:.75rem;line-height:1.2;}
+    .ebas-tagline{font-size:.95rem;color:#BEF264;font-style:italic;margin-bottom:1.25rem;font-weight:600;}
+    .ebas-desc{font-size:.92rem;color:#CBD5E1;line-height:1.7;margin-bottom:1.75rem;}
+    .ebas-process-flow{display:flex;align-items:center;gap:.5rem;flex-wrap:wrap;}
+    .process-step{display:flex;flex-direction:column;align-items:center;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);border-radius:8px;padding:.75rem 1rem;min-width:110px;text-align:center;}
+    .step-num{font-size:.72rem;font-weight:800;color:#BEF264;margin-bottom:.2rem;}
+    .step-name{font-size:.88rem;font-weight:800;color:#fff;margin-bottom:.2rem;}
+    .step-sub{font-size:.68rem;color:#94A3B8;}
+    .process-arrow{color:#BEF264;font-size:.9rem;}
+
+    /* Domains grid */
+    .domains-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1.25rem;}
+    .domain-card{background:var(--bg-white);border:1px solid var(--border-light);border-radius:var(--radius-lg);padding:1.5rem;transition:var(--transition-fast);cursor:pointer;position:relative;overflow:hidden;}
+    .domain-card::before{content:'';position:absolute;top:0;left:0;width:4px;height:100%;background:var(--accent-lime);transform:scaleY(0);transform-origin:bottom;transition:transform .3s ease;}
+    .domain-card:hover{transform:translateY(-3px);box-shadow:var(--shadow-lg);border-color:var(--primary-green);}
+    .domain-card:hover::before{transform:scaleY(1);}
+    .domain-icon{width:48px;height:48px;border-radius:12px;background:var(--accent-lime-light);color:var(--primary-green);display:flex;align-items:center;justify-content:center;font-size:1.25rem;margin-bottom:1rem;transition:var(--transition-fast);}
+    .domain-card:hover .domain-icon{background:var(--primary-green);color:#fff;}
+    .domain-tag{font-size:.68rem;font-weight:700;color:var(--accent-lime-hover);text-transform:uppercase;letter-spacing:.05em;margin-bottom:.4rem;}
+    .domain-name{font-size:.95rem;font-weight:800;color:var(--text-dark);margin-bottom:.5rem;line-height:1.3;}
+    .domain-desc{font-size:.8rem;color:var(--text-muted);line-height:1.5;margin-bottom:.75rem;}
+    .domain-features{display:flex;flex-direction:column;gap:.3rem;}
+    .domain-feature{display:flex;align-items:center;gap:.35rem;font-size:.76rem;color:var(--text-body);}
+    .domain-feature i{color:var(--primary-green);font-size:.7rem;flex-shrink:0;}
+
+    /* Scorecard mockup */
+    .scorecard-card{background:var(--bg-slate);border:1px solid var(--border-light);border-radius:var(--radius-lg);padding:2rem;box-shadow:var(--shadow-lg);}
+    .scorecard-row{background:var(--bg-white);padding:1rem;border-radius:8px;display:flex;justify-content:space-between;align-items:center;margin-bottom:.75rem;}
+    .scorecard-row:last-child{margin-bottom:0;}
+    .badge-success2{background:#DCFCE7;color:#166534;font-size:.68rem;font-weight:700;padding:.15rem .6rem;border-radius:50px;}
+    .badge-warning2{background:#FEF3C7;color:#92400E;font-size:.68rem;font-weight:700;padding:.15rem .6rem;border-radius:50px;}
+    .badge-info2{background:#DBEAFE;color:#1e40af;font-size:.68rem;font-weight:700;padding:.15rem .6rem;border-radius:50px;}
+
+    /* Process mining section */
+    .process-steps-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin-top:2rem;}
+    .process-box{background:var(--bg-white);border:1px solid var(--border-light);border-radius:var(--radius-lg);padding:1.5rem;}
+    .process-box-num{font-size:2rem;font-weight:900;color:var(--accent-lime);line-height:1;margin-bottom:.5rem;}
+    .process-box-title{font-size:.95rem;font-weight:800;color:var(--text-dark);margin-bottom:.4rem;}
+    .process-box-desc{font-size:.82rem;color:var(--text-muted);line-height:1.55;}
+
+    /* Services served */
+    .services-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;}
+    .service-card{background:var(--bg-white);border:1px solid var(--border-light);border-radius:var(--radius-lg);padding:1.25rem;display:flex;gap:.75rem;align-items:flex-start;transition:var(--transition-fast);}
+    .service-card:hover{border-color:var(--primary-green);box-shadow:var(--shadow-md);}
+    .service-icon{width:38px;height:38px;border-radius:8px;background:var(--accent-lime-light);color:var(--primary-green);display:flex;align-items:center;justify-content:center;font-size:.95rem;flex-shrink:0;}
+    .service-title{font-size:.85rem;font-weight:700;color:var(--text-dark);margin-bottom:.2rem;}
+    .service-desc{font-size:.78rem;color:var(--text-muted);line-height:1.5;}
+
+    /* Intake form */
+    .intake-form-card{background:var(--bg-white);border:1px solid var(--border-light);border-radius:var(--radius-lg);padding:2.5rem;box-shadow:var(--shadow-lg);}
+    .form-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1rem;}
+
+    /* Footer */
+    .footer{background:var(--primary-navy);color:#CBD5E1;padding:3.5rem 0 0;}
+    .footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1.5fr;gap:3rem;margin-bottom:2.5rem;}
+    .footer-title{font-size:.82rem;font-weight:800;color:#fff;text-transform:uppercase;letter-spacing:.06em;margin-bottom:1rem;}
+    .footer-links{display:flex;flex-direction:column;gap:.6rem;}
+    .footer-links a{font-size:.85rem;color:#94A3B8;transition:var(--transition-fast);}
+    .footer-links a:hover{color:var(--accent-lime);padding-left:4px;}
+    .footer-bottom{border-top:1px solid rgba(255,255,255,.08);padding:1.25rem 0;display:flex;justify-content:space-between;align-items:center;font-size:.82rem;color:#475569;}
+
+    @media(max-width:1024px){.domains-grid{grid-template-columns:repeat(2,1fr);}.process-steps-grid{grid-template-columns:repeat(2,1fr);}.services-grid{grid-template-columns:repeat(2,1fr);}.footer-grid{grid-template-columns:1fr 1fr;}}
+    @media(max-width:768px){.domains-grid{grid-template-columns:1fr;}.process-steps-grid{grid-template-columns:1fr;}.services-grid{grid-template-columns:1fr;}.form-row{grid-template-columns:1fr;}.footer-grid{grid-template-columns:1fr;gap:1.5rem;}.ebas-process-flow{flex-direction:column;}.process-arrow{transform:rotate(90deg);}}
+  </style>
+</head>
+<body>
+
+  <!-- TOP BAR -->
+  <div class="top-bar">
+    <div class="container top-bar-inner">
+      <div class="top-bar-left">
+        <span class="top-bar-item"><i class="fa-solid fa-phone" style="color:var(--accent-lime);"></i> Tel: +234 803 279 8904</span>
+        <span class="top-bar-item"><i class="fa-solid fa-envelope" style="color:var(--accent-lime);"></i> info@ruachconsortia.com</span>
+      </div>
+      <div class="top-bar-right">
+        <span class="top-bar-item"><i class="fa-solid fa-shield-halved" style="color:var(--accent-lime);"></i> RC: 1488920</span>
+        <a href="index.html#admin" class="top-bar-link"><i class="fa-solid fa-lock"></i> Staff Portal</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- MAIN NAV -->
+  <header class="header">
+    <div class="container header-inner">
+      <a href="index.html" class="brand-logo-wrapper">
+        <img src="assets/images/ruach_logo_new.png" alt="Ruach Business Consortia Limited Logo" class="brand-logo-img">
+      </a>
+      <nav class="nav-menu" id="navMenu">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="consulting.html" class="nav-link active">Business Consulting</a>
+        <a href="trainings.html" class="nav-link">Training &amp; Schedule</a>
+        <a href="index.html#leadership" class="nav-link">Leadership &amp; Governance</a>
+        <a href="index.html#about" class="nav-link">About Ruach</a>
+        <a href="index.html#contact" class="nav-link">Contact Us</a>
+      </nav>
+      <div class="nav-actions">
+        <a href="#request-demo" class="btn btn-lime btn-sm">Request eBAS Demo</a>
+        <a href="trainings.html" class="btn btn-primary btn-sm">Training Schedule</a>
+        <button class="mobile-nav-toggle" id="mobileNavToggle"><i class="fa-solid fa-bars"></i></button>
+      </div>
+    </div>
+  </header>
+
+  <!-- =============================================
+       HERO SECTION
+  ============================================== -->
+  <section class="consulting-hero">
+    <div class="container">
+      <div style="max-width:900px;">
+        <div class="hero-pill2"><i class="fa-solid fa-chart-line"></i> Enterprise Business Consulting &amp; Advisory</div>
+        <h1>Business Solutions, Performance Monitoring &amp; <span>Management Intelligence</span></h1>
+        <p>Ruach Business Consortia Ltd works with corporate organizations, public institutions, DFIs, and development agencies to solve complex operational challenges, implement process mining, and deploy Enterprise Business Analytics Solutions (eBAS) for complete management visibility.</p>
+        <div class="hero-btns">
+          <a href="#request-demo" class="btn btn-lime">
+            <i class="fa-solid fa-laptop-code" style="margin-right:.4rem;"></i> Request eBAS Software Demo
+          </a>
+          <a href="#request-demo" class="btn btn-outline-green" style="color:#fff;border-color:rgba(255,255,255,.3);">
+            <i class="fa-solid fa-handshake" style="margin-right:.4rem;"></i> Schedule Advisory Consultation
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TRUST STATS BAR -->
+  <div style="background:var(--primary-green);padding:1.25rem 0;">
+    <div class="container" style="display:grid;grid-template-columns:repeat(4,1fr);gap:0;">
+      <div style="display:flex;align-items:center;gap:.85rem;padding:.5rem 1.5rem;border-right:1px solid rgba(255,255,255,.15);">
+        <div style="width:40px;height:40px;background:rgba(255,255,255,.15);border-radius:8px;display:flex;align-items:center;justify-content:center;color:#BEF264;font-size:1.1rem;flex-shrink:0;"><i class="fa-solid fa-building"></i></div>
+        <div><div style="font-size:1.4rem;font-weight:800;color:#fff;line-height:1;">200+</div><div style="font-size:.78rem;color:#BEF264;font-weight:600;">Organisations Served</div></div>
+      </div>
+      <div style="display:flex;align-items:center;gap:.85rem;padding:.5rem 1.5rem;border-right:1px solid rgba(255,255,255,.15);">
+        <div style="width:40px;height:40px;background:rgba(255,255,255,.15);border-radius:8px;display:flex;align-items:center;justify-content:center;color:#BEF264;font-size:1.1rem;flex-shrink:0;"><i class="fa-solid fa-layer-group"></i></div>
+        <div><div style="font-size:1.4rem;font-weight:800;color:#fff;line-height:1;">8</div><div style="font-size:.78rem;color:#BEF264;font-weight:600;">Operational Domains</div></div>
+      </div>
+      <div style="display:flex;align-items:center;gap:.85rem;padding:.5rem 1.5rem;border-right:1px solid rgba(255,255,255,.15);">
+        <div style="width:40px;height:40px;background:rgba(255,255,255,.15);border-radius:8px;display:flex;align-items:center;justify-content:center;color:#BEF264;font-size:1.1rem;flex-shrink:0;"><i class="fa-solid fa-chart-bar"></i></div>
+        <div><div style="font-size:1.4rem;font-weight:800;color:#fff;line-height:1;">98%</div><div style="font-size:.78rem;color:#BEF264;font-weight:600;">Client Retention Rate</div></div>
+      </div>
+      <div style="display:flex;align-items:center;gap:.85rem;padding:.5rem 1.5rem;">
+        <div style="width:40px;height:40px;background:rgba(255,255,255,.15);border-radius:8px;display:flex;align-items:center;justify-content:center;color:#BEF264;font-size:1.1rem;flex-shrink:0;"><i class="fa-solid fa-globe"></i></div>
+        <div><div style="font-size:1.4rem;font-weight:800;color:#fff;line-height:1;">7</div><div style="font-size:.78rem;color:#BEF264;font-weight:600;">Industry Sectors Served</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- =============================================
+       eBAS FLAGSHIP PLATFORM SECTION
+  ============================================== -->
+  <section class="section" id="ebas" style="background:var(--bg-slate);border-bottom:1px solid var(--border-light);">
+    <div class="container">
+      <div class="ebas-flagship-card">
+        <div class="ebas-badge"><i class="fa-solid fa-shield-halved" style="margin-right:.3rem;"></i> FLAGSHIP ENTERPRISE PLATFORM</div>
+        <h2 class="ebas-title">Enterprise Business Analytics Solutions (eBAS / DeBAS)</h2>
+        <p class="ebas-tagline">"Enterprise Intelligence. Operational Visibility. Performance That Can Be Managed."</p>
+        <p class="ebas-desc">Transforming Data, Operations, and Programmes into Actionable Management Intelligence. One Platform. Complete Management Visibility. DeBAS connects fragmented spreadsheets, paper records, emails, and legacy systems into a unified digital management dashboard that empowers leadership teams with real-time insights, automated alerts, and exception-driven governance.</p>
+
+        <div>
+          <h4 style="color:#BEF264;font-size:1rem;font-weight:800;margin-bottom:1rem;text-transform:uppercase;letter-spacing:.05em;">
+            Ruach 5-Step Consulting &amp; Implementation Methodology
+          </h4>
+          <div class="ebas-process-flow">
+            <div class="process-step">
+              <span class="step-num">01</span>
+              <span class="step-name">Discover</span>
+              <span class="step-sub">Operational audit &amp; process analysis</span>
+            </div>
+            <div class="process-arrow"><i class="fa-solid fa-chevron-right"></i></div>
+            <div class="process-step">
+              <span class="step-num">02</span>
+              <span class="step-name">Design</span>
+              <span class="step-sub">Architecture &amp; KPI scorecard framework</span>
+            </div>
+            <div class="process-arrow"><i class="fa-solid fa-chevron-right"></i></div>
+            <div class="process-step">
+              <span class="step-num">03</span>
+              <span class="step-name">Build</span>
+              <span class="step-sub">Configure analytics &amp; workflow engine</span>
+            </div>
+            <div class="process-arrow"><i class="fa-solid fa-chevron-right"></i></div>
+            <div class="process-step">
+              <span class="step-num">04</span>
+              <span class="step-name">Deploy</span>
+              <span class="step-sub">Data migration, rollout &amp; adoption</span>
+            </div>
+            <div class="process-arrow"><i class="fa-solid fa-chevron-right"></i></div>
+            <div class="process-step">
+              <span class="step-num">05</span>
+              <span class="step-name">Optimise</span>
+              <span class="step-sub">Continuous tracking &amp; refinement</span>
+            </div>
+          </div>
+        </div>
+
+        <div style="display:flex;gap:1rem;margin-top:2rem;flex-wrap:wrap;">
+          <a href="#request-demo" class="btn btn-lime"><i class="fa-solid fa-laptop-code" style="margin-right:.4rem;"></i> Request eBAS Demo</a>
+          <a href="#domains" class="btn" style="background:rgba(255,255,255,.1);color:#fff;border:1px solid rgba(255,255,255,.25);">Explore 8 Domains &darr;</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =============================================
+       8 OPERATIONAL DOMAINS
+  ============================================== -->
+  <section class="section" id="domains" style="background:var(--bg-white);">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-subtitle"><i class="fa-solid fa-layer-group" style="color:var(--primary-green);"></i> Comprehensive Operational Reach</div>
+        <h2 class="section-title">8 Operational Domains Powered by eBAS Intelligence</h2>
+        <p class="section-description">Select any operational domain to discover tailored consulting solutions, digital workflow automation, and specialized management scorecards designed to drive visibility and performance.</p>
+      </div>
+      <div class="domains-grid">
+        <div class="domain-card">
+          <div class="domain-icon"><i class="fa-solid fa-chart-pie"></i></div>
+          <div class="domain-tag">Financial Intelligence</div>
+          <div class="domain-name">Finance &amp; Financial Performance</div>
+          <div class="domain-desc">Integrated budget expenditure monitoring, revenue &amp; cost dashboards, budget-versus-actual analysis, and financial KPI scorecards.</div>
+          <div class="domain-features">
+            <div class="domain-feature"><i class="fa-solid fa-check"></i> Budget &amp; expenditure tracking</div>
+            <div class="domain-feature"><i class="fa-solid fa-check"></i> Revenue &amp; cost performance dashboards</div>
+            <div class="domain-feature"><i class="fa-solid fa-check"></i> Real-time financial analytics</div>
+            <div class="domain-feature"><i class="fa-solid fa-check"></i> Budget-vs-actual variance analysis</div>
+          </div>
+        </div>
+        <div class="domain-card">
+          <div class="domain-icon"><i class="fa-solid fa-gears"></i></div>
+          <div class="domain-tag">Operational Intelligence</div>
+          <div class="domain-name">Operations &amp; Workflow Monitoring</div>
+          <div class="domain-desc">Operational KPIs, productivity tracking, service delivery performance, bottleneck detection, and automated exception escalations.</div>
+          <div class="domain-features">
+            <div class="domain-feature"><i class="fa-solid fa-check"></i> Operational KPI dashboards</div>
+            <div class="domain-feature"><i class="fa-solid fa-check"></i> Productivity &amp; workflow tracking</div>
+            <div class="domain-feature"><i class="fa-solid fa-check"></i> Service delivery monitoring</div>
+            <div class="domain-feature"><i class="fa-solid fa-check"></i> Exception &amp; escalation alerts</div>
+          </div>
+        </div>
+        <div class="domain-card">
+          <div class="domain-icon"><i class="fa-solid fa-users-gear"></i></div>
+          <div class="domain-tag">Workforce Intelligence</div>
+          <div class="domain-name">Human Resources &amp; People Management</div>
+          <div class="domain-desc">Workforce analytics, employee performance indicators, attendance tracking, and capacity building records management.</div>
+          <div class="domain-features">
+            <div class="domain-feature"><i class="fa-solid fa-check"></i> Workforce &amp; staffing analytics</div>
+            <div class="domain-feature"><i class="fa-solid fa-check"></i> Employee KPI scorecards</div>
+            <div class="domain-feature"><i class="fa-solid fa-check"></i> Attendance &amp; activity tracking</div>
+            <div class="domain-feature"><i class="fa-solid fa-check"></i> Training &amp; competency records</div>
+          </div>
+        </div>
+        <div class="domain-card">
+          <div class="domain-icon"><i class="fa-solid fa-boxes-stacked"></i></div>
+          <div class="domain-tag">Asset Intelligence</div>
+          <div class="domain-name">Asset Management &amp; Lifecycle Tracking</div>
+          <div class="domain-desc">Fixed asset registers, asset utilization metrics, maintenance schedules, lifecycle monitoring, and real-time status tracking.</div>
+          <div class="domain-features">
+            <div class="domain-feature"><i class="fa-solid fa-check"></i> Real-time asset registers</div>
+            <div class="domain-feature"><i class="fa-solid fa-check"></i> Asset utilization &amp; uptime metrics</div>
+            <div class="domain-feature"><i class="fa-solid fa-check"></i> Preventive maintenance schedules</div>
+            <div class="domain-feature"><i class="fa-solid fa-check"></i> Location &amp; status tracking</div>
+          </div>
+        </div>
+        <div class="domain-card">
+          <div class="domain-icon"><i class="fa-solid fa-briefcase"></i></div>
+          <div class="domain-tag">Commercial Intelligence</div>
+          <div class="domain-name">Sales, Customers &amp; Business Development</div>
+          <div class="domain-desc">Customer account intelligence, sales pipeline monitoring, onboarding workflows, and revenue opportunity tracking across your commercial portfolio.</div>
+          <div class="domain-features">
+            <div class="domain-feature"><i class="fa-solid fa-check"></i> Customer &amp; account intelligence</div>
+            <div class="domain-feature"><i class="fa-solid fa-check"></i> Sales pipeline monitoring</div>
+            <div class="domain-feature"><i class="fa-solid fa-check"></i> Client onboarding workflows</div>
+            <div class="domain-feature"><i class="fa-solid fa-check"></i> Opportunity &amp; revenue tracking</div>
+          </div>
+        </div>
+        <div class="domain-card">
+          <div class="domain-icon"><i class="fa-solid fa-diagram-project"></i></div>
+          <div class="domain-tag">Programme &amp; MEL Intelligence</div>
+          <div class="domain-name">Projects &amp; Programme MEL Management</div>
+          <div class="domain-desc">Milestone deliverables, budget utilization, Monitoring, Evaluation &amp; Learning (MEL) dashboards, and beneficiary tracking for development programmes.</div>
+          <div class="domain-features">
+            <div class="domain-feature"><i class="fa-solid fa-check"></i> Project milestone tracking</div>
+            <div class="domain-feature"><i class="fa-solid fa-check"></i> MEL &amp; impact dashboards</div>
+            <div class="domain-feature"><i class="fa-solid fa-check"></i> Beneficiary &amp; stakeholder databases</div>
+            <div class="domain-feature"><i class="fa-solid fa-check"></i> Risk &amp; issue monitoring</div>
+          </div>
+        </div>
+        <div class="domain-card">
+          <div class="domain-icon"><i class="fa-solid fa-truck-ramp-box"></i></div>
+          <div class="domain-tag">Supply Chain Intelligence</div>
+          <div class="domain-name">Procurement &amp; Supply Chain</div>
+          <div class="domain-desc">Procurement pipeline monitoring, supplier scorecards, PO status tracking, inventory visibility, and delivery performance management.</div>
+          <div class="domain-features">
+            <div class="domain-feature"><i class="fa-solid fa-check"></i> Procurement pipeline tracking</div>
+            <div class="domain-feature"><i class="fa-solid fa-check"></i> Supplier performance scorecards</div>
+            <div class="domain-feature"><i class="fa-solid fa-check"></i> Inventory &amp; stock visibility</div>
+            <div class="domain-feature"><i class="fa-solid fa-check"></i> Delivery &amp; fulfillment tracking</div>
+          </div>
+        </div>
+        <div class="domain-card">
+          <div class="domain-icon"><i class="fa-solid fa-network-wired"></i></div>
+          <div class="domain-tag">Workflow Automation</div>
+          <div class="domain-name">Intelligent Digital Workflows</div>
+          <div class="domain-desc">Digital approvals, task escalations, document workflows, electronic agreements, and automated management reporting across all departments.</div>
+          <div class="domain-features">
+            <div class="domain-feature"><i class="fa-solid fa-check"></i> Paperless digital approvals</div>
+            <div class="domain-feature"><i class="fa-solid fa-check"></i> Task assignment &amp; escalation</div>
+            <div class="domain-feature"><i class="fa-solid fa-check"></i> Document &amp; contract workflows</div>
+            <div class="domain-feature"><i class="fa-solid fa-check"></i> Automated management reporting</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =============================================
+       PERFORMANCE MONITORING SHOWCASE
+  ============================================== -->
+  <section class="section" id="performance" style="background:var(--bg-slate);border-top:1px solid var(--border-light);">
+    <div class="container">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:center;">
+        <div>
+          <div class="section-subtitle"><i class="fa-solid fa-sliders" style="color:var(--primary-green);"></i> Real-Time Visibility</div>
+          <h2 class="section-title">Performance Monitoring &amp; Management Intelligence</h2>
+          <p style="font-size:.95rem;color:var(--text-body);line-height:1.7;margin-bottom:1.25rem;">
+            Modern organizations cannot manage what they cannot measure. Ruach equips leadership teams with real-time performance indicators, automated exception management, and executive intelligence portals that surface the metrics that matter most.
+          </p>
+          <ul style="display:flex;flex-direction:column;gap:.75rem;font-size:.9rem;color:var(--primary-navy);font-weight:700;margin-bottom:2rem;">
+            <li><i class="fa-solid fa-circle-check" style="color:var(--primary-green);margin-right:.5rem;"></i> Executive Boardroom Scorecards &amp; Variance Analytics</li>
+            <li><i class="fa-solid fa-circle-check" style="color:var(--primary-green);margin-right:.5rem;"></i> Automated Bottleneck &amp; Escalation Triggers</li>
+            <li><i class="fa-solid fa-circle-check" style="color:var(--primary-green);margin-right:.5rem;"></i> Project Monitoring, Evaluation &amp; Learning (MEL) Dashboards</li>
+            <li><i class="fa-solid fa-circle-check" style="color:var(--primary-green);margin-right:.5rem;"></i> Paperless Digital Approvals &amp; Audit Trail History</li>
+            <li><i class="fa-solid fa-circle-check" style="color:var(--primary-green);margin-right:.5rem;"></i> Supplier &amp; Vendor Performance Scorecards</li>
+          </ul>
+          <a href="#request-demo" class="btn btn-primary">Request Performance Monitoring Demo &rarr;</a>
+        </div>
+        <div class="scorecard-card">
+          <div style="font-size:.8rem;font-weight:800;color:var(--primary-green);text-transform:uppercase;margin-bottom:1rem;">Sample eBAS Management Scorecard</div>
+          <div class="scorecard-row" style="border-left:4px solid #16A34A;">
+            <div>
+              <div style="font-size:.8rem;color:var(--text-muted);">Budget Expenditure Index</div>
+              <strong style="font-size:1.1rem;color:var(--primary-navy);">&#8358;1.42B / &#8358;1.50B (94.6%)</strong>
+            </div>
+            <span class="badge-success2">ON TARGET</span>
+          </div>
+          <div class="scorecard-row" style="border-left:4px solid #D97706;">
+            <div>
+              <div style="font-size:.8rem;color:var(--text-muted);">Project Deliverables Completed</div>
+              <strong style="font-size:1.1rem;color:var(--primary-navy);">18 of 22 Milestones (81.8%)</strong>
+            </div>
+            <span class="badge-warning2">ATTENTION</span>
+          </div>
+          <div class="scorecard-row" style="border-left:4px solid #2563EB;">
+            <div>
+              <div style="font-size:.8rem;color:var(--text-muted);">Digital Workflow Approvals</div>
+              <strong style="font-size:1.1rem;color:var(--primary-navy);">142 Requests Cleared Today</strong>
+            </div>
+            <span class="badge-info2">OPTIMAL</span>
+          </div>
+          <div class="scorecard-row" style="border-left:4px solid #16A34A;">
+            <div>
+              <div style="font-size:.8rem;color:var(--text-muted);">Staff Attendance Compliance</div>
+              <strong style="font-size:1.1rem;color:var(--primary-navy);">96.3% (217 of 225 Staff)</strong>
+            </div>
+            <span class="badge-success2">EXCELLENT</span>
+          </div>
+          <div class="scorecard-row" style="border-left:4px solid #D97706;">
+            <div>
+              <div style="font-size:.8rem;color:var(--text-muted);">Procurement Cycle Time</div>
+              <strong style="font-size:1.1rem;color:var(--primary-navy);">Avg. 14 Days (Target: 10 Days)</strong>
+            </div>
+            <span class="badge-warning2">IMPROVE</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =============================================
+       PROCESS MINING & WORKFLOW SECTION
+  ============================================== -->
+  <section class="section" id="process-mining" style="background:var(--bg-white);">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-subtitle"><i class="fa-solid fa-sitemap" style="color:var(--primary-green);"></i> Process Intelligence</div>
+        <h2 class="section-title">Process Mining &amp; Digital Workflow Automation</h2>
+        <p class="section-description">Ruach maps, analyzes, and optimizes every business process â€” eliminating bottlenecks, automating repetitive tasks, and digitizing paper-based approvals into seamless digital workflows.</p>
+      </div>
+      <div class="process-steps-grid">
+        <div class="process-box">
+          <div class="process-box-num">01</div>
+          <div class="process-box-title">Process Discovery &amp; Mapping</div>
+          <div class="process-box-desc">We shadow your workflows end-to-end, document every touchpoint, and identify high-impact automation and efficiency opportunities across departments.</div>
+        </div>
+        <div class="process-box">
+          <div class="process-box-num">02</div>
+          <div class="process-box-title">Bottleneck Analysis &amp; Redesign</div>
+          <div class="process-box-desc">Using data-driven process mining, we identify bottlenecks, redundant steps, and approval delays â€” then design leaner, faster workflow architectures.</div>
+        </div>
+        <div class="process-box">
+          <div class="process-box-num">03</div>
+          <div class="process-box-title">Digital Workflow Implementation</div>
+          <div class="process-box-desc">We deploy paperless digital approval chains, automated escalation protocols, exception routing systems, and electronic document management.</div>
+        </div>
+        <div class="process-box">
+          <div class="process-box-num">04</div>
+          <div class="process-box-title">Automation &amp; RPA Integration</div>
+          <div class="process-box-desc">We integrate Robotic Process Automation (RPA) into repetitive data entry, reconciliation, and reporting tasks â€” freeing your team for high-value work.</div>
+        </div>
+        <div class="process-box">
+          <div class="process-box-num">05</div>
+          <div class="process-box-title">Change Management &amp; Adoption</div>
+          <div class="process-box-desc">We embed change management into every rollout â€” training teams, managing resistance, and ensuring sustainable adoption of new digital workflows.</div>
+        </div>
+        <div class="process-box">
+          <div class="process-box-num">06</div>
+          <div class="process-box-title">Continuous Process Monitoring</div>
+          <div class="process-box-desc">Post-deployment, we establish ongoing KPI monitoring to track workflow performance, detect new bottlenecks, and refine processes for continuous improvement.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =============================================
+       CONSULTING SERVICES OVERVIEW
+  ============================================== -->
+  <section class="section" style="background:var(--bg-slate);border-top:1px solid var(--border-light);">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-subtitle"><i class="fa-solid fa-briefcase" style="color:var(--primary-green);"></i> Advisory Services Portfolio</div>
+        <h2 class="section-title">Strategic Advisory &amp; Consulting Services</h2>
+        <p class="section-description">Beyond eBAS, Ruach delivers a comprehensive portfolio of strategic advisory services to drive organizational transformation, governance, and sustainable growth.</p>
+      </div>
+      <div class="services-grid">
+        <div class="service-card">
+          <div class="service-icon"><i class="fa-solid fa-lightbulb"></i></div>
+          <div><div class="service-title">Strategic Business Advisory &amp; Planning</div><div class="service-desc">Corporate strategy development, business plan reviews, market entry strategies, and growth roadmaps for enterprises and institutions.</div></div>
+        </div>
+        <div class="service-card">
+          <div class="service-icon"><i class="fa-solid fa-scale-balanced"></i></div>
+          <div><div class="service-title">Corporate Governance &amp; Compliance Frameworks</div><div class="service-desc">Board governance advisory, regulatory compliance frameworks, policy development, and institutional governance audits.</div></div>
+        </div>
+        <div class="service-card">
+          <div class="service-icon"><i class="fa-solid fa-people-arrows"></i></div>
+          <div><div class="service-title">Organizational Change Management</div><div class="service-desc">End-to-end change management for mergers, restructuring, digital transformation, and large-scale operational reforms.</div></div>
+        </div>
+        <div class="service-card">
+          <div class="service-icon"><i class="fa-solid fa-magnifying-glass-chart"></i></div>
+          <div><div class="service-title">Operational &amp; Financial Due Diligence</div><div class="service-desc">Comprehensive diagnostic assessments of financial health, operational efficiency, and management systems for investors and boards.</div></div>
+        </div>
+        <div class="service-card">
+          <div class="service-icon"><i class="fa-solid fa-seedling"></i></div>
+          <div><div class="service-title">SME &amp; Enterprise Development Programs</div><div class="service-desc">Capacity building, business development support, and structured advisory for growing SMEs seeking structured management systems.</div></div>
+        </div>
+        <div class="service-card">
+          <div class="service-icon"><i class="fa-solid fa-hand-holding-dollar"></i></div>
+          <div><div class="service-title">Development Program Design &amp; MEL</div><div class="service-desc">Programme design, theory of change development, logical framework alignment, and M&amp;E systems for DFIs and NGOs.</div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =============================================
+       REQUEST DEMO / INTAKE FORM
+  ============================================== -->
+  <section class="section" id="request-demo" style="background:var(--bg-white);">
+    <div class="container">
+      <div style="display:grid;grid-template-columns:1fr 1.4fr;gap:3rem;align-items:start;">
+        <!-- Left info panel -->
+        <div>
+          <div class="section-subtitle"><i class="fa-solid fa-paper-plane" style="color:var(--primary-green);"></i> Get In Touch</div>
+          <h2 class="section-title">Request a Consulting Demo or Advisory Session</h2>
+          <p style="font-size:.95rem;color:var(--text-body);line-height:1.7;margin-bottom:2rem;">Tell us about your organization's challenges and we'll tailor a demonstration of our eBAS platform or schedule a no-obligation strategic advisory consultation.</p>
+
+          <div style="display:flex;flex-direction:column;gap:1rem;">
+            <div style="display:flex;align-items:flex-start;gap:.75rem;">
+              <div style="width:40px;height:40px;border-radius:10px;background:var(--accent-lime-light);color:var(--primary-green);display:flex;align-items:center;justify-content:center;font-size:1rem;flex-shrink:0;"><i class="fa-solid fa-clock"></i></div>
+              <div><strong style="font-size:.88rem;color:var(--text-dark);">Fast Response Time</strong><p style="font-size:.82rem;color:var(--text-muted);margin-top:.2rem;">Our consulting team responds to all inquiries within 24 business hours.</p></div>
+            </div>
+            <div style="display:flex;align-items:flex-start;gap:.75rem;">
+              <div style="width:40px;height:40px;border-radius:10px;background:var(--accent-lime-light);color:var(--primary-green);display:flex;align-items:center;justify-content:center;font-size:1rem;flex-shrink:0;"><i class="fa-solid fa-shield-check"></i></div>
+              <div><strong style="font-size:.88rem;color:var(--text-dark);">100% Confidential</strong><p style="font-size:.82rem;color:var(--text-muted);margin-top:.2rem;">All information shared is treated with strict professional confidentiality.</p></div>
+            </div>
+            <div style="display:flex;align-items:flex-start;gap:.75rem;">
+              <div style="width:40px;height:40px;border-radius:10px;background:var(--accent-lime-light);color:var(--primary-green);display:flex;align-items:center;justify-content:center;font-size:1rem;flex-shrink:0;"><i class="fa-solid fa-handshake"></i></div>
+              <div><strong style="font-size:.88rem;color:var(--text-dark);">No-Obligation Consultation</strong><p style="font-size:.82rem;color:var(--text-muted);margin-top:.2rem;">Our initial advisory session is complimentary with no commitment required.</p></div>
+            </div>
+          </div>
+
+          <div style="margin-top:2rem;padding:1.25rem;background:var(--bg-slate);border-radius:var(--radius-lg);border:1px solid var(--border-light);">
+            <div style="font-size:.8rem;font-weight:700;color:var(--primary-green);margin-bottom:.5rem;text-transform:uppercase;">Direct Contact</div>
+            <p style="font-size:.85rem;color:var(--text-body);margin-bottom:.35rem;"><i class="fa-solid fa-phone" style="color:var(--primary-green);margin-right:.4rem;"></i> +234 803 279 8904</p>
+            <p style="font-size:.85rem;color:var(--text-body);margin-bottom:.35rem;"><i class="fa-solid fa-envelope" style="color:var(--primary-green);margin-right:.4rem;"></i> info@ruachconsortia.com</p>
+          </div>
+        </div>
+
+        <!-- Right form -->
+        <div class="intake-form-card">
+          <h3 style="font-size:1.15rem;font-weight:800;color:var(--text-dark);margin-bottom:1.5rem;">Consulting &amp; eBAS Enquiry Form</h3>
+          <form id="consultingIntakeForm" onsubmit="handleConsultingPageSubmit(event)">
+            <div class="form-group" style="margin-bottom:1rem;">
+              <label class="form-label">Solution / Service Required</label>
+              <select class="form-control" id="pageConsultingService" required>
+                <option value="">Select a service...</option>
+                <option value="eBAS Platform Demo">Enterprise Business Analytics Solutions (eBAS Demo)</option>
+                <option value="Strategic Business Advisory">Strategic Business Advisory &amp; Planning</option>
+                <option value="Process Mining">Process Mining &amp; Digital Workflow Automation</option>
+                <option value="Performance MEL Systems">Monitoring, Evaluation &amp; Learning (MEL) Dashboards</option>
+                <option value="Governance Compliance">Corporate Governance &amp; Compliance Frameworks</option>
+                <option value="Custom Corporate Consulting">Custom Corporate Capacity Building &amp; Advisory</option>
+              </select>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label">Full Name</label>
+                <input type="text" class="form-control" id="pageConsultingName" placeholder="e.g. Dr. Jane Doe" required>
+              </div>
+              <div class="form-group">
+                <label class="form-label">Job Title / Position</label>
+                <input type="text" class="form-control" id="pageConsultingTitle" placeholder="e.g. Director of Finance" required>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label">Official Work Email</label>
+                <input type="email" class="form-control" id="pageConsultingEmail" placeholder="jane.doe@company.com" required>
+              </div>
+              <div class="form-group">
+                <label class="form-label">Phone Number</label>
+                <input type="tel" class="form-control" id="pageConsultingPhone" placeholder="+234 803 279 8904" required>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label">Organization / Company Name</label>
+                <input type="text" class="form-control" id="pageConsultingOrg" placeholder="e.g. Federal Ministry / Bank Plc" required>
+              </div>
+              <div class="form-group">
+                <label class="form-label">Industry Sector</label>
+                <select class="form-control" id="pageConsultingSector">
+                  <option value="">Select sector...</option>
+                  <option>Finance &amp; Banking</option>
+                  <option>Oil &amp; Gas / Energy</option>
+                  <option>Government / Public Sector</option>
+                  <option>Healthcare</option>
+                  <option>Education</option>
+                  <option>Development / NGO</option>
+                  <option>Commercial / Corporate</option>
+                  <option>Other</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-group" style="margin-bottom:1.25rem;">
+              <label class="form-label">Brief Description of Operational Needs / Goals</label>
+              <textarea class="form-control" id="pageConsultingNotes" rows="4" placeholder="Tell us about your organization's digital transformation, data analytics, performance management, or governance challenges..."></textarea>
+            </div>
+            <div id="consultingFormFeedback" style="display:none;background:var(--success-green-light);color:#166534;padding:1rem;border-radius:8px;margin-bottom:1rem;font-size:.88rem;font-weight:600;border:1px solid #16A34A;"></div>
+            <div style="display:flex;justify-content:flex-end;gap:.75rem;">
+              <button type="reset" class="btn btn-outline-green btn-sm">Clear Form</button>
+              <button type="submit" class="btn btn-lime">
+                <i class="fa-solid fa-paper-plane" style="margin-right:.3rem;"></i> Submit Enquiry
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <a href="index.html" class="brand-logo-wrapper" style="margin-bottom:.5rem;">
+            <img src="assets/images/ruach_logo_new.png" alt="Ruach Logo" style="height:55px;width:auto;object-fit:contain;">
+          </a>
+          <p style="font-size:.88rem;line-height:1.6;color:#CBD5E1;margin-top:.75rem;">Ruach Business Consortia Limited is a premier business consulting, digital transformation (eBAS), and executive training firm based in Nigeria.</p>
+          <p style="font-size:.8rem;color:#94A3B8;margin-top:.5rem;"><i class="fa-solid fa-phone" style="color:var(--accent-lime);margin-right:.3rem;"></i> +234 803 279 8904</p>
+          <p style="font-size:.8rem;color:#94A3B8;margin-top:.25rem;"><i class="fa-solid fa-envelope" style="color:var(--accent-lime);margin-right:.3rem;"></i> info@ruachconsortia.com</p>
+        </div>
+        <div>
+          <h4 class="footer-title">Site Navigation</h4>
+          <div class="footer-links">
+            <a href="index.html">Home</a>
+            <a href="consulting.html">Business Consulting &amp; eBAS</a>
+            <a href="trainings.html">Training &amp; Schedule Matrix</a>
+            <a href="index.html#leadership">Leadership &amp; Board</a>
+            <a href="index.html#about">About Ruach</a>
+            <a href="index.html#contact">Contact Us</a>
+          </div>
+        </div>
+        <div>
+          <h4 class="footer-title">Consulting Services</h4>
+          <div class="footer-links">
+            <a href="#ebas">eBAS Platform</a>
+            <a href="#domains">8 Operational Domains</a>
+            <a href="#performance">Performance Monitoring</a>
+            <a href="#process-mining">Process Mining</a>
+            <a href="#request-demo">Request Demo</a>
+          </div>
+        </div>
+        <div>
+          <h4 class="footer-title">Newsletter &amp; Advisory Updates</h4>
+          <p style="font-size:.85rem;color:#CBD5E1;margin-bottom:1rem;">Subscribe to receive quarterly business insights and consulting intelligence reports.</p>
+          <form onsubmit="event.preventDefault();document.getElementById('consultingToast').textContent='Subscribed to Ruach consulting updates!';document.getElementById('consultingToast').style.transform='translateY(0)';document.getElementById('consultingToast').style.opacity='1';setTimeout(()=>{document.getElementById('consultingToast').style.transform='translateY(100px)';document.getElementById('consultingToast').style.opacity='0';},3000);">
+            <div style="display:flex;gap:.5rem;">
+              <input type="email" class="form-control" placeholder="Enter work email" required style="font-size:.85rem;padding:.6rem;">
+              <button type="submit" class="btn btn-lime btn-sm">Subscribe</button>
+            </div>
+          </form>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div>&copy; 2026 Ruach Business Consortia Limited. All rights reserved.</div>
+        <div style="display:flex;gap:1.5rem;">
+          <a href="index.html#about">Privacy Policy</a>
+          <a href="index.html#about">Terms of Engagement</a>
+          <a href="index.html#about">Governance Statement</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <div id="consultingToast" style="position:fixed;bottom:2rem;right:2rem;background:var(--primary-green);color:#fff;padding:1rem 1.5rem;border-radius:8px;box-shadow:var(--shadow-xl);font-weight:600;font-size:.9rem;transform:translateY(100px);opacity:0;transition:all .35s ease;z-index:9999;max-width:320px;"></div>
+
+  <script src="js/app.js"></script>
+  <script>
+    document.getElementById('mobileNavToggle').addEventListener('click',()=>{
+      document.getElementById('navMenu').classList.toggle('active');
+    });
+
+    function handleConsultingPageSubmit(e) {
+      e.preventDefault();
+      const name    = document.getElementById('pageConsultingName').value;
+      const service = document.getElementById('pageConsultingService').value;
+      const feedback = document.getElementById('consultingFormFeedback');
+      feedback.textContent = `Thank you, ${name}! Your enquiry for "${service}" has been received. Our consulting team will contact you within 24 business hours.`;
+      feedback.style.display = 'block';
+      document.getElementById('consultingIntakeForm').reset();
+      feedback.scrollIntoView({behavior:'smooth',block:'nearest'});
+      setTimeout(()=>{feedback.style.display='none';},8000);
+    }
+
+    // Smooth scroll for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(a=>{
+      a.addEventListener('click',e=>{
+        const target = document.querySelector(a.getAttribute('href'));
+        if(target){ e.preventDefault(); target.scrollIntoView({behavior:'smooth'}); }
+      });
+    });
+  </script>
+</body>
+</html>
+

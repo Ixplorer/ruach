@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About Ruach Business Consortia Ltd | Vision, Mission &amp; Leadership</title>
+  <meta name="description" content="Learn about Ruach Business Consortia Limited — our founding story, vision, mission, core organizational values, strategic partners, and leadership team. Headquartered in Abuja, Nigeria.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,600&family=Outfit:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    /* ── About Hero ── */
+    .about-hero{background:linear-gradient(135deg,var(--primary-navy) 0%,var(--primary-green-dark) 100%);padding:5rem 0 4.5rem;color:#fff;position:relative;overflow:hidden;}
+    .about-hero::before{content:'';position:absolute;inset:0;background-image:radial-gradient(circle at 15% 50%,rgba(132,204,22,.1) 0%,transparent 55%),radial-gradient(circle at 85% 20%,rgba(132,204,22,.06) 0%,transparent 45%);pointer-events:none;}
+    .about-hero-pill{display:inline-flex;align-items:center;gap:.5rem;background:rgba(132,204,22,.15);border:1px solid rgba(132,204,22,.35);color:#BEF264;font-size:.82rem;font-weight:700;padding:.4rem 1rem;border-radius:50px;margin-bottom:1.25rem;text-transform:uppercase;letter-spacing:.05em;}
+    .about-hero h1{font-size:clamp(2rem,4vw,3.25rem);font-weight:800;line-height:1.12;color:#fff;margin-bottom:1.25rem;}
+    .about-hero h1 span{color:#BEF264;}
+    .about-hero p{font-size:1.05rem;color:#CBD5E1;line-height:1.75;max-width:820px;margin-bottom:0;}
+
+    /* ── Story / Founding section ── */
+    .story-grid{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center;}
+    .story-accent-bar{width:4px;height:60px;background:linear-gradient(to bottom,var(--primary-green),var(--accent-lime));border-radius:2px;margin-bottom:1.25rem;}
+    .story-stat-row{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;margin-top:2.5rem;}
+    .story-stat{background:var(--bg-slate);border:1px solid var(--border-light);border-radius:var(--radius-lg);padding:1.25rem;text-align:center;}
+    .story-stat-num{font-size:1.75rem;font-weight:900;color:var(--primary-green);line-height:1;}
+    .story-stat-label{font-size:.78rem;color:var(--text-muted);font-weight:600;margin-top:.3rem;}
+
+    /* ── Vision / Mission ── */
+    .vm-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;}
+    .vm-box{border-radius:var(--radius-lg);padding:2rem;position:relative;overflow:hidden;}
+    .vm-box-vision{background:linear-gradient(135deg,var(--primary-green-dark) 0%,var(--primary-navy) 100%);color:#fff;}
+    .vm-box-mission{background:linear-gradient(135deg,var(--primary-navy) 0%,#1e293b 100%);color:#fff;}
+    .vm-icon-wrap{width:52px;height:52px;border-radius:12px;background:rgba(132,204,22,.15);border:1px solid rgba(132,204,22,.3);display:flex;align-items:center;justify-content:center;font-size:1.3rem;color:#BEF264;margin-bottom:1.25rem;}
+    .vm-label{font-size:.72rem;font-weight:800;color:#BEF264;text-transform:uppercase;letter-spacing:.08em;margin-bottom:.5rem;}
+    .vm-title2{font-size:1.3rem;font-weight:800;color:#fff;margin-bottom:.75rem;}
+    .vm-text2{font-size:.92rem;color:#CBD5E1;line-height:1.7;}
+
+    /* ── Core Values ── */
+    .core-values-page-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:1rem;}
+    .cv-card{background:var(--bg-white);border:1px solid var(--border-light);border-radius:var(--radius-lg);padding:1.5rem;text-align:center;transition:var(--transition-fast);position:relative;overflow:hidden;}
+    .cv-card::after{content:'';position:absolute;bottom:0;left:0;right:0;height:3px;background:linear-gradient(to right,var(--primary-green),var(--accent-lime));transform:scaleX(0);transition:transform .3s ease;}
+    .cv-card:hover{transform:translateY(-4px);box-shadow:var(--shadow-lg);border-color:var(--primary-green);}
+    .cv-card:hover::after{transform:scaleX(1);}
+    .cv-num{font-size:.7rem;font-weight:800;color:var(--accent-lime-hover);letter-spacing:.08em;text-transform:uppercase;margin-bottom:.75rem;}
+    .cv-icon{width:56px;height:56px;border-radius:14px;background:var(--accent-lime-light);color:var(--primary-green);display:flex;align-items:center;justify-content:center;font-size:1.4rem;margin:0 auto .9rem;}
+    .cv-title{font-size:1rem;font-weight:800;color:var(--primary-navy);margin-bottom:.5rem;}
+    .cv-desc{font-size:.8rem;color:var(--text-muted);line-height:1.55;}
+
+    /* ── Pillars / What Sets Us Apart ── */
+    .pillars-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;}
+    .pillar-card{background:var(--bg-white);border:1px solid var(--border-light);border-radius:var(--radius-lg);padding:1.75rem;transition:var(--transition-fast);}
+    .pillar-card:hover{border-color:var(--primary-green);box-shadow:var(--shadow-md);}
+    .pillar-icon{width:48px;height:48px;border-radius:12px;background:var(--accent-lime-light);color:var(--primary-green);display:flex;align-items:center;justify-content:center;font-size:1.2rem;margin-bottom:1rem;}
+    .pillar-title{font-size:.95rem;font-weight:800;color:var(--text-dark);margin-bottom:.5rem;}
+    .pillar-desc{font-size:.82rem;color:var(--text-muted);line-height:1.6;}
+
+    /* ── Partners ── */
+    .partners-display{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;}
+    .partner-tile{background:var(--bg-white);border:1px solid var(--border-light);border-radius:var(--radius-lg);padding:1.25rem;display:flex;align-items:center;gap:.75rem;transition:var(--transition-fast);}
+    .partner-tile:hover{border-color:var(--primary-green);box-shadow:var(--shadow-sm);}
+    .partner-badge{width:40px;height:40px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:1rem;color:#fff;flex-shrink:0;}
+    .partner-info .p-name{font-size:.82rem;font-weight:700;color:var(--text-dark);}
+    .partner-info .p-type{font-size:.72rem;color:var(--text-muted);}
+
+    /* ── Leadership preview cards ── */
+    .leaders-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1.25rem;}
+    .leader-card{background:var(--bg-white);border:1px solid var(--border-light);border-radius:var(--radius-lg);overflow:hidden;transition:var(--transition-fast);text-align:center;}
+    .leader-card:hover{transform:translateY(-3px);box-shadow:var(--shadow-lg);border-color:var(--primary-green);}
+    .leader-img-wrap{background:linear-gradient(135deg,var(--primary-green-dark),var(--primary-navy));padding:1.5rem 1.5rem 0;display:flex;justify-content:center;}
+    .leader-img{width:90px;height:90px;border-radius:50%;object-fit:cover;border:3px solid rgba(132,204,22,.5);}
+    .leader-img-placeholder{width:90px;height:90px;border-radius:50%;background:rgba(255,255,255,.15);border:3px solid rgba(132,204,22,.35);display:flex;align-items:center;justify-content:center;font-size:1.6rem;color:#BEF264;}
+    .leader-body{padding:1rem;}
+    .leader-badge{display:inline-block;background:var(--accent-lime-light);color:var(--primary-green);font-size:.68rem;font-weight:800;padding:.15rem .6rem;border-radius:50px;text-transform:uppercase;margin-bottom:.4rem;}
+    .leader-name{font-size:.88rem;font-weight:800;color:var(--text-dark);margin-bottom:.2rem;line-height:1.3;}
+    .leader-role{font-size:.75rem;color:var(--text-muted);}
+
+    /* ── CTA Banner ── */
+    .about-cta-banner{background:linear-gradient(135deg,var(--primary-green-dark) 0%,var(--primary-navy) 100%);border-radius:var(--radius-lg);padding:3rem;text-align:center;}
+    .about-cta-btns{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;margin-top:1.5rem;}
+
+    /* ── Footer ── */
+    .footer{background:var(--primary-navy);color:#CBD5E1;padding:3.5rem 0 0;}
+    .footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1.5fr;gap:3rem;margin-bottom:2.5rem;}
+    .footer-title{font-size:.82rem;font-weight:800;color:#fff;text-transform:uppercase;letter-spacing:.06em;margin-bottom:1rem;}
+    .footer-links{display:flex;flex-direction:column;gap:.6rem;}
+    .footer-links a{font-size:.85rem;color:#94A3B8;transition:var(--transition-fast);}
+    .footer-links a:hover{color:var(--accent-lime);padding-left:4px;}
+    .footer-bottom{border-top:1px solid rgba(255,255,255,.08);padding:1.25rem 0;display:flex;justify-content:space-between;align-items:center;font-size:.82rem;color:#475569;}
+
+    @media(max-width:1024px){
+      .story-grid{grid-template-columns:1fr;gap:2rem;}
+      .core-values-page-grid{grid-template-columns:repeat(3,1fr);}
+      .partners-display{grid-template-columns:repeat(2,1fr);}
+      .leaders-grid{grid-template-columns:repeat(2,1fr);}
+      .pillars-grid{grid-template-columns:repeat(2,1fr);}
+      .footer-grid{grid-template-columns:1fr 1fr;}
+      .vm-grid{grid-template-columns:1fr;}
+    }
+    @media(max-width:768px){
+      .core-values-page-grid{grid-template-columns:repeat(2,1fr);}
+      .story-stat-row{grid-template-columns:repeat(2,1fr);}
+      .pillars-grid{grid-template-columns:1fr;}
+      .partners-display{grid-template-columns:1fr 1fr;}
+      .leaders-grid{grid-template-columns:1fr 1fr;}
+      .footer-grid{grid-template-columns:1fr;gap:1.5rem;}
+    }
+  </style>
+</head>
+<body>
+
+  <!-- TOP BAR -->
+  <div class="top-bar">
+    <div class="container top-bar-inner">
+      <div class="top-bar-left">
+        <span class="top-bar-item"><i class="fa-solid fa-phone" style="color:var(--accent-lime);"></i> Tel: +234 803 279 8904</span>
+        <span class="top-bar-item"><i class="fa-solid fa-envelope" style="color:var(--accent-lime);"></i> info@ruachconsortia.com</span>
+      </div>
+      <div class="top-bar-right">
+        <span class="top-bar-item"><i class="fa-solid fa-shield-halved" style="color:var(--accent-lime);"></i> RC: 1488920</span>
+        <a href="index.html#admin" class="top-bar-link"><i class="fa-solid fa-lock"></i> Staff Portal</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- MAIN NAV -->
+  <header class="header">
+    <div class="container header-inner">
+      <a href="index.html" class="brand-logo-wrapper">
+        <img src="assets/images/ruach_logo_new.png" alt="Ruach Business Consortia Limited Logo" class="brand-logo-img">
+      </a>
+      <nav class="nav-menu" id="navMenu">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="consulting.html" class="nav-link">Business Consulting</a>
+        <a href="trainings.html" class="nav-link">Training &amp; Schedule</a>
+        <a href="index.html#leadership" class="nav-link">Leadership &amp; Governance</a>
+        <a href="about.html" class="nav-link active">About Ruach</a>
+        <a href="index.html#contact" class="nav-link">Contact Us</a>
+      </nav>
+      <div class="nav-actions">
+        <a href="consulting.html" class="btn btn-lime btn-sm">Consulting &amp; eBAS</a>
+        <a href="trainings.html" class="btn btn-primary btn-sm">Training Schedule</a>
+        <button class="mobile-nav-toggle" id="mobileNavToggle"><i class="fa-solid fa-bars"></i></button>
+      </div>
+    </div>
+  </header>
+
+  <!-- =============================================
+       HERO
+  ============================================== -->
+  <section class="about-hero">
+    <div class="container">
+      <div class="about-hero-pill"><i class="fa-solid fa-compass"></i> Corporate Overview &amp; Foundation</div>
+      <h1>About <span>Ruach Business Consortia Limited</span></h1>
+      <p>Empowering Organizations Through Knowledge, Innovation &amp; Excellence. Building capable enterprises, future-ready leaders, and sustainable business growth across Africa and globally.</p>
+    </div>
+  </section>
+
+  <!-- BREADCRUMB STRIP -->
+  <div style="background:var(--bg-slate);border-bottom:1px solid var(--border-light);padding:.65rem 0;">
+    <div class="container" style="display:flex;align-items:center;gap:.5rem;font-size:.82rem;color:var(--text-muted);">
+      <a href="index.html" style="color:var(--text-muted);font-weight:600;">Home</a>
+      <i class="fa-solid fa-chevron-right" style="font-size:.6rem;"></i>
+      <span style="color:var(--primary-green);font-weight:700;">About Ruach</span>
+    </div>
+  </div>
+
+  <!-- =============================================
+       FOUNDING STORY SECTION
+  ============================================== -->
+  <section class="section" style="background:var(--bg-white);" id="story">
+    <div class="container">
+      <div class="story-grid">
+        <div>
+          <div class="story-accent-bar"></div>
+          <div class="section-subtitle"><i class="fa-solid fa-book-open" style="color:var(--primary-green);"></i> Our Founding Story</div>
+          <h2 class="section-title">Built on Expertise. Driven by Impact.</h2>
+          <p style="font-size:.95rem;color:var(--text-body);line-height:1.75;margin-bottom:1.25rem;">
+            Ruach Business Consortia Limited was established with one clear purpose: to solve the persistent gap between strategic intent and operational execution in African enterprises and institutions. Founded by seasoned management executives with decades of cross-sector experience spanning agribusiness, energy, finance, healthcare, and international development, Ruach was built as a consortium of expertise — not just a consultancy.
+          </p>
+          <p style="font-size:.95rem;color:var(--text-body);line-height:1.75;margin-bottom:1.25rem;">
+            With a global advisory network spanning Nigeria, Dubai, London, and Canada — we work at the intersection of strategy, digital transformation, and human capital to deliver outcomes that outlast any single engagement.
+          </p>
+          <p style="font-size:.95rem;color:var(--text-body);line-height:1.75;">
+            Registered under the Corporate Affairs Commission of Nigeria (RC: <strong>1488920</strong>), we operate across three core service pillars: <strong>Business Consulting &amp; eBAS</strong>, <strong>Executive Training &amp; Masterclasses</strong>, and <strong>Enterprise Digital Transformation</strong>.
+          </p>
+        </div>
+        <div>
+          <div style="background:linear-gradient(135deg,var(--primary-green-dark) 0%,var(--primary-navy) 100%);border-radius:16px;padding:2rem;color:#fff;margin-bottom:1rem;">
+            <div style="font-size:.8rem;font-weight:800;color:#BEF264;text-transform:uppercase;letter-spacing:.06em;margin-bottom:1rem;">RC: 1488920 &bull; CAC Registered</div>
+            <h3 style="font-size:1.25rem;font-weight:800;color:#fff;margin-bottom:.75rem;">Ruach Business Consortia Limited</h3>
+            <p style="font-size:.88rem;color:#CBD5E1;line-height:1.6;margin-bottom:1.25rem;">A consortium of strategic minds united by a common purpose — delivering transformative consulting, digital intelligence, and executive education for the organizations that shape our economy.</p>
+            <div style="display:flex;flex-direction:column;gap:.6rem;">
+              <div style="display:flex;align-items:center;gap:.6rem;font-size:.85rem;color:#CBD5E1;">
+                <i class="fa-solid fa-globe" style="color:#BEF264;width:14px;"></i> Global Network: Nigeria · Dubai · London · Canada
+              </div>
+              <div style="display:flex;align-items:center;gap:.6rem;font-size:.85rem;color:#CBD5E1;">
+                <i class="fa-solid fa-envelope" style="color:#BEF264;width:14px;"></i> info@ruachconsortia.com
+              </div>
+              <div style="display:flex;align-items:center;gap:.6rem;font-size:.85rem;color:#CBD5E1;">
+                <i class="fa-solid fa-phone" style="color:#BEF264;width:14px;"></i> +234 803 279 8904
+              </div>
+            </div>
+          </div>
+
+          <!-- Quick service tags -->
+          <div style="display:flex;flex-wrap:wrap;gap:.5rem;">
+            <span style="background:var(--accent-lime-light);color:var(--primary-green);font-size:.75rem;font-weight:700;padding:.3rem .8rem;border-radius:50px;"><i class="fa-solid fa-chart-line" style="margin-right:.3rem;"></i> Business Consulting</span>
+            <span style="background:var(--accent-lime-light);color:var(--primary-green);font-size:.75rem;font-weight:700;padding:.3rem .8rem;border-radius:50px;"><i class="fa-solid fa-laptop-code" style="margin-right:.3rem;"></i> eBAS Platform</span>
+            <span style="background:var(--accent-lime-light);color:var(--primary-green);font-size:.75rem;font-weight:700;padding:.3rem .8rem;border-radius:50px;"><i class="fa-solid fa-graduation-cap" style="margin-right:.3rem;"></i> Executive Training</span>
+            <span style="background:var(--accent-lime-light);color:var(--primary-green);font-size:.75rem;font-weight:700;padding:.3rem .8rem;border-radius:50px;"><i class="fa-solid fa-sitemap" style="margin-right:.3rem;"></i> Process Mining</span>
+            <span style="background:var(--accent-lime-light);color:var(--primary-green);font-size:.75rem;font-weight:700;padding:.3rem .8rem;border-radius:50px;"><i class="fa-solid fa-sliders" style="margin-right:.3rem;"></i> Performance Monitoring</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Stats row -->
+      <div class="story-stat-row">
+        <div class="story-stat">
+          <div class="story-stat-num">200+</div>
+          <div class="story-stat-label">Organisations Consulted</div>
+        </div>
+        <div class="story-stat">
+          <div class="story-stat-num">10,000+</div>
+          <div class="story-stat-label">Executives Trained</div>
+        </div>
+        <div class="story-stat">
+          <div class="story-stat-num">70+</div>
+          <div class="story-stat-label">Active Masterclass Programmes</div>
+        </div>
+        <div class="story-stat">
+          <div class="story-stat-num">5</div>
+          <div class="story-stat-label">Global Learning Hubs</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =============================================
+       VISION & MISSION
+  ============================================== -->
+  <section class="section" id="vision-mission" style="background:var(--bg-slate);border-top:1px solid var(--border-light);">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-subtitle"><i class="fa-solid fa-eye" style="color:var(--primary-green);"></i> Strategic Direction</div>
+        <h2 class="section-title">Vision, Mission &amp; Guiding Purpose</h2>
+        <p class="section-description">Driven by excellence, integrity, and innovation, we deliver high-impact advisory, capacity building, and digital management tools that create measurable, lasting organizational change.</p>
+      </div>
+      <div class="vm-grid">
+        <div class="vm-box vm-box-vision">
+          <div class="vm-icon-wrap"><i class="fa-solid fa-eye"></i></div>
+          <div class="vm-label">Our Vision</div>
+          <h3 class="vm-title2">Empowering Global Excellence</h3>
+          <p class="vm-text2">To be a leading business consulting and professional training firm, recognized for empowering organizations and individuals with innovative solutions, transformative learning, and strategic insights that drive sustainable growth and excellence — across Africa and globally.</p>
+        </div>
+        <div class="vm-box vm-box-mission">
+          <div class="vm-icon-wrap"><i class="fa-solid fa-rocket"></i></div>
+          <div class="vm-label">Our Mission</div>
+          <h3 class="vm-title2">High-Impact Solutions</h3>
+          <p class="vm-text2">To deliver high-impact consulting, training, and capacity development solutions that enhance organizational performance, develop exceptional leaders, strengthen operational efficiency, and equip businesses with the knowledge and strategies needed to thrive in a rapidly evolving world.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =============================================
+       CORE VALUES (rendered from app.js CORE_VALUES_DATA)
+  ============================================== -->
+  <section class="section" id="core-values" style="background:var(--bg-white);">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-subtitle"><i class="fa-solid fa-star" style="color:var(--primary-green);"></i> Organizational Values</div>
+        <h2 class="section-title">Our 5 Core Pillars &amp; Organizational Values</h2>
+        <p class="section-description">These five principles are not aspirations — they are operational commitments embedded in every engagement, every relationship, and every outcome we deliver.</p>
+      </div>
+      <div class="core-values-page-grid" id="aboutCoreValuesGrid">
+        <!-- Populated by app.js CORE_VALUES_DATA via inline script below -->
+      </div>
+    </div>
+  </section>
+
+  <!-- =============================================
+       WHAT SETS US APART
+  ============================================== -->
+  <section class="section" id="pillars" style="background:var(--bg-slate);border-top:1px solid var(--border-light);">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-subtitle"><i class="fa-solid fa-gem" style="color:var(--primary-green);"></i> Why Choose Ruach</div>
+        <h2 class="section-title">What Sets Ruach Apart</h2>
+        <p class="section-description">In a market crowded with generalist consultancies, Ruach is built differently — combining deep sector expertise, proprietary digital tools, and a structured capacity building methodology.</p>
+      </div>
+      <div class="pillars-grid">
+        <div class="pillar-card">
+          <div class="pillar-icon"><i class="fa-solid fa-layer-group"></i></div>
+          <div class="pillar-title">Consortium Model — Not a Solo Firm</div>
+          <div class="pillar-desc">Ruach operates as a consortium of specialists, bringing together sector-specific experts for every engagement — meaning our clients benefit from deep, multi-disciplinary capability rather than a single generalist perspective.</div>
+        </div>
+        <div class="pillar-card">
+          <div class="pillar-icon"><i class="fa-solid fa-laptop-code"></i></div>
+          <div class="pillar-title">Proprietary eBAS Digital Platform</div>
+          <div class="pillar-desc">We don't just advise — we deploy our own Enterprise Business Analytics Solutions (eBAS) platform, giving clients a live digital management command center that makes our consulting recommendations measurable and self-sustaining.</div>
+        </div>
+        <div class="pillar-card">
+          <div class="pillar-icon"><i class="fa-solid fa-graduation-cap"></i></div>
+          <div class="pillar-title">Integrated Training &amp; Consulting Ecosystem</div>
+          <div class="pillar-desc">Our executive training and business consulting arms operate in tandem — meaning client organizations benefit from both strategic advisory at the institutional level and leadership capacity building at the individual level simultaneously.</div>
+        </div>
+        <div class="pillar-card">
+          <div class="pillar-icon"><i class="fa-solid fa-globe-africa"></i></div>
+          <div class="pillar-title">African Context, Global Standards</div>
+          <div class="pillar-desc">We combine deep Nigerian and African market intelligence with internationally certified methodologies and a global advisory network spanning Dubai, London, and Canada — delivering world-class solutions that are locally grounded.</div>
+        </div>
+        <div class="pillar-card">
+          <div class="pillar-icon"><i class="fa-solid fa-chart-line"></i></div>
+          <div class="pillar-title">Results-Oriented Delivery Model</div>
+          <div class="pillar-desc">Every Ruach engagement begins with a baseline diagnostic, deploys data-driven interventions, and closes with a measurable KPI dashboard — ensuring accountability for outcomes, not just deliverables.</div>
+        </div>
+        <div class="pillar-card">
+          <div class="pillar-icon"><i class="fa-solid fa-handshake"></i></div>
+          <div class="pillar-title">Long-Term Partnership Approach</div>
+          <div class="pillar-desc">With a 98% client retention rate, Ruach builds multi-year relationships with clients — acting as a trusted institutional partner across strategy, execution, training, and digital governance over the long term.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =============================================
+       THREE SERVICE PILLARS
+  ============================================== -->
+  <section class="section" style="background:linear-gradient(135deg,var(--primary-green-dark) 0%,var(--primary-navy) 100%);padding:4rem 0;">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-subtitle" style="color:#BEF264;">Three Pillars of Value</div>
+        <h2 class="section-title" style="color:#fff;">What We Do</h2>
+        <p class="section-description" style="color:#CBD5E1;">Ruach operates across three synergistic service pillars that create a complete ecosystem of organizational transformation.</p>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;">
+        <div style="background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.15);border-radius:var(--radius-lg);padding:2rem;">
+          <div style="width:52px;height:52px;border-radius:12px;background:rgba(132,204,22,.15);border:1px solid rgba(132,204,22,.3);display:flex;align-items:center;justify-content:center;font-size:1.3rem;color:#BEF264;margin-bottom:1.25rem;"><i class="fa-solid fa-chart-network"></i></div>
+          <h3 style="font-size:1.05rem;font-weight:800;color:#fff;margin-bottom:.65rem;">01. Business Consulting &amp; eBAS</h3>
+          <p style="font-size:.85rem;color:#CBD5E1;line-height:1.6;margin-bottom:1.25rem;">Strategic advisory, process mining, performance monitoring, and our proprietary Enterprise Business Analytics Solutions (eBAS) platform across 8 operational domains.</p>
+          <a href="consulting.html" class="btn btn-lime btn-sm">Explore Consulting</a>
+        </div>
+        <div style="background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.15);border-radius:var(--radius-lg);padding:2rem;">
+          <div style="width:52px;height:52px;border-radius:12px;background:rgba(132,204,22,.15);border:1px solid rgba(132,204,22,.3);display:flex;align-items:center;justify-content:center;font-size:1.3rem;color:#BEF264;margin-bottom:1.25rem;"><i class="fa-solid fa-graduation-cap"></i></div>
+          <h3 style="font-size:1.05rem;font-weight:800;color:#fff;margin-bottom:.65rem;">02. Executive Training &amp; Masterclasses</h3>
+          <p style="font-size:.85rem;color:#CBD5E1;line-height:1.6;margin-bottom:1.25rem;">70+ verified executive masterclasses across 10 subject disciplines with physical sessions in Abuja, Lagos, Port Harcourt, Dubai, and London for senior professionals.</p>
+          <a href="trainings.html" class="btn btn-lime btn-sm">View Training Matrix</a>
+        </div>
+        <div style="background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.15);border-radius:var(--radius-lg);padding:2rem;">
+          <div style="width:52px;height:52px;border-radius:12px;background:rgba(132,204,22,.15);border:1px solid rgba(132,204,22,.3);display:flex;align-items:center;justify-content:center;font-size:1.3rem;color:#BEF264;margin-bottom:1.25rem;"><i class="fa-solid fa-sitemap"></i></div>
+          <h3 style="font-size:1.05rem;font-weight:800;color:#fff;margin-bottom:.65rem;">03. Digital Transformation &amp; Workflow</h3>
+          <p style="font-size:.85rem;color:#CBD5E1;line-height:1.6;margin-bottom:1.25rem;">End-to-end digital transformation including process mapping, workflow automation, RPA integration, paperless approvals, and change management for institutions.</p>
+          <a href="consulting.html#process-mining" class="btn btn-lime btn-sm">Explore Digital Services</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =============================================
+       STRATEGIC PARTNERS (rendered from app.js PARTNERS_DATA)
+  ============================================== -->
+  <section class="section" id="partners" style="background:var(--bg-white);">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-subtitle"><i class="fa-solid fa-people-group" style="color:var(--primary-green);"></i> Strategic Partnerships</div>
+        <h2 class="section-title">Our Strategic Partners &amp; Institutional Network</h2>
+        <p class="section-description">Ruach collaborates with a diverse network of financial institutions, development organizations, technology firms, and enterprise partners to deliver comprehensive, integrated solutions.</p>
+      </div>
+      <div class="partners-display" id="aboutPartnersGrid">
+        <!-- Rendered from PARTNERS_DATA via inline script -->
+      </div>
+    </div>
+  </section>
+
+  <!-- =============================================
+       LEADERSHIP PREVIEW
+  ============================================== -->
+  <section class="section" id="leadership-preview" style="background:var(--bg-slate);border-top:1px solid var(--border-light);">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-subtitle"><i class="fa-solid fa-crown" style="color:var(--primary-green);"></i> Our Leadership</div>
+        <h2 class="section-title">Board of Directors &amp; Executive Management</h2>
+        <p class="section-description">A diverse, internationally experienced team united by a shared commitment to building enterprise capability and delivering transformative impact.</p>
+      </div>
+      <div class="leaders-grid" id="aboutLeadersGrid">
+        <!-- Rendered from TEAM_DATA via inline script -->
+      </div>
+      <div style="text-align:center;margin-top:2rem;">
+        <a href="index.html#leadership" class="btn btn-primary">View Full Leadership &amp; Advisory Board &rarr;</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- =============================================
+       CTA BANNER
+  ============================================== -->
+  <section class="section" style="background:var(--bg-white);">
+    <div class="container">
+      <div class="about-cta-banner">
+        <div style="font-size:.82rem;font-weight:800;color:#BEF264;text-transform:uppercase;letter-spacing:.06em;margin-bottom:.75rem;">Ready to Work With Ruach?</div>
+        <h2 style="font-size:clamp(1.5rem,3vw,2.25rem);font-weight:800;color:#fff;margin-bottom:.75rem;">Start Your Transformation Journey Today</h2>
+        <p style="font-size:.95rem;color:#CBD5E1;max-width:680px;margin:0 auto;">Whether you need enterprise consulting, an eBAS demo, a training enrolment, or a strategic advisory session — we're ready to work with your organization.</p>
+        <div class="about-cta-btns">
+          <a href="consulting.html#request-demo" class="btn btn-lime"><i class="fa-solid fa-laptop-code" style="margin-right:.4rem;"></i> Request eBAS Demo</a>
+          <a href="trainings.html#schedule" class="btn btn-outline-green" style="color:#fff;border-color:rgba(255,255,255,.3);"><i class="fa-solid fa-graduation-cap" style="margin-right:.4rem;"></i> Browse Training Matrix</a>
+          <a href="index.html#contact" class="btn" style="background:rgba(255,255,255,.1);color:#fff;border:1px solid rgba(255,255,255,.25);"><i class="fa-solid fa-envelope" style="margin-right:.4rem;"></i> Contact Our Team</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <a href="index.html" class="brand-logo-wrapper" style="margin-bottom:.5rem;">
+            <img src="assets/images/ruach_logo_new.png" alt="Ruach Logo" style="height:55px;width:auto;object-fit:contain;">
+          </a>
+          <p style="font-size:.88rem;line-height:1.6;color:#CBD5E1;margin-top:.75rem;">Ruach Business Consortia Limited is a premier business consulting, digital transformation (eBAS), and executive training firm based in Nigeria.</p>
+          <p style="font-size:.8rem;color:#94A3B8;margin-top:.5rem;"><i class="fa-solid fa-phone" style="color:var(--accent-lime);margin-right:.3rem;"></i> +234 803 279 8904</p>
+          <p style="font-size:.8rem;color:#94A3B8;margin-top:.25rem;"><i class="fa-solid fa-envelope" style="color:var(--accent-lime);margin-right:.3rem;"></i> info@ruachconsortia.com</p>
+        </div>
+        <div>
+          <h4 class="footer-title">Site Navigation</h4>
+          <div class="footer-links">
+            <a href="index.html">Home</a>
+            <a href="consulting.html">Business Consulting &amp; eBAS</a>
+            <a href="trainings.html">Training &amp; Schedule Matrix</a>
+            <a href="index.html#leadership">Leadership &amp; Board</a>
+            <a href="about.html">About Ruach</a>
+            <a href="index.html#contact">Contact Us</a>
+          </div>
+        </div>
+        <div>
+          <h4 class="footer-title">About This Page</h4>
+          <div class="footer-links">
+            <a href="#story">Founding Story</a>
+            <a href="#vision-mission">Vision &amp; Mission</a>
+            <a href="#core-values">Core Values</a>
+            <a href="#pillars">What Sets Us Apart</a>
+            <a href="#partners">Strategic Partners</a>
+            <a href="#leadership-preview">Leadership Team</a>
+          </div>
+        </div>
+        <div>
+          <h4 class="footer-title">Newsletter &amp; Insights</h4>
+          <p style="font-size:.85rem;color:#CBD5E1;margin-bottom:1rem;">Subscribe to receive quarterly business insights and executive training calendars.</p>
+          <form onsubmit="event.preventDefault();const t=document.getElementById('aboutToast');t.textContent='Subscribed to Ruach insights!';t.style.transform='translateY(0)';t.style.opacity='1';setTimeout(()=>{t.style.transform='translateY(100px)';t.style.opacity='0';},3000);">
+            <div style="display:flex;gap:.5rem;">
+              <input type="email" class="form-control" placeholder="Enter work email" required style="font-size:.85rem;padding:.6rem;">
+              <button type="submit" class="btn btn-lime btn-sm">Subscribe</button>
+            </div>
+          </form>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div>&copy; 2026 Ruach Business Consortia Limited. All rights reserved. RC: 1488920</div>
+        <div style="display:flex;gap:1.5rem;">
+          <a href="#">Privacy Policy</a>
+          <a href="#">Terms of Engagement</a>
+          <a href="#">Governance Statement</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <div id="aboutToast" style="position:fixed;bottom:2rem;right:2rem;background:var(--primary-green);color:#fff;padding:1rem 1.5rem;border-radius:8px;box-shadow:var(--shadow-xl);font-weight:600;font-size:.9rem;transform:translateY(100px);opacity:0;transition:all .35s ease;z-index:9999;max-width:320px;"></div>
+
+  <script src="js/app.js"></script>
+  <script>
+    // Mobile nav
+    document.getElementById('mobileNavToggle').addEventListener('click',()=>{
+      document.getElementById('navMenu').classList.toggle('active');
+    });
+
+    // Smooth scroll
+    document.querySelectorAll('a[href^="#"]').forEach(a=>{
+      a.addEventListener('click',e=>{
+        const t=document.querySelector(a.getAttribute('href'));
+        if(t){e.preventDefault();t.scrollIntoView({behavior:'smooth'});}
+      });
+    });
+
+    // Render core values into about page grid using app.js CORE_VALUES_DATA
+    function renderAboutCoreValues() {
+      const grid = document.getElementById('aboutCoreValuesGrid');
+      if (!grid || typeof CORE_VALUES_DATA === 'undefined') return;
+      grid.innerHTML = CORE_VALUES_DATA.map(v => `
+        <div class="cv-card">
+          <div class="cv-num">${v.num}</div>
+          <div class="cv-icon"><i class="fa-solid ${v.icon}"></i></div>
+          <div class="cv-title">${v.title}</div>
+          <div class="cv-desc">${v.desc}</div>
+        </div>
+      `).join('');
+    }
+
+    // Render strategic partners using app.js PARTNERS_DATA
+    function renderAboutPartners() {
+      const grid = document.getElementById('aboutPartnersGrid');
+      if (!grid || typeof PARTNERS_DATA === 'undefined') return;
+      grid.innerHTML = PARTNERS_DATA.map(p => `
+        <div class="partner-tile">
+          <div class="partner-badge" style="background:${p.color};"><i class="fa-solid ${p.icon}"></i></div>
+          <div class="partner-info">
+            <div class="p-name">${p.name}</div>
+            <div class="p-type">${p.type}</div>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    // Render leadership preview using app.js TEAM_DATA (management only, max 4)
+    function renderAboutLeaders() {
+      const grid = document.getElementById('aboutLeadersGrid');
+      if (!grid || typeof TEAM_DATA === 'undefined') return;
+      const mgmt = TEAM_DATA.filter(m => m.category === 'management').slice(0, 4);
+      grid.innerHTML = mgmt.map(m => `
+        <div class="leader-card">
+          <div class="leader-img-wrap">
+            ${m.image
+              ? `<img src="${m.image}" alt="${m.name}" class="leader-img" onerror="this.outerHTML='<div class=\\'leader-img-placeholder\\'><i class=\\'fa-solid fa-user\\'></i></div>'">`
+              : `<div class="leader-img-placeholder"><i class="fa-solid fa-user"></i></div>`}
+          </div>
+          <div class="leader-body">
+            <span class="leader-badge">${m.badge}</span>
+            <div class="leader-name">${m.name}</div>
+            <div class="leader-role">${m.role}</div>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      renderAboutCoreValues();
+      renderAboutPartners();
+      renderAboutLeaders();
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Executive Training &amp; Masterclasses | Ruach Business Consortia Ltd</title>
+  <meta name="description" content="Explore Ruach Business Consortia's 70+ verified executive masterclasses across 10 subject disciplines. Physical sessions in Abuja, Lagos, Port Harcourt, Dubai, and London.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,600&family=Outfit:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    .page-hero{background:linear-gradient(135deg,var(--primary-navy) 0%,var(--primary-green-dark) 60%,#1a3a1f 100%);padding:4.5rem 0 3.5rem;color:#fff;position:relative;overflow:hidden;}
+    .page-hero::before{content:'';position:absolute;inset:0;background-image:radial-gradient(circle at 20% 50%,rgba(132,204,22,0.08) 0%,transparent 60%),radial-gradient(circle at 80% 20%,rgba(132,204,22,0.05) 0%,transparent 50%);pointer-events:none;}
+    .page-hero-pill{display:inline-flex;align-items:center;gap:.5rem;background:rgba(132,204,22,.15);border:1px solid rgba(132,204,22,.35);color:#BEF264;font-size:.82rem;font-weight:700;padding:.4rem 1rem;border-radius:50px;margin-bottom:1.25rem;text-transform:uppercase;letter-spacing:.05em;}
+    .page-hero h1{font-size:clamp(2rem,4vw,3rem);font-weight:800;line-height:1.15;color:#fff;margin-bottom:1rem;}
+    .page-hero h1 span{color:#BEF264;}
+    .page-hero p{font-size:1.05rem;color:#CBD5E1;line-height:1.7;max-width:720px;margin-bottom:2rem;}
+    .search-card-full{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.15);border-radius:12px;padding:1.5rem;backdrop-filter:blur(8px);}
+    .search-grid-full{display:grid;grid-template-columns:2fr 1fr 1fr 1fr auto;gap:.75rem;align-items:end;}
+    .stats-bar2{background:var(--primary-green);padding:1.25rem 0;}
+    .stats-grid2{display:grid;grid-template-columns:repeat(4,1fr);gap:0;}
+    .stat-item2{display:flex;align-items:center;gap:.85rem;padding:.5rem 1.5rem;border-right:1px solid rgba(255,255,255,.15);}
+    .stat-item2:last-child{border-right:none;}
+    .stat-icon-wrapper2{width:40px;height:40px;background:rgba(255,255,255,.15);border-radius:8px;display:flex;align-items:center;justify-content:center;color:#BEF264;font-size:1.1rem;flex-shrink:0;}
+    .stat-number2{font-size:1.4rem;font-weight:800;color:#fff;line-height:1;}
+    .stat-label2{font-size:.78rem;color:#BEF264;font-weight:600;}
+    .categories-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:1rem;}
+    .cat-card{background:var(--bg-white);border:1px solid var(--border-light);border-radius:var(--radius-lg);padding:1.25rem;cursor:pointer;transition:var(--transition-fast);text-align:center;}
+    .cat-card:hover,.cat-card.active{border-color:var(--primary-green);box-shadow:0 4px 20px rgba(42,82,53,.12);transform:translateY(-2px);}
+    .cat-card.active{background:var(--primary-green);color:#fff;}
+    .cat-icon{width:48px;height:48px;border-radius:12px;background:var(--accent-lime-light);color:var(--primary-green);display:flex;align-items:center;justify-content:center;font-size:1.25rem;margin:0 auto .75rem;transition:var(--transition-fast);}
+    .cat-card.active .cat-icon{background:rgba(255,255,255,.2);color:#BEF264;}
+    .cat-title{font-size:.82rem;font-weight:700;color:var(--text-dark);margin-bottom:.25rem;}
+    .cat-card.active .cat-title,.cat-card.active .cat-count{color:#fff;}
+    .cat-count{font-size:.75rem;color:var(--text-muted);font-weight:600;}
+    .cat-card.active .cat-count{color:#BEF264;}
+    .courses-grid-full{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;}
+    .course-card{background:var(--bg-white);border:1px solid var(--border-light);border-radius:var(--radius-lg);overflow:hidden;display:flex;flex-direction:column;transition:var(--transition-fast);}
+    .course-card:hover{transform:translateY(-3px);box-shadow:var(--shadow-lg);border-color:var(--primary-green);}
+    .course-card-top{background:linear-gradient(135deg,var(--primary-green-dark),var(--primary-navy));padding:1.5rem;}
+    .course-badge{display:inline-flex;align-items:center;gap:.3rem;background:rgba(132,204,22,.2);border:1px solid rgba(132,204,22,.4);color:#BEF264;font-size:.7rem;font-weight:700;padding:.2rem .6rem;border-radius:50px;text-transform:uppercase;margin-bottom:.75rem;}
+    .course-code{font-size:.72rem;color:#94A3B8;font-weight:600;margin-bottom:.4rem;}
+    .course-title{font-size:1rem;font-weight:800;color:#fff;line-height:1.3;margin-bottom:.75rem;}
+    .course-meta{display:flex;gap:1rem;flex-wrap:wrap;}
+    .course-meta-item{display:flex;align-items:center;gap:.3rem;font-size:.78rem;color:#94A3B8;}
+    .course-card-body{padding:1.25rem;flex:1;display:flex;flex-direction:column;}
+    .course-audience{font-size:.82rem;color:var(--text-muted);line-height:1.5;margin-bottom:1rem;}
+    .course-outcomes{display:flex;flex-direction:column;gap:.4rem;margin-bottom:1.25rem;}
+    .course-outcome{display:flex;align-items:flex-start;gap:.4rem;font-size:.8rem;color:var(--text-body);}
+    .course-outcome i{color:var(--primary-green);margin-top:2px;flex-shrink:0;}
+    .course-sessions{display:flex;flex-direction:column;gap:.5rem;margin-top:auto;}
+    .session-row{background:var(--bg-slate);border-radius:6px;padding:.65rem .9rem;display:flex;justify-content:space-between;align-items:center;gap:.5rem;}
+    .session-info{display:flex;flex-direction:column;}
+    .session-city{font-size:.78rem;font-weight:700;color:var(--text-dark);}
+    .session-dates{font-size:.72rem;color:var(--text-muted);}
+    .session-badge{font-size:.68rem;font-weight:700;padding:.15rem .5rem;border-radius:50px;white-space:nowrap;}
+    .badge-guaranteed{background:#DCFCE7;color:#166534;}
+    .badge-invoice{background:#DBEAFE;color:#1e40af;}
+    .badge-flagship{background:#FEF3C7;color:#92400E;}
+    .course-cta{display:flex;gap:.5rem;margin-top:1rem;}
+    .course-cta a,.course-cta button{flex:1;font-size:.82rem;padding:.6rem .5rem;text-align:center;}
+    .schedule-layout{display:grid;grid-template-columns:260px 1fr;gap:2rem;}
+    .filter-sidebar{background:var(--bg-white);border:1px solid var(--border-light);border-radius:var(--radius-lg);padding:1.5rem;height:fit-content;position:sticky;top:100px;}
+    .sidebar-title{display:flex;justify-content:space-between;align-items:center;font-weight:800;color:var(--text-dark);margin-bottom:1.25rem;font-size:.95rem;}
+    .btn-reset{font-size:.78rem;color:var(--accent-lime-hover);font-weight:600;cursor:pointer;background:none;border:none;}
+    .filter-group{margin-bottom:1.25rem;}
+    .filter-label{font-size:.8rem;font-weight:700;color:var(--text-dark);display:block;margin-bottom:.6rem;text-transform:uppercase;letter-spacing:.03em;}
+    .checkbox-list{display:flex;flex-direction:column;gap:.4rem;}
+    .checkbox-item{display:flex;align-items:center;gap:.4rem;font-size:.83rem;color:var(--text-body);cursor:pointer;}
+    .schedule-card{background:var(--bg-white);border:1px solid var(--border-light);border-radius:var(--radius-lg);padding:1.25rem;margin-bottom:1rem;display:flex;gap:1.5rem;align-items:flex-start;transition:var(--transition-fast);}
+    .schedule-card:hover{border-color:var(--primary-green);box-shadow:var(--shadow-md);}
+    .schedule-date-col{text-align:center;min-width:64px;background:var(--accent-lime-light);border-radius:8px;padding:.75rem .5rem;flex-shrink:0;}
+    .schedule-month{font-size:.65rem;font-weight:800;text-transform:uppercase;color:var(--primary-green);}
+    .schedule-day{font-size:1.5rem;font-weight:800;color:var(--primary-green-dark);line-height:1;}
+    .schedule-info{flex:1;}
+    .schedule-course-title{font-size:.95rem;font-weight:800;color:var(--text-dark);margin-bottom:.3rem;}
+    .schedule-meta{display:flex;flex-wrap:wrap;gap:.75rem;margin-bottom:.5rem;}
+    .schedule-meta-item{display:flex;align-items:center;gap:.3rem;font-size:.78rem;color:var(--text-muted);}
+    .schedule-actions{display:flex;gap:.5rem;margin-top:.75rem;}
+    .sectors-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;}
+    .sector-card{background:var(--bg-white);border:1px solid var(--border-light);border-radius:var(--radius-lg);padding:1.5rem;transition:var(--transition-fast);}
+    .sector-card:hover{border-color:var(--primary-green);box-shadow:var(--shadow-md);transform:translateY(-2px);}
+    .sector-icon{width:44px;height:44px;border-radius:10px;background:var(--accent-lime-light);color:var(--primary-green);display:flex;align-items:center;justify-content:center;font-size:1.1rem;margin-bottom:.75rem;}
+    .sector-title{font-size:.88rem;font-weight:700;color:var(--text-dark);margin-bottom:.4rem;}
+    .sector-desc{font-size:.8rem;color:var(--text-muted);line-height:1.5;}
+    .pathway-banner{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin-top:2.5rem;}
+    .pathway-box{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.15);border-radius:var(--radius-lg);padding:1.75rem;}
+    .pathway-title{font-size:.95rem;font-weight:800;color:#fff;margin-bottom:.6rem;display:flex;align-items:center;gap:.4rem;}
+    .pathway-desc{font-size:.85rem;color:#CBD5E1;line-height:1.6;margin-bottom:1.25rem;}
+    .footer{background:var(--primary-navy);color:#CBD5E1;padding:3.5rem 0 0;}
+    .footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1.5fr;gap:3rem;margin-bottom:2.5rem;}
+    .footer-title{font-size:.82rem;font-weight:800;color:#fff;text-transform:uppercase;letter-spacing:.06em;margin-bottom:1rem;}
+    .footer-links{display:flex;flex-direction:column;gap:.6rem;}
+    .footer-links a{font-size:.85rem;color:#94A3B8;transition:var(--transition-fast);}
+    .footer-links a:hover{color:var(--accent-lime);padding-left:4px;}
+    .footer-bottom{border-top:1px solid rgba(255,255,255,.08);padding:1.25rem 0;display:flex;justify-content:space-between;align-items:center;font-size:.82rem;color:#475569;}
+    @media(max-width:1024px){.search-grid-full{grid-template-columns:1fr 1fr;}.categories-grid{grid-template-columns:repeat(3,1fr);}.courses-grid-full{grid-template-columns:repeat(2,1fr);}.stats-grid2{grid-template-columns:repeat(2,1fr);}.sectors-grid{grid-template-columns:repeat(2,1fr);}.footer-grid{grid-template-columns:1fr 1fr;}}
+    @media(max-width:768px){.search-grid-full{grid-template-columns:1fr;}.categories-grid{grid-template-columns:repeat(2,1fr);}.courses-grid-full{grid-template-columns:1fr;}.schedule-layout{grid-template-columns:1fr;}.filter-sidebar{position:static;}.pathway-banner{grid-template-columns:1fr;}.sectors-grid{grid-template-columns:1fr 1fr;}.footer-grid{grid-template-columns:1fr;gap:1.5rem;}}
+  </style>
+</head>
+<body>
+
+  <!-- TOP BAR -->
+  <div class="top-bar">
+    <div class="container top-bar-inner">
+      <div class="top-bar-left">
+        <span class="top-bar-item"><i class="fa-solid fa-phone" style="color:var(--accent-lime);"></i> Tel: +234 803 279 8904</span>
+        <span class="top-bar-item"><i class="fa-solid fa-envelope" style="color:var(--accent-lime);"></i> info@ruachconsortia.com</span>
+      </div>
+      <div class="top-bar-right">
+        <span class="top-bar-item"><i class="fa-solid fa-shield-halved" style="color:var(--accent-lime);"></i> RC: 1488920</span>
+        <a href="index.html#admin" class="top-bar-link"><i class="fa-solid fa-lock"></i> Staff Portal</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- MAIN NAV -->
+  <header class="header">
+    <div class="container header-inner">
+      <a href="index.html" class="brand-logo-wrapper">
+        <img src="assets/images/ruach_logo_new.png" alt="Ruach Business Consortia Limited Logo" class="brand-logo-img">
+      </a>
+      <nav class="nav-menu" id="navMenu">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="consulting.html" class="nav-link">Business Consulting</a>
+        <a href="trainings.html" class="nav-link active">Training &amp; Schedule</a>
+        <a href="index.html#leadership" class="nav-link">Leadership &amp; Governance</a>
+        <a href="index.html#about" class="nav-link">About Ruach</a>
+        <a href="index.html#contact" class="nav-link">Contact Us</a>
+      </nav>
+      <div class="nav-actions">
+        <a href="consulting.html" class="btn btn-lime btn-sm">Consulting &amp; eBAS</a>
+        <a href="#schedule" class="btn btn-primary btn-sm">Training Schedule</a>
+        <button class="mobile-nav-toggle" id="mobileNavToggle"><i class="fa-solid fa-bars"></i></button>
+      </div>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="page-hero">
+    <div class="container">
+      <div class="page-hero-pill"><i class="fa-solid fa-graduation-cap"></i> Ruach Executive Education Matrix</div>
+      <h1>Executive Training &amp; <span>Masterclasses Matrix</span></h1>
+      <p>Explore our 10 core subject disciplines, sector delegate profiles, and confirmed physical session schedule across Abuja, Lagos, Port Harcourt, Dubai, and London.</p>
+      <div class="search-card-full">
+        <div class="search-grid-full">
+          <div class="form-group">
+            <label class="form-label" style="color:#CBD5E1;">Search Masterclass / Keyword</label>
+            <input type="text" id="trainingSearchInput" class="form-control" placeholder="e.g. Financial Risk, Leadership, eBAS...">
+          </div>
+          <div class="form-group">
+            <label class="form-label" style="color:#CBD5E1;">Subject Category</label>
+            <select id="trainingCatSelect" class="form-control">
+              <option value="all">All 10 Subject Areas</option>
+              <option value="tech">AI &amp; Digital Transformation</option>
+              <option value="finance">Finance, Budgeting &amp; Risk</option>
+              <option value="leadership">Leadership &amp; Executive</option>
+              <option value="project">Project &amp; Procurement</option>
+              <option value="hr">Human Resources &amp; Talent</option>
+              <option value="energy">Oil &amp; Gas Economics</option>
+              <option value="hse">HSE &amp; Safety Governance</option>
+              <option value="operations">Operations &amp; Quality</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label" style="color:#CBD5E1;">Venue City</label>
+            <select id="trainingVenueSelect" class="form-control">
+              <option value="all">All Global Venues</option>
+              <option value="Abuja">Abuja, Nigeria</option>
+              <option value="Lagos">Lagos, Nigeria</option>
+              <option value="Port Harcourt">Port Harcourt</option>
+              <option value="Dubai">Dubai, UAE</option>
+              <option value="London">London, UK</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label" style="color:#CBD5E1;">Funding Pathway</label>
+            <select id="trainingFundingSelect" class="form-control">
+              <option value="all">Both Options</option>
+              <option value="employer">Employer Sponsored</option>
+              <option value="grant">Self-Funded / Grant</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label" style="color:transparent;">Go</label>
+            <button class="btn-search" onclick="runPageSearch()"><i class="fa-solid fa-magnifying-glass"></i> Search</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- STATS BAR -->
+  <div class="stats-bar2">
+    <div class="container stats-grid2">
+      <div class="stat-item2"><div class="stat-icon-wrapper2"><i class="fa-solid fa-book-open"></i></div><div><div class="stat-number2">70+</div><div class="stat-label2">Verified Masterclasses</div></div></div>
+      <div class="stat-item2"><div class="stat-icon-wrapper2"><i class="fa-solid fa-location-dot"></i></div><div><div class="stat-number2">5</div><div class="stat-label2">Global Physical Venues</div></div></div>
+      <div class="stat-item2"><div class="stat-icon-wrapper2"><i class="fa-solid fa-graduation-cap"></i></div><div><div class="stat-number2">10,000+</div><div class="stat-label2">Corporate Executives Trained</div></div></div>
+      <div class="stat-item2"><div class="stat-icon-wrapper2"><i class="fa-solid fa-award"></i></div><div><div class="stat-number2">99.6%</div><div class="stat-label2">Delegate Satisfaction Score</div></div></div>
+    </div>
+  </div>
+
+  <!-- SUBJECT CATEGORIES -->
+  <section class="section" style="background:var(--bg-white);" id="programmes">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-subtitle"><i class="fa-solid fa-layer-group" style="color:var(--primary-green);"></i> Step 1 of 3</div>
+        <h2 class="section-title">10 Executive Training Subject Areas</h2>
+        <p class="section-description">Filter our catalog by key corporate disciplines. Select any category to view specialized 5-day masterclass outlines.</p>
+      </div>
+      <div class="categories-grid" id="pageCategoriesGrid"></div>
+      <div style="margin-top:3.5rem;">
+        <h3 style="font-size:1.3rem;font-weight:800;color:var(--primary-navy);margin-bottom:1.5rem;">
+          Featured Executive Masterclass Short Courses
+          <span id="filterBadge" style="display:none;background:var(--accent-lime-light);color:var(--primary-green);font-size:.75rem;padding:.2rem .75rem;border-radius:50px;margin-left:.75rem;font-weight:700;"></span>
+        </h3>
+        <div class="courses-grid-full" id="pageFeaturedCourses"></div>
+        <div id="noCoursesMsg" style="display:none;text-align:center;padding:3rem;color:var(--text-muted);">
+          <i class="fa-solid fa-magnifying-glass" style="font-size:2rem;margin-bottom:1rem;display:block;"></i>
+          No courses match your selected filter. <button onclick="clearCategoryFilter()" style="color:var(--primary-green);font-weight:700;cursor:pointer;background:none;border:none;text-decoration:underline;">Clear filter</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TARGET SECTORS -->
+  <section class="section" id="sectors" style="background:var(--bg-slate);border-top:1px solid var(--border-light);border-bottom:1px solid var(--border-light);">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-subtitle"><i class="fa-solid fa-industry" style="color:var(--primary-green);"></i> Step 2 of 3</div>
+        <h2 class="section-title">Target Industry Sectors &amp; Delegate Profiles</h2>
+        <p class="section-description">Ruach masterclasses are designed for senior executives, directors, department heads, and managers across high-impact growth sectors.</p>
+      </div>
+      <div class="sectors-grid">
+        <div class="sector-card"><div class="sector-icon"><i class="fa-solid fa-building-columns"></i></div><div class="sector-title">Finance Corporations &amp; Banking</div><div class="sector-desc">Empowering banks and financial institutions with risk monitoring, customer analytics, and operational intelligence.</div></div>
+        <div class="sector-card"><div class="sector-icon"><i class="fa-solid fa-landmark"></i></div><div class="sector-title">Federal &amp; State Government MDAs</div><div class="sector-desc">Ministries, Departments, and Agencies requiring governance, compliance, and public sector leadership development.</div></div>
+        <div class="sector-card"><div class="sector-icon"><i class="fa-solid fa-gas-pump"></i></div><div class="sector-title">Oil &amp; Gas Services &amp; Logistics</div><div class="sector-desc">Energy service operators and logistics firms requiring HSE compliance, procurement, and operational leadership.</div></div>
+        <div class="sector-card"><div class="sector-icon"><i class="fa-solid fa-hospital"></i></div><div class="sector-title">Healthcare Networks &amp; Hospitals</div><div class="sector-desc">Hospitals and healthcare programs requiring HR management, asset tracking, and clinical operations training.</div></div>
+        <div class="sector-card"><div class="sector-icon"><i class="fa-solid fa-graduation-cap"></i></div><div class="sector-title">Education &amp; Institutional Networks</div><div class="sector-desc">Universities, colleges, and schools requiring management excellence and institutional leadership capacity.</div></div>
+        <div class="sector-card"><div class="sector-icon"><i class="fa-solid fa-hand-holding-dollar"></i></div><div class="sector-title">Development Finance Institutions</div><div class="sector-desc">DFIs and financing programs requiring portfolio intelligence, MEL, and governance capacity building.</div></div>
+        <div class="sector-card"><div class="sector-icon"><i class="fa-solid fa-people-roof"></i></div><div class="sector-title">Development &amp; NGO Organisations</div><div class="sector-desc">Donor-funded programs and NGOs managing complex portfolios, field activities, and beneficiary impact.</div></div>
+        <div class="sector-card"><div class="sector-icon"><i class="fa-solid fa-chart-line"></i></div><div class="sector-title">Corporate &amp; Commercial Businesses</div><div class="sector-desc">Enterprises seeking integrated leadership, finance, HR, and supply chain management capacity development.</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SCHEDULE MATRIX -->
+  <section class="section" id="schedule" style="background:var(--bg-white);">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-subtitle"><i class="fa-solid fa-calendar-days" style="color:var(--primary-green);"></i> Step 3 of 3</div>
+        <h2 class="section-title">2026 Interactive Training Schedule Matrix</h2>
+        <p class="section-description">Filter upcoming physical sessions by subject category, global venue city, or month. Click <strong>Enrol Now</strong> to book your seat.</p>
+      </div>
+      <div class="schedule-layout">
+        <div class="filter-sidebar">
+          <div class="sidebar-title"><span>Filter Schedule</span><button class="btn-reset" onclick="resetPageFilters()">Reset All</button></div>
+          <div class="filter-group">
+            <label class="filter-label">Subject Category</label>
+            <div class="checkbox-list">
+              <label class="checkbox-item"><input type="radio" name="pageSchedCat" value="all" checked onchange="renderPageSchedule()"> All Categories</label>
+              <label class="checkbox-item"><input type="radio" name="pageSchedCat" value="tech" onchange="renderPageSchedule()"> AI &amp; Digital Tech</label>
+              <label class="checkbox-item"><input type="radio" name="pageSchedCat" value="finance" onchange="renderPageSchedule()"> Finance &amp; Risk</label>
+              <label class="checkbox-item"><input type="radio" name="pageSchedCat" value="leadership" onchange="renderPageSchedule()"> Leadership &amp; Exec</label>
+              <label class="checkbox-item"><input type="radio" name="pageSchedCat" value="project" onchange="renderPageSchedule()"> Project &amp; Procurement</label>
+              <label class="checkbox-item"><input type="radio" name="pageSchedCat" value="hr" onchange="renderPageSchedule()"> Human Resources</label>
+              <label class="checkbox-item"><input type="radio" name="pageSchedCat" value="energy" onchange="renderPageSchedule()"> Oil &amp; Gas Economics</label>
+              <label class="checkbox-item"><input type="radio" name="pageSchedCat" value="hse" onchange="renderPageSchedule()"> HSE &amp; Safety</label>
+              <label class="checkbox-item"><input type="radio" name="pageSchedCat" value="operations" onchange="renderPageSchedule()"> Operations &amp; Quality</label>
+            </div>
+          </div>
+          <div class="filter-group">
+            <label class="filter-label">Venue City</label>
+            <select class="form-control" id="scheduleVenueFilter" onchange="renderPageSchedule()">
+              <option value="all">All Cities</option>
+              <option value="Abuja">Abuja, Nigeria</option>
+              <option value="Lagos">Lagos, Nigeria</option>
+              <option value="Port Harcourt">Port Harcourt</option>
+              <option value="Dubai">Dubai, UAE</option>
+              <option value="London">London, UK</option>
+            </select>
+          </div>
+        </div>
+        <div id="pageScheduleList"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ENROLMENT PATHWAYS -->
+  <section style="background:linear-gradient(135deg,var(--primary-green-dark) 0%,var(--primary-navy) 100%);padding:4rem 0;">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-subtitle" style="color:#BEF264;">Two Enrolment Pathways &bull; Friction-Free Booking</div>
+        <h2 class="section-title" style="color:#fff;">Choose Your Funding &amp; Enrolment Route</h2>
+        <p class="section-description" style="color:#CBD5E1;">Whether you're self-funding your professional development or your employer is sponsoring your training, Ruach makes enrolment seamless.</p>
+      </div>
+      <div class="pathway-banner">
+        <div class="pathway-box">
+          <h4 class="pathway-title"><i class="fa-solid fa-credit-card" style="color:#BEF264;"></i> Path 1: Self-Funded / Grant Learners</h4>
+          <p class="pathway-desc">For attendees utilizing personal professional development funds or educational support grants. Select your session, complete secure online payment, and receive an instant enrolment receipt.</p>
+          <a href="#schedule" class="btn btn-lime btn-sm">Pay Online (Self-Funded)</a>
+        </div>
+        <div class="pathway-box">
+          <h4 class="pathway-title"><i class="fa-solid fa-file-invoice" style="color:#BEF264;"></i> Path 2: Employer-Sponsored Invoice</h4>
+          <p class="pathway-desc">For staff whose training is funded by their organization. Submit your staff and organization details to receive an official Ruach Pro-Forma Invoice/Proposal for workplace payment approval.</p>
+          <a href="index.html#training" class="btn btn-primary btn-sm">Request Employer Invoice</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <a href="index.html" class="brand-logo-wrapper" style="margin-bottom:.5rem;">
+            <img src="assets/images/ruach_logo_new.png" alt="Ruach Logo" style="height:55px;width:auto;object-fit:contain;">
+          </a>
+          <p style="font-size:.88rem;line-height:1.6;color:#CBD5E1;margin-top:.75rem;">Ruach Business Consortia Limited is a premier business consulting, digital transformation (eBAS), and executive training firm based in Nigeria.</p>
+          <p style="font-size:.8rem;color:#94A3B8;margin-top:.5rem;"><i class="fa-solid fa-phone" style="color:var(--accent-lime);margin-right:.3rem;"></i> +234 803 279 8904</p>
+          <p style="font-size:.8rem;color:#94A3B8;margin-top:.25rem;"><i class="fa-solid fa-envelope" style="color:var(--accent-lime);margin-right:.3rem;"></i> info@ruachconsortia.com</p>
+        </div>
+        <div>
+          <h4 class="footer-title">Site Navigation</h4>
+          <div class="footer-links">
+            <a href="index.html">Home</a>
+            <a href="consulting.html">Business Consulting &amp; eBAS</a>
+            <a href="trainings.html">Training &amp; Schedule Matrix</a>
+            <a href="index.html#leadership">Leadership &amp; Board</a>
+            <a href="index.html#about">About Ruach</a>
+            <a href="index.html#contact">Contact Us</a>
+          </div>
+        </div>
+        <div>
+          <h4 class="footer-title">Global Learning Hubs</h4>
+          <div class="footer-links">
+            <a href="#schedule">Abuja, Nigeria (HQ)</a>
+            <a href="#schedule">Lagos, Nigeria</a>
+            <a href="#schedule">Port Harcourt, Nigeria</a>
+            <a href="#schedule">Dubai, UAE</a>
+            <a href="#schedule">London, UK</a>
+          </div>
+        </div>
+        <div>
+          <h4 class="footer-title">Newsletter &amp; Advisory Updates</h4>
+          <p style="font-size:.85rem;color:#CBD5E1;margin-bottom:1rem;">Subscribe to receive quarterly business insights and executive training calendars.</p>
+          <form onsubmit="event.preventDefault();document.getElementById('toastNotification').textContent='Subscribed to Ruach training updates!';document.getElementById('toastNotification').style.transform='translateY(0)';document.getElementById('toastNotification').style.opacity='1';setTimeout(()=>{document.getElementById('toastNotification').style.transform='translateY(100px)';document.getElementById('toastNotification').style.opacity='0';},3000);">
+            <div style="display:flex;gap:.5rem;">
+              <input type="email" class="form-control" placeholder="Enter work email" required style="font-size:.85rem;padding:.6rem;">
+              <button type="submit" class="btn btn-lime btn-sm">Subscribe</button>
+            </div>
+          </form>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div>&copy; 2026 Ruach Business Consortia Limited. All rights reserved.</div>
+        <div style="display:flex;gap:1.5rem;">
+          <a href="index.html#about">Privacy Policy</a>
+          <a href="index.html#about">Terms of Engagement</a>
+          <a href="index.html#about">Governance Statement</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Shared modals (used by app.js functions) -->
+  <div class="modal-overlay" id="modalCourseDetail"><div class="modal-container" style="max-width:820px;"><div class="modal-header"><h3 class="modal-title" id="courseDetailTitle">Course Details</h3><span class="modal-close" onclick="closeAllModals()">&times;</span></div><div class="modal-body" id="courseDetailBody"></div></div></div>
+  <div class="modal-overlay" id="modalInvoiceForm"><div class="modal-container" style="max-width:620px;"><div class="modal-header"><h3 class="modal-title">Request Employer Pro-Forma Invoice</h3><span class="modal-close" onclick="closeAllModals()">&times;</span></div><div class="modal-body" id="invoiceModalBody"></div></div></div>
+  <div class="modal-overlay" id="modalInvoicePreview"><div class="modal-container" style="max-width:900px;"><div class="modal-header"><h3 class="modal-title">Official Pro-Forma Invoice Document</h3><span class="modal-close" onclick="closeAllModals()">&times;</span></div><div class="modal-body" id="invoicePreviewBody"></div></div></div>
+  <div class="modal-overlay" id="modalSelfFunded"><div class="modal-container" style="max-width:550px;"><div class="modal-header"><h3 class="modal-title">Self-Funded / Grant Enrolment</h3><span class="modal-close" onclick="closeAllModals()">&times;</span></div><div class="modal-body" id="selfFundedModalBody"></div></div></div>
+  <div id="toastNotification" style="position:fixed;bottom:2rem;right:2rem;background:var(--primary-green);color:#fff;padding:1rem 1.5rem;border-radius:8px;box-shadow:var(--shadow-xl);font-weight:600;font-size:.9rem;transform:translateY(100px);opacity:0;transition:all .35s ease;z-index:9999;max-width:320px;"></div>
+
+  <script src="js/app.js"></script>
+  <script>
+    const PAGE_CATEGORIES = [
+      {code:'tech',label:'AI, Digital Transformation & IT',icon:'fa-microchip',count:12},
+      {code:'finance',label:'Finance, Budgeting & Risk Management',icon:'fa-chart-pie',count:14},
+      {code:'leadership',label:'Leadership & Executive Development',icon:'fa-crown',count:10},
+      {code:'project',label:'Project, Procurement & Contract Mgmt',icon:'fa-diagram-project',count:11},
+      {code:'hr',label:'Human Resources & Talent Management',icon:'fa-users-gear',count:9},
+      {code:'energy',label:'Oil & Gas, Energy & Engineering',icon:'fa-bolt',count:7},
+      {code:'hse',label:'HSE, Security & Emergency Management',icon:'fa-helmet-safety',count:6},
+      {code:'operations',label:'Operations, Quality & Auditing',icon:'fa-gears',count:8},
+      {code:'governance',label:'Corporate Governance & Compliance',icon:'fa-scale-balanced',count:5},
+      {code:'public',label:'Public Policy & Government Programmes',icon:'fa-landmark',count:8},
+    ];
+
+    let activeCatFilter = 'all';
+
+    function renderPageCategories() {
+      const grid = document.getElementById('pageCategoriesGrid');
+      if (!grid) return;
+      grid.innerHTML = PAGE_CATEGORIES.map(c => `
+        <div class="cat-card ${activeCatFilter===c.code?'active':''}" onclick="setCatFilter('${c.code}')">
+          <div class="cat-icon"><i class="fa-solid ${c.icon}"></i></div>
+          <div class="cat-title">${c.label}</div>
+          <div class="cat-count">${c.count} Masterclasses</div>
+        </div>`).join('');
+    }
+
+    function setCatFilter(code) {
+      activeCatFilter = activeCatFilter === code ? 'all' : code;
+      renderPageCategories();
+      renderPageFeaturedCourses();
+    }
+
+    function clearCategoryFilter() {
+      activeCatFilter = 'all';
+      renderPageCategories();
+      renderPageFeaturedCourses();
+    }
+
+    function renderPageFeaturedCourses() {
+      const grid  = document.getElementById('pageFeaturedCourses');
+      const noMsg = document.getElementById('noCoursesMsg');
+      const badge = document.getElementById('filterBadge');
+      if (!grid) return;
+      let filtered = (typeof COURSES_DATA !== 'undefined') ? [...COURSES_DATA] : [];
+      if (activeCatFilter !== 'all') filtered = filtered.filter(c => c.categoryCode === activeCatFilter);
+      if (activeCatFilter !== 'all') {
+        const cat = PAGE_CATEGORIES.find(c => c.code === activeCatFilter);
+        badge.textContent = cat ? cat.label : '';
+        badge.style.display = 'inline';
+      } else { badge.style.display = 'none'; }
+      if (filtered.length === 0) { grid.innerHTML = ''; noMsg.style.display = 'block'; return; }
+      noMsg.style.display = 'none';
+      grid.innerHTML = filtered.map(course => `
+        <div class="course-card">
+          <div class="course-card-top">
+            <div class="course-badge"><i class="fa-solid fa-star"></i> ${course.badgeText||'Masterclass'}</div>
+            <div class="course-code">${course.code}</div>
+            <div class="course-title">${course.title}</div>
+            <div class="course-meta">
+              <span class="course-meta-item"><i class="fa-solid fa-clock"></i> ${course.duration}</span>
+              <span class="course-meta-item"><i class="fa-solid fa-tag"></i> &#8358;${(course.feeNGN||0).toLocaleString()} / $${(course.feeUSD||0).toLocaleString()}</span>
+            </div>
+          </div>
+          <div class="course-card-body">
+            <p class="course-audience"><strong>For:</strong> ${course.targetAudience}</p>
+            <div class="course-outcomes">
+              ${(course.outcomes||[]).slice(0,3).map(o=>`<div class="course-outcome"><i class="fa-solid fa-circle-check"></i><span>${o}</span></div>`).join('')}
+            </div>
+            <div class="course-sessions">
+              ${(course.sessions||[]).map(s=>`
+                <div class="session-row">
+                  <div class="session-info">
+                    <div class="session-city"><i class="fa-solid fa-location-dot" style="color:var(--primary-green);margin-right:.25rem;"></i>${s.city}</div>
+                    <div class="session-dates">${s.dates}</div>
+                  </div>
+                  <span class="session-badge ${s.statusClass}">${s.status}</span>
+                </div>`).join('')}
+            </div>
+            <div class="course-cta">
+              <a href="#" onclick="openProspectusModal('${course.id}');return false;" class="btn btn-lime"><i class="fa-solid fa-file-pdf"></i> Prospectus</a>
+              <a href="#" onclick="openCourseModal('${course.id}');return false;" class="btn btn-outline-navy">Details</a>
+              <a href="#" onclick="openEmployerInvoiceModal('${course.id}','${(course.sessions||[])[0]?.id||''}');return false;" class="btn btn-primary">Invoice</a>
+            </div>
+          </div>
+        </div>`).join('');
+    }
+
+    function renderPageSchedule() {
+      const list     = document.getElementById('pageScheduleList');
+      const catEl    = document.querySelector('input[name="pageSchedCat"]:checked');
+      const catVal   = catEl ? catEl.value : 'all';
+      const venueVal = document.getElementById('scheduleVenueFilter')?.value || 'all';
+      const allSessions = [];
+      if (typeof COURSES_DATA !== 'undefined') {
+        COURSES_DATA.forEach(course => {
+          if (catVal !== 'all' && course.categoryCode !== catVal) return;
+          (course.sessions||[]).forEach(s => {
+            if (venueVal !== 'all' && !s.city.includes(venueVal)) return;
+            allSessions.push({course, session: s});
+          });
+        });
+      }
+      if (allSessions.length === 0) {
+        list.innerHTML = `<div style="text-align:center;padding:3rem;color:var(--text-muted);">
+          <i class="fa-solid fa-calendar-xmark" style="font-size:2rem;display:block;margin-bottom:1rem;"></i>
+          No sessions match your selected filters. <button onclick="resetPageFilters()" style="color:var(--primary-green);font-weight:700;cursor:pointer;background:none;border:none;text-decoration:underline;">Reset filters</button></div>`;
+        return;
+      }
+      list.innerHTML = allSessions.map(({course, session}) => {
+        const startDate = (session.dates||'').split(' - ')[0];
+        const dateObj = new Date(startDate);
+        const month = isNaN(dateObj) ? 'TBD' : dateObj.toLocaleString('en',{month:'short'}).toUpperCase();
+        const day   = isNaN(dateObj) ? '--'  : dateObj.getDate();
+        return `<div class="schedule-card">
+          <div class="schedule-date-col"><div class="schedule-month">${month}</div><div class="schedule-day">${day}</div></div>
+          <div class="schedule-info">
+            <div class="schedule-course-title">${course.title}</div>
+            <div class="schedule-meta">
+              <span class="schedule-meta-item"><i class="fa-solid fa-location-dot"></i> ${session.city} &mdash; ${session.venue}</span>
+              <span class="schedule-meta-item"><i class="fa-solid fa-calendar"></i> ${session.dates}</span>
+              <span class="schedule-meta-item"><i class="fa-solid fa-clock"></i> ${course.duration}</span>
+              <span class="schedule-meta-item"><i class="fa-solid fa-tag"></i> &#8358;${(course.feeNGN||0).toLocaleString()}</span>
+            </div>
+            <span class="session-badge ${session.statusClass}" style="font-size:.75rem;">${session.status}</span>
+            <div class="schedule-actions">
+              <a href="#" onclick="openProspectusModal('${course.id}');return false;" class="btn btn-lime btn-sm"><i class="fa-solid fa-file-pdf"></i> Prospectus</a>
+              <a href="#" onclick="openSelfFundedPaymentModal('${course.id}');return false;" class="btn btn-outline-navy btn-sm">Pay Online</a>
+              <a href="#" onclick="openEmployerInvoiceModal('${course.id}','${session.id}');return false;" class="btn btn-primary btn-sm">Request Invoice</a>
+            </div>
+          </div>
+        </div>`;
+      }).join('');
+    }
+
+    function resetPageFilters() {
+      document.querySelectorAll('input[name="pageSchedCat"]').forEach(r=>{ if(r.value==='all') r.checked=true; });
+      const v = document.getElementById('scheduleVenueFilter'); if(v) v.value='all';
+      renderPageSchedule();
+    }
+
+    function runPageSearch() {
+      const cat   = document.getElementById('trainingCatSelect').value;
+      const venue = document.getElementById('trainingVenueSelect').value;
+      if (cat !== 'all') { activeCatFilter = cat; renderPageCategories(); }
+      if (venue !== 'all') { const el = document.getElementById('scheduleVenueFilter'); if(el) el.value = venue; }
+      renderPageFeaturedCourses();
+      renderPageSchedule();
+      document.getElementById('schedule').scrollIntoView({behavior:'smooth'});
+    }
+
+    document.getElementById('mobileNavToggle').addEventListener('click',()=>{
+      document.getElementById('navMenu').classList.toggle('active');
+    });
+
+    document.addEventListener('DOMContentLoaded',()=>{
+      renderPageCategories();
+      renderPageFeaturedCourses();
+      renderPageSchedule();
+    });
+  </script>
+</body>
+</html>
+

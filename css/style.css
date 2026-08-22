@@ -203,7 +203,7 @@ button {
 }
 
 .brand-logo-img {
-  height: 40px;
+  height: 70px;
   width: auto;
   object-fit: contain;
 }
@@ -1760,6 +1760,423 @@ button {
   }
 }
 
+/* ==========================================================================
+   BUSINESS CONSULTING & eBAS SOLUTIONS STYLING
+   ========================================================================== */
+.consulting-section {
+  background: var(--bg-slate);
+  border-top: 1px solid var(--border-light);
+  border-bottom: 1px solid var(--border-light);
+  padding: 4.5rem 0;
+}
+
+.ebas-flagship-card {
+  background: linear-gradient(135deg, var(--primary-green-dark) 0%, var(--primary-navy) 100%);
+  border-radius: var(--radius-lg);
+  padding: 2.75rem;
+  color: var(--bg-white);
+  box-shadow: var(--shadow-xl);
+  border: 1px solid rgba(132, 204, 22, 0.3);
+  position: relative;
+  overflow: hidden;
+}
+
+.ebas-badge {
+  display: inline-flex;
+  align-items: center;
+  background: var(--accent-lime);
+  color: var(--primary-navy);
+  font-size: 0.72rem;
+  font-weight: 800;
+  padding: 0.25rem 0.75rem;
+  border-radius: var(--radius-sm);
+  letter-spacing: 0.05em;
+  margin-bottom: 1rem;
+}
+
+.ebas-title {
+  font-size: 1.85rem;
+  font-weight: 800;
+  color: var(--bg-white);
+  margin-bottom: 0.4rem;
+  line-height: 1.2;
+}
+
+.ebas-tagline {
+  font-size: 1.05rem;
+  color: #BEF264;
+  font-weight: 700;
+  font-style: italic;
+  margin-bottom: 1rem;
+}
+
+.ebas-desc {
+  font-size: 0.95rem;
+  color: #CBD5E1;
+  line-height: 1.65;
+  max-width: 900px;
+  margin-bottom: 2rem;
+}
+
+/* 5-Step Process Timeline */
+.ebas-process-flow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: rgba(15, 23, 42, 0.6);
+  padding: 1.5rem 1.75rem;
+  border-radius: var(--radius-md);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  margin-bottom: 2rem;
+  overflow-x: auto;
+  gap: 0.5rem;
+}
+
+.process-step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  min-width: 110px;
+}
+
+.step-num {
+  font-size: 1.3rem;
+  font-weight: 800;
+  color: var(--accent-lime);
+  line-height: 1;
+}
+
+.step-name {
+  font-size: 0.9rem;
+  font-weight: 800;
+  color: var(--bg-white);
+  margin-top: 0.2rem;
+}
+
+.step-sub {
+  font-size: 0.72rem;
+  color: #94A3B8;
+  margin-top: 0.15rem;
+}
+
+.process-arrow {
+  color: rgba(255, 255, 255, 0.25);
+  font-size: 0.9rem;
+}
+
+.ebas-cta-row {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+/* eBAS 8 Operational Domains Grid */
+.ebas-domains-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem;
+}
+
+.ebas-domain-card {
+  background: var(--bg-white);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-md);
+  padding: 1.5rem;
+  box-shadow: var(--shadow-sm);
+  transition: var(--transition-normal);
+  display: flex;
+  flex-direction: column;
+  cursor: pointer;
+  position: relative;
+}
+
+.ebas-domain-card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-xl);
+  border-color: rgba(42, 82, 53, 0.3);
+}
+
+.domain-icon-wrapper {
+  width: 48px;
+  height: 48px;
+  border-radius: var(--radius-sm);
+  background: var(--accent-lime-light);
+  color: var(--primary-green);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.25rem;
+  margin-bottom: 0.85rem;
+  border: 1px solid var(--accent-lime-border);
+  transition: var(--transition-fast);
+}
+
+.ebas-domain-card:hover .domain-icon-wrapper {
+  background: var(--primary-green);
+  color: var(--accent-lime);
+  border-color: var(--primary-green);
+}
+
+.domain-tag {
+  font-size: 0.7rem;
+  font-weight: 800;
+  color: var(--primary-green);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 0.25rem;
+}
+
+.domain-name {
+  font-size: 1.05rem;
+  font-weight: 800;
+  color: var(--primary-navy);
+  margin-bottom: 0.5rem;
+  line-height: 1.3;
+}
+
+.domain-desc {
+  font-size: 0.83rem;
+  color: var(--text-muted);
+  line-height: 1.5;
+  margin-bottom: 1rem;
+}
+
+.domain-features-list {
+  font-size: 0.78rem;
+  color: var(--text-body);
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  margin-bottom: 1.25rem;
+  margin-top: auto;
+}
+
+.domain-action {
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--primary-green);
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid var(--border-light);
+}
+
+/* Target Markets Grid */
+.target-markets-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem;
+}
+
+.target-market-card {
+  background: var(--bg-white);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-md);
+  padding: 1.5rem;
+  box-shadow: var(--shadow-sm);
+  transition: var(--transition-fast);
+}
+
+.target-market-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-md);
+  border-color: rgba(42, 82, 53, 0.25);
+}
+
+.target-market-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: var(--radius-sm);
+  background: rgba(42, 82, 53, 0.08);
+  color: var(--primary-green);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  margin-bottom: 0.85rem;
+}
+
+.target-market-title {
+  font-size: 1rem;
+  font-weight: 800;
+  color: var(--primary-navy);
+  margin-bottom: 0.4rem;
+}
+
+.target-market-desc {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  line-height: 1.5;
+}
+
+/* Vision & Mission Cards */
+.vm-banner-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.vm-card {
+  padding: 2.25rem;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border-light);
+  background: var(--bg-white);
+  box-shadow: var(--shadow-md);
+  position: relative;
+}
+
+.vision-card {
+  border-left: 4px solid var(--primary-green);
+}
+
+.mission-card {
+  border-left: 4px solid var(--accent-lime);
+}
+
+.vm-badge {
+  font-size: 0.72rem;
+  font-weight: 800;
+  color: var(--primary-green);
+  letter-spacing: 0.05em;
+  margin-bottom: 0.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.vm-title {
+  font-size: 1.35rem;
+  font-weight: 800;
+  color: var(--primary-navy);
+  margin-bottom: 0.75rem;
+}
+
+.vm-text {
+  font-size: 0.92rem;
+  color: var(--text-body);
+  line-height: 1.65;
+}
+
+/* Core Values Grid */
+.core-values-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 1.25rem;
+}
+
+.core-value-card {
+  background: var(--bg-white);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-md);
+  padding: 1.5rem 1.25rem;
+  text-align: center;
+  box-shadow: var(--shadow-sm);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.value-num {
+  position: absolute;
+  top: 0.6rem;
+  right: 0.75rem;
+  font-size: 1.1rem;
+  font-weight: 800;
+  color: #CBD5E1;
+}
+
+.value-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: var(--accent-lime-light);
+  color: var(--primary-green);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.25rem;
+  margin-bottom: 0.85rem;
+}
+
+.value-title {
+  font-size: 1.05rem;
+  font-weight: 800;
+  color: var(--primary-navy);
+  margin-bottom: 0.4rem;
+}
+
+.value-desc {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  line-height: 1.5;
+}
+
+/* Partners Grid */
+.partners-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.25rem;
+}
+
+.partner-logo-card {
+  background: var(--bg-white);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-md);
+  padding: 1.15rem 1.25rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  box-shadow: var(--shadow-sm);
+  transition: var(--transition-fast);
+}
+
+.partner-logo-card:hover {
+  transform: translateY(-3px);
+  border-color: rgba(42, 82, 53, 0.3);
+  box-shadow: var(--shadow-md);
+}
+
+.partner-emblem-badge {
+  width: 46px;
+  height: 46px;
+  border-radius: var(--radius-sm);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  font-size: 1.15rem;
+}
+
+.partner-emblem-badge span {
+  font-size: 0.65rem;
+  font-weight: 900;
+  letter-spacing: 0.04em;
+  margin-top: 0.15rem;
+}
+
+.partner-info-box {
+  display: flex;
+  flex-direction: column;
+}
+
+.partner-name-text {
+  font-size: 0.92rem;
+  font-weight: 800;
+  color: var(--primary-navy);
+  line-height: 1.25;
+}
+
+.partner-type-text {
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  margin-top: 0.15rem;
+}
+
 /* Responsive Breakpoints */
 @media (max-width: 1024px) {
   .hero-title { font-size: 2.5rem; }
@@ -1773,6 +2190,10 @@ button {
   .why-grid { grid-template-columns: 1fr; }
   .pathway-banner { grid-template-columns: 1fr; }
   .footer-grid { grid-template-columns: 1fr 1fr; }
+  .ebas-domains-grid { grid-template-columns: repeat(2, 1fr); }
+  .target-markets-grid { grid-template-columns: repeat(2, 1fr); }
+  .core-values-grid { grid-template-columns: repeat(3, 1fr); }
+  .partners-grid { grid-template-columns: repeat(3, 1fr); }
 }
 
 @media (max-width: 640px) {
@@ -1784,4 +2205,11 @@ button {
   .footer-grid { grid-template-columns: 1fr; }
   .nav-menu { display: none; }
   .mobile-nav-toggle { display: block; }
+  .ebas-domains-grid { grid-template-columns: 1fr; }
+  .target-markets-grid { grid-template-columns: 1fr; }
+  .vm-banner-grid { grid-template-columns: 1fr; }
+  .core-values-grid { grid-template-columns: 1fr; }
+  .partners-grid { grid-template-columns: 1fr 1fr; }
+  .ebas-flagship-card { padding: 1.5rem; }
+  .ebas-title { font-size: 1.4rem; }
 }
