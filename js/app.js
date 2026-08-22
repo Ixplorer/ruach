@@ -1312,31 +1312,33 @@ function handleHashRouting() {
 
 // 5. Mega Menu Renderer
 function renderMegaMenu() {
-  const megaMenuGrid = document.getElementById('megaMenuGrid');
-  if (!megaMenuGrid) return;
+  const grids = document.querySelectorAll('.mega-menu-grid');
+  if (!grids || grids.length === 0) return;
 
   const categories = [
-    { name: 'AI & Digital Tech', icon: '<i class="fa-solid fa-laptop-code"></i>', items: ['Intelligent Process Automation', 'Data Analytics & BI', 'Cybersecurity Governance'] },
-    { name: 'Finance & Risk', icon: '<i class="fa-solid fa-chart-line"></i>', items: ['Financial Risk Management', 'Internal Control Systems', 'Treasury & Liquidity'] },
-    { name: 'Leadership & Exec', icon: '<i class="fa-solid fa-user-tie"></i>', items: ['High-Performance Leadership', 'Strategic Governance', 'Executive Presence'] },
-    { name: 'Project & Procurement', icon: '<i class="fa-solid fa-diagram-project"></i>', items: ['Agile Project Management', 'Contract & Claims Management', 'Public Private Partnerships'] },
-    { name: 'HR & Talent', icon: '<i class="fa-solid fa-users"></i>', items: ['Strategic Talent Analytics', 'L&D Management', 'Performance Management'] },
-    { name: 'Operations & Quality', icon: '<i class="fa-solid fa-gears"></i>', items: ['Lean Six Sigma Controls', 'Root Cause Analysis', 'Operational Excellence'] },
-    { name: 'Oil & Energy', icon: '<i class="fa-solid fa-bolt"></i>', items: ['Petroleum Economics', 'PSC Negotiations', 'Energy Transition Strategy'] },
-    { name: 'HSE & Safety', icon: '<i class="fa-solid fa-shield-halved"></i>', items: ['ISO 45001 Compliance', 'Emergency Response', 'Crisis Management'] }
+    { name: 'AI & Digital Transformation', code: 'tech', icon: '<i class="fa-solid fa-laptop-code"></i>', items: ['Intelligent Process Automation', 'Data Analytics & BI', 'Cybersecurity Governance'] },
+    { name: 'Finance & Risk Management', code: 'finance', icon: '<i class="fa-solid fa-chart-line"></i>', items: ['Financial Risk Management', 'Internal Control Systems', 'Treasury & Liquidity'] },
+    { name: 'Leadership & Exec Strategy', code: 'leadership', icon: '<i class="fa-solid fa-user-tie"></i>', items: ['High-Performance Leadership', 'Strategic Governance', 'Executive Presence'] },
+    { name: 'Project & Procurement', code: 'project', icon: '<i class="fa-solid fa-diagram-project"></i>', items: ['Agile Project Management', 'Contract & Claims Management', 'Public Private Partnerships'] },
+    { name: 'Human Resource Management', code: 'hr', icon: '<i class="fa-solid fa-users"></i>', items: ['Strategic Talent Analytics', 'L&D Management', 'Performance Management'] },
+    { name: 'Operations & Quality Control', code: 'operations', icon: '<i class="fa-solid fa-gears"></i>', items: ['Lean Six Sigma Controls', 'Root Cause Analysis', 'Operational Excellence'] },
+    { name: 'Oil & Gas Fiscal Economics', code: 'energy', icon: '<i class="fa-solid fa-bolt"></i>', items: ['Petroleum Economics', 'PSC Negotiations', 'Energy Transition Strategy'] },
+    { name: 'HSE & Emergency Safety', code: 'hse', icon: '<i class="fa-solid fa-shield-halved"></i>', items: ['ISO 45001 Compliance', 'Emergency Response', 'Crisis Management'] }
   ];
 
-  megaMenuGrid.innerHTML = categories.map(cat => `
-    <div class="mega-menu-category">
+  const html = categories.map(cat => `
+    <div class="mega-menu-category" onclick="window.location.href='trainings.html#schedule'; filterByCategory('${cat.code}');">
       <div class="mega-category-header">
         <span class="mega-category-icon">${cat.icon}</span>
-        <span>${cat.name}</span>
+        <span style="font-weight: 700; color: var(--primary-navy); font-size: 0.86rem;">${cat.name}</span>
       </div>
-      <div class="mega-course-list">
-        ${cat.items.map(item => `<a href="#programmes" class="mega-course-link">&bull; ${item}</a>`).join('')}
+      <div class="mega-course-list" style="display: flex; flex-direction: column; gap: 0.35rem; margin-top: 0.5rem;">
+        ${cat.items.map(item => `<a href="trainings.html#schedule" onclick="filterByCategory('${cat.code}')" class="mega-course-link" style="font-size: 0.78rem; color: var(--text-muted); text-decoration: none; transition: color 0.2s;" onmouseover="this.style.color='var(--primary-green)'" onmouseout="this.style.color='var(--text-muted)'">&bull; ${item}</a>`).join('')}
       </div>
     </div>
   `).join('');
+
+  grids.forEach(g => g.innerHTML = html);
 }
 
 // 6. Featured Courses Renderer
