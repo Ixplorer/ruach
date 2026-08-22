@@ -1483,9 +1483,10 @@ function setActiveCurrency(code) {
   const dd = document.getElementById('currencyDropdown');
   if (dd) dd.classList.remove('active');
 
-  renderFeaturedCourses();
-  renderScheduleCourses();
-  if (typeof renderTrainingsPageCourses === 'function') renderTrainingsPageCourses();
+  if (typeof renderFeaturedCourses === 'function') renderFeaturedCourses();
+  if (typeof renderScheduleCourses === 'function') renderScheduleCourses();
+  if (typeof renderPageFeaturedCourses === 'function') renderPageFeaturedCourses();
+  if (typeof renderPageSchedule === 'function') renderPageSchedule();
 
   showToast(`Display currency changed to ${CURRENCIES[code].name} (${CURRENCIES[code].symbol})`);
 }

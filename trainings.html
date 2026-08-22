@@ -443,7 +443,7 @@
       const noMsg = document.getElementById('noCoursesMsg');
       const badge = document.getElementById('filterBadge');
       if (!grid) return;
-      let filtered = (typeof COURSES_DATA !== 'undefined') ? [...COURSES_DATA] : [];
+      let filtered = (typeof getCoursesCatalog === 'function') ? getCoursesCatalog() : ((typeof COURSES_DATA !== 'undefined') ? [...COURSES_DATA] : []);
       if (activeCatFilter !== 'all') filtered = filtered.filter(c => c.categoryCode === activeCatFilter);
       if (activeCatFilter !== 'all') {
         const cat = PAGE_CATEGORIES.find(c => c.code === activeCatFilter);
@@ -460,7 +460,7 @@
             <div class="course-title">${course.title}</div>
             <div class="course-meta">
               <span class="course-meta-item"><i class="fa-solid fa-clock"></i> ${course.duration}</span>
-              <span class="course-meta-item"><i class="fa-solid fa-tag"></i> &#8358;${(course.feeNGN||0).toLocaleString()} / $${(course.feeUSD||0).toLocaleString()}</span>
+              <span class="course-meta-item"><i class="fa-solid fa-tag"></i> ${typeof formatFeeCompact === 'function' ? formatFeeCompact(course.feeNGN, course.feeUSD) : '₦' + (course.feeNGN||0).toLocaleString()}</span>
             </div>
           </div>
           <div class="course-card-body">
@@ -493,15 +493,14 @@
       const catVal   = catEl ? catEl.value : 'all';
       const venueVal = document.getElementById('scheduleVenueFilter')?.value || 'all';
       const allSessions = [];
-      if (typeof COURSES_DATA !== 'undefined') {
-        COURSES_DATA.forEach(course => {
-          if (catVal !== 'all' && course.categoryCode !== catVal) return;
-          (course.sessions||[]).forEach(s => {
-            if (venueVal !== 'all' && !s.city.includes(venueVal)) return;
-            allSessions.push({course, session: s});
-          });
+      const catalog = (typeof getCoursesCatalog === 'function') ? getCoursesCatalog() : ((typeof COURSES_DATA !== 'undefined') ? COURSES_DATA : []);
+      catalog.forEach(course => {
+        if (catVal !== 'all' && course.categoryCode !== catVal) return;
+        (course.sessions||[]).forEach(s => {
+          if (venueVal !== 'all' && !s.city.includes(venueVal)) return;
+          allSessions.push({course, session: s});
         });
-      }
+      });
       if (allSessions.length === 0) {
         list.innerHTML = `<div style="text-align:center;padding:3rem;color:var(--text-muted);">
           <i class="fa-solid fa-calendar-xmark" style="font-size:2rem;display:block;margin-bottom:1rem;"></i>
@@ -521,7 +520,7 @@
               <span class="schedule-meta-item"><i class="fa-solid fa-location-dot"></i> ${session.city} &mdash; ${session.venue}</span>
               <span class="schedule-meta-item"><i class="fa-solid fa-calendar"></i> ${session.dates}</span>
               <span class="schedule-meta-item"><i class="fa-solid fa-clock"></i> ${course.duration}</span>
-              <span class="schedule-meta-item"><i class="fa-solid fa-tag"></i> &#8358;${(course.feeNGN||0).toLocaleString()}</span>
+              <span class="schedule-meta-item"><i class="fa-solid fa-tag"></i> ${typeof formatFeeCompact === 'function' ? formatFeeCompact(course.feeNGN, course.feeUSD) : '₦' + (course.feeNGN||0).toLocaleString()}</span>
             </div>
             <span class="session-badge ${session.statusClass}" style="font-size:.75rem;">${session.status}</span>
             <div class="schedule-actions">
