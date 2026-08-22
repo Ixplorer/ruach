@@ -2327,58 +2327,59 @@ button {
   }
 }
 
-/* Subject Area Cards - Hardcoded Grid */
+/* Subject Area Cards - Polished Grid */
 .subj-card {
   background: #FFFFFF;
   border: 1.5px solid #E2E8F0;
-  border-radius: 14px;
-  padding: 1.75rem 0.85rem;
+  border-radius: 18px;
+  padding: 2rem 1.25rem 1.75rem;
   text-align: center;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: space-between;
-  min-height: 210px;
+  gap: 0;
+  min-height: 230px;
   cursor: pointer;
-  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-  box-shadow: 0 2px 8px rgba(15, 23, 42, 0.03);
+  transition: background 0.35s ease, border-color 0.35s ease, box-shadow 0.35s ease, transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 1px 4px rgba(15, 23, 42, 0.04);
 }
 
 .subj-card:hover {
   background: #0F172A;
   border-color: #84CC16;
-  box-shadow: 0 16px 32px -8px rgba(15, 23, 42, 0.3);
-  transform: translateY(-6px);
+  box-shadow: 0 20px 40px -10px rgba(15, 23, 42, 0.35);
+  transform: translateY(-8px);
 }
 
 .subj-icon {
-  width: 56px;
-  height: 56px;
-  border-radius: 14px;
-  background: #DCFCE7;
-  color: #166534;
+  width: 64px;
+  height: 64px;
+  border-radius: 16px;
+  background: #ECFDF5;
+  color: #15803D;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1.4rem;
-  margin-bottom: 0.85rem;
-  transition: all 0.3s ease;
+  font-size: 1.55rem;
+  margin-bottom: 1.1rem;
   flex-shrink: 0;
+  transition: background 0.35s ease, color 0.35s ease, transform 0.35s ease;
 }
 
 .subj-card:hover .subj-icon {
   background: #84CC16;
   color: #0F172A;
-  transform: scale(1.08);
+  transform: scale(1.1);
 }
 
 .subj-title {
-  font-size: 0.95rem;
+  font-size: 0.97rem;
   font-weight: 700;
   color: #0F172A;
-  line-height: 1.35;
-  margin-bottom: 0.75rem;
-  transition: color 0.3s ease;
+  line-height: 1.4;
+  margin-bottom: 0.9rem;
+  flex: 1;
+  transition: color 0.35s ease;
 }
 
 .subj-card:hover .subj-title {
@@ -2387,22 +2388,28 @@ button {
 
 .subj-count {
   background: #F1F5F9;
-  color: #475569;
+  color: #64748B;
   font-size: 0.75rem;
   font-weight: 700;
-  padding: 0.25rem 0.75rem;
+  padding: 0.28rem 0.85rem;
   border-radius: 50px;
   display: inline-block;
-  transition: all 0.3s ease;
+  letter-spacing: 0.01em;
+  transition: background 0.35s ease, color 0.35s ease;
 }
 
 .subj-card:hover .subj-count {
-  background: rgba(255, 255, 255, 0.18);
+  background: rgba(132, 204, 22, 0.2);
   color: #84CC16;
 }
 
 @media (max-width: 767px) {
-  #subject-areas div[style*="grid-template-columns: repeat(5"] {
+  #subject-areas div[style*="repeat(5"] {
     grid-template-columns: repeat(2, 1fr) !important;
+    gap: 1rem !important;
+  }
+  .subj-card {
+    min-height: 190px;
+    padding: 1.5rem 1rem 1.25rem;
   }
 }
