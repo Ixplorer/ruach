@@ -1198,18 +1198,17 @@ const CORE_VALUES_DATA = [
 
 // 1.9. Strategic Partners Store (With Institutional Logos & Badges)
 const PARTNERS_DATA = [
-  { name: 'Bank of Industry',        type: 'Development Finance Institution', logo: 'partners/bank_of_industry_limited_logo.jfif', color: '#1E3A8A' },
-  { name: 'Sterling Bank Plc',       type: 'Commercial Banking Partner',       logo: 'partners/sterling-bank-plc-logo-png_seeklogo-510247.png', color: '#DC2626' },
-  { name: 'ProvidusBank',            type: 'Financial Institution',            logo: 'partners/09c66ba0bb9a49fbe28afda33e652529.png', color: '#4F46E5' },
-  { name: 'iCentra',                 type: 'Tech & Advisory',                  logo: 'partners/images.png', color: '#0D9488' },
-  { name: 'Food Chest Inc.',         type: 'Agribusiness & Logistics',         logo: 'partners/Food Chest.png', color: '#16A34A' },
-  { name: 'Lela Blossom Schools',    type: 'Educational Network',              logo: 'partners/Lela Blossom Schools.jfif', color: '#D97706' },
-  { name: 'Glovis Almonds',         type: 'Enterprise Real Estate',           logo: 'partners/Glovis Almonds Properties.png', color: '#2563EB' },
-  { name: 'Judicial Council of Nigeria', type: 'Public Sector Governance',   logo: 'partners/Judicial Council of Nigeria.jfif', color: '#15803D' },
-  { name: 'DataScribe Analytics',    type: 'Data Intelligence',               logo: 'partners/DataScribe Analytics.jfif', color: '#7C3AED' },
-  { name: 'GrandVille Medical',      type: 'Healthcare Network',              logo: 'partners/GrandVille Medical Group.jfif', color: '#E11D48' },
-  { name: 'Scope Training',          type: 'Executive Education',             logo: 'partners/Scope Training.jfif', color: '#2A5235' },
-  { name: 'Celebrations',            type: 'Corporate Partner',               logo: 'partners/Celebrations.jfif', color: '#C026D3' }
+  { name: 'Bank of Industry', type: 'Development Finance Institution', logo: 'Partners/bank_of_industry_limited_logo.jfif', color: '#1E3A8A' },
+  { name: 'Sterling Bank Plc', type: 'Commercial Banking Partner', logo: 'Partners/sterling-bank-plc-logo-png_seeklogo-510247.png', color: '#DC2626' },
+  { name: 'ProvidusBank', type: 'Financial Institution', logo: 'Partners/09c66ba0bb9a49fbe28afda33e652529.png', color: '#4F46E5' },
+  { name: 'iCentra', type: 'Tech & Advisory', logo: 'Partners/images.png', color: '#0D9488' },
+  { name: 'Food Chest Inc.', type: 'Agribusiness & Logistics', logo: 'Partners/Food Chest.png', color: '#16A34A' },
+  { name: 'Lela Blossom Schools', type: 'Educational Network', logo: 'Partners/Lela Blossom Schools.jfif', color: '#D97706' },
+  { name: 'Glovis Almonds', type: 'Enterprise Real Estate', logo: 'Partners/Glovis Almonds Properties.png', color: '#2563EB' },
+  { name: 'Judicial Council of Nigeria', type: 'Public Sector Governance', logo: 'Partners/Judicial Council of Nigeria.jfif', color: '#15803D' },
+  { name: 'DataScribe Analytics', type: 'Data Intelligence', logo: 'Partners/DataScribe Analytics.jfif', color: '#7C3AED' },
+  { name: 'GrandVille Medical', type: 'Healthcare Network', logo: 'Partners/GrandVille Medical Group.jfif', color: '#E11D48' },
+  { name: 'Scope Training', type: 'Executive Education', logo: 'Partners/Celebrations.jfif', color: '#C026D3' }
 ];
 
 // ── STAFF AUTHENTICATION SYSTEM ────────────────────────────────────────────
@@ -1217,9 +1216,9 @@ const PARTNERS_DATA = [
 // Pre-defined staff accounts (username → SHA-256-style simple hash stored in LS)
 // Passwords are compared using a simple btoa encoding — adequate for internal portal.
 const STAFF_ACCOUNTS = [
-  { username: 'admin',    password: 'ruach@2026',    role: 'admin',   displayName: 'Admin Portal',       avatar: 'fa-shield-halved' },
-  { username: 'content',  password: 'training@2026', role: 'content', displayName: 'Content Manager',    avatar: 'fa-pen-ruler' },
-  { username: 'manager',  password: 'ops@2026',      role: 'admin',   displayName: 'Operations Manager', avatar: 'fa-user-tie' }
+  { username: 'admin', password: 'ruach@2026', role: 'admin', displayName: 'Admin Portal', avatar: 'fa-shield-halved' },
+  { username: 'content', password: 'training@2026', role: 'content', displayName: 'Content Manager', avatar: 'fa-pen-ruler' },
+  { username: 'manager', password: 'ops@2026', role: 'admin', displayName: 'Operations Manager', avatar: 'fa-user-tie' }
 ];
 
 // Session lasts 8 hours
@@ -1266,7 +1265,7 @@ let LIVE_COURSES = [];
 function loadCoursesOverride() {
   const override = localStorage.getItem('ruach_courses_override');
   if (override) {
-    try { LIVE_COURSES = JSON.parse(override); return; } catch {}
+    try { LIVE_COURSES = JSON.parse(override); return; } catch { }
   }
   // Deep clone so COURSES_DATA stays pristine
   LIVE_COURSES = JSON.parse(JSON.stringify(COURSES_DATA));
@@ -2405,19 +2404,19 @@ function renderDashboardTabs(container, session) {
 
   container.innerHTML = `
     <div class="admin-tabs">
-      ${isAdmin ? `<button class="admin-tab-btn ${adminActiveTab==='overview'?'active':''}" onclick="switchAdminTab('overview')">
+      ${isAdmin ? `<button class="admin-tab-btn ${adminActiveTab === 'overview' ? 'active' : ''}" onclick="switchAdminTab('overview')">
         <i class="fa-solid fa-gauge-high"></i> Overview
       </button>` : ''}
-      <button class="admin-tab-btn ${adminActiveTab==='courses'?'active':''}" onclick="switchAdminTab('courses')">
+      <button class="admin-tab-btn ${adminActiveTab === 'courses' ? 'active' : ''}" onclick="switchAdminTab('courses')">
         <i class="fa-solid fa-book-open"></i> Course &amp; Schedule Manager
       </button>
-      ${isAdmin ? `<button class="admin-tab-btn ${adminActiveTab==='enrolments'?'active':''}" onclick="switchAdminTab('enrolments')">
+      ${isAdmin ? `<button class="admin-tab-btn ${adminActiveTab === 'enrolments' ? 'active' : ''}" onclick="switchAdminTab('enrolments')">
         <i class="fa-solid fa-users"></i> Enrolments &amp; Leads
       </button>` : ''}
     </div>
 
     <!-- TAB: Overview -->
-    ${isAdmin ? `<div id="adminTab-overview" class="admin-tab-panel ${adminActiveTab==='overview'?'active':''}">
+    ${isAdmin ? `<div id="adminTab-overview" class="admin-tab-panel ${adminActiveTab === 'overview' ? 'active' : ''}">
       <div class="admin-metrics-grid">
         <div class="metric-card"><div class="metric-title">Invoice Requests</div><div class="metric-value">${invoices.length}</div></div>
         <div class="metric-card"><div class="metric-title">Mailing List Leads</div><div class="metric-value">${leads.length}</div></div>
@@ -2427,7 +2426,7 @@ function renderDashboardTabs(container, session) {
       <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem;flex-wrap:wrap;gap:0.5rem;">
         <h3 style="color:var(--bg-white);font-size:1.1rem;margin:0;">Invoice Queue (${invoices.length})</h3>
       </div>
-      ${invoices.length===0 ? '<p style="color:#94A3B8;font-size:0.9rem;margin-bottom:2rem;">No invoice requests yet.</p>' : `
+      ${invoices.length === 0 ? '<p style="color:#94A3B8;font-size:0.9rem;margin-bottom:2rem;">No invoice requests yet.</p>' : `
       <table class="admin-table" style="margin-bottom:2.5rem;">
         <thead><tr><th>Invoice No</th><th>Organization</th><th>Staff Nominee</th><th>Course</th><th>Amount (NGN)</th><th>Status</th><th>Action</th></tr></thead>
         <tbody>${invoices.map(inv => `<tr>
@@ -2441,35 +2440,35 @@ function renderDashboardTabs(container, session) {
     </div>` : ''}
 
     <!-- TAB: Course & Schedule Manager -->
-    <div id="adminTab-courses" class="admin-tab-panel ${adminActiveTab==='courses'?'active':''}">
+    <div id="adminTab-courses" class="admin-tab-panel ${adminActiveTab === 'courses' ? 'active' : ''}">
       ${renderCourseManagerPanel()}
     </div>
 
     <!-- TAB: Enrolments & Leads -->
-    ${isAdmin ? `<div id="adminTab-enrolments" class="admin-tab-panel ${adminActiveTab==='enrolments'?'active':''}">
+    ${isAdmin ? `<div id="adminTab-enrolments" class="admin-tab-panel ${adminActiveTab === 'enrolments' ? 'active' : ''}">
       <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem;flex-wrap:wrap;gap:0.5rem;">
         <h3 style="color:var(--bg-white);font-size:1.1rem;margin:0;">Mailing List &amp; Prospectus Leads (${leads.length})</h3>
         <button class="btn btn-lime btn-sm" onclick="exportMailingListCSV()"><i class="fa-solid fa-file-csv" style="margin-right:0.3rem;"></i>Export CSV</button>
       </div>
-      ${leads.length===0 ? '<p style="color:#94A3B8;font-size:0.9rem;margin-bottom:2rem;">No subscriber leads yet.</p>' : `
+      ${leads.length === 0 ? '<p style="color:#94A3B8;font-size:0.9rem;margin-bottom:2rem;">No subscriber leads yet.</p>' : `
       <table class="admin-table" style="margin-bottom:2.5rem;">
         <thead><tr><th>Lead ID</th><th>Name</th><th>Email</th><th>Phone</th><th>Organization</th><th>Course</th><th>Date</th></tr></thead>
         <tbody>${leads.map(l => `<tr>
           <td><strong>${l.id}</strong></td><td>${l.name}</td>
           <td><a href="mailto:${l.email}" style="color:#60A5FA;">${l.email}</a></td>
-          <td>${l.phone}</td><td>${l.org||'N/A'}</td>
+          <td>${l.phone}</td><td>${l.org || 'N/A'}</td>
           <td style="max-width:220px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">${l.courseTitle}</td>
           <td style="font-size:0.8rem;color:#94A3B8;">${l.date}</td>
         </tr>`).join('')}</tbody>
       </table>`}
       <h3 style="color:var(--bg-white);font-size:1.1rem;margin-bottom:1rem;">Self-Funded Enrolments (${enrolments.length})</h3>
-      ${enrolments.length===0 ? '<p style="color:#94A3B8;font-size:0.9rem;">No self-funded enrolments yet.</p>' : `
+      ${enrolments.length === 0 ? '<p style="color:#94A3B8;font-size:0.9rem;">No self-funded enrolments yet.</p>' : `
       <table class="admin-table">
         <thead><tr><th>Ref</th><th>Name</th><th>Email</th><th>Course</th><th>City</th><th>Date</th></tr></thead>
         <tbody>${enrolments.map(e => `<tr>
           <td><strong>${e.id}</strong></td><td>${e.name}</td>
           <td><a href="mailto:${e.email}" style="color:#60A5FA;">${e.email}</a></td>
-          <td>${e.courseTitle}</td><td>${e.city||'N/A'}</td>
+          <td>${e.courseTitle}</td><td>${e.city || 'N/A'}</td>
           <td style="font-size:0.8rem;color:#94A3B8;">${e.date}</td>
         </tr>`).join('')}</tbody>
       </table>`}
@@ -2487,12 +2486,12 @@ function switchAdminTab(tab) {
   const panel = document.getElementById(`adminTab-${tab}`);
   if (panel) panel.classList.add('active');
   const btns = document.querySelectorAll('.admin-tab-btn');
-  btns.forEach(b => { if (b.textContent.toLowerCase().includes(tab==='overview'?'overview':tab==='courses'?'course':'enrol')) b.classList.add('active'); });
+  btns.forEach(b => { if (b.textContent.toLowerCase().includes(tab === 'overview' ? 'overview' : tab === 'courses' ? 'course' : 'enrol')) b.classList.add('active'); });
 }
 
 // ── COURSE MANAGER PANEL ─────────────────────────────────────────────────────
 function renderCourseManagerPanel() {
-  const categories = ['AI, Digital Transformation & IT','Finance, Budgeting & Risk Management','Leadership & Executive Development','Project, Procurement & Contract Management','Human Resource Management & L&D','Public Sector Administration & Governance','Strategic Planning & Corporate Governance','Health, Safety & Environment (HSE)','Oil & Gas Industry Management','Monitoring, Evaluation & Learning (MEL)'];
+  const categories = ['AI, Digital Transformation & IT', 'Finance, Budgeting & Risk Management', 'Leadership & Executive Development', 'Project, Procurement & Contract Management', 'Human Resource Management & L&D', 'Public Sector Administration & Governance', 'Strategic Planning & Corporate Governance', 'Health, Safety & Environment (HSE)', 'Oil & Gas Industry Management', 'Monitoring, Evaluation & Learning (MEL)'];
 
   return `
     <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1.25rem;flex-wrap:wrap;gap:0.75rem;">
@@ -2634,18 +2633,18 @@ function renderCourseManagerPanel() {
 function renderCourseRow(c) {
   return `
     <tr id="crow-${c.id}">
-      <td><code style="font-size:0.75rem;color:#BEF264;">${c.code||'—'}</code></td>
+      <td><code style="font-size:0.75rem;color:#BEF264;">${c.code || '—'}</code></td>
       <td>
         <div style="font-weight:600;color:#F1F5F9;font-size:0.88rem;">${c.title}</div>
         ${c.flagship ? '<span style="font-size:0.7rem;background:rgba(132,204,22,0.15);color:#BEF264;padding:1px 6px;border-radius:999px;">Flagship</span>' : ''}
       </td>
-      <td style="font-size:0.78rem;color:#94A3B8;">${(c.category||'').split('&')[0].trim()}</td>
-      <td style="font-size:0.8rem;color:#CBD5E1;">${c.duration||'—'}</td>
-      <td style="font-size:0.8rem;">₦${(c.feeNGN||0).toLocaleString()}</td>
-      <td style="font-size:0.8rem;">$${(c.feeUSD||0).toLocaleString()}</td>
+      <td style="font-size:0.78rem;color:#94A3B8;">${(c.category || '').split('&')[0].trim()}</td>
+      <td style="font-size:0.8rem;color:#CBD5E1;">${c.duration || '—'}</td>
+      <td style="font-size:0.8rem;">₦${(c.feeNGN || 0).toLocaleString()}</td>
+      <td style="font-size:0.8rem;">$${(c.feeUSD || 0).toLocaleString()}</td>
       <td style="text-align:center;">
         <button onclick="toggleSessions('${c.id}')" style="background:rgba(99,102,241,0.15);color:#A5B4FC;border:1px solid rgba(99,102,241,0.3);border-radius:6px;padding:3px 10px;font-size:0.76rem;cursor:pointer;">
-          ${(c.sessions||[]).length} <i class="fa-solid fa-chevron-down" style="font-size:0.65rem;"></i>
+          ${(c.sessions || []).length} <i class="fa-solid fa-chevron-down" style="font-size:0.65rem;"></i>
         </button>
       </td>
       <td>
@@ -2659,8 +2658,8 @@ function renderCourseRow(c) {
     <tr id="sessions-${c.id}" style="display:none;">
       <td colspan="8" style="padding:0;background:rgba(15,23,42,0.5);">
         <div style="padding:0.75rem 1rem;">
-          ${(c.sessions||[]).length===0 ? '<p style="color:#475569;font-size:0.82rem;margin:0.5rem 0;">No sessions scheduled. Click the <strong>calendar+</strong> button above to add one.</p>' :
-          `<table style="width:100%;border-collapse:collapse;font-size:0.82rem;">
+          ${(c.sessions || []).length === 0 ? '<p style="color:#475569;font-size:0.82rem;margin:0.5rem 0;">No sessions scheduled. Click the <strong>calendar+</strong> button above to add one.</p>' :
+      `<table style="width:100%;border-collapse:collapse;font-size:0.82rem;">
             <thead><tr>
               <th style="text-align:left;padding:4px 8px;color:#64748B;font-weight:600;">City</th>
               <th style="text-align:left;padding:4px 8px;color:#64748B;font-weight:600;">Venue</th>
@@ -2668,11 +2667,11 @@ function renderCourseRow(c) {
               <th style="text-align:left;padding:4px 8px;color:#64748B;font-weight:600;">Status</th>
               <th style="padding:4px 8px;color:#64748B;font-weight:600;">Actions</th>
             </tr></thead>
-            <tbody>${(c.sessions||[]).map(s => `<tr>
-              <td style="padding:4px 8px;color:#CBD5E1;">${s.city||'—'}</td>
-              <td style="padding:4px 8px;color:#94A3B8;max-width:180px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">${s.venue||'—'}</td>
-              <td style="padding:4px 8px;color:#CBD5E1;">${s.dates||'—'}</td>
-              <td style="padding:4px 8px;"><span style="font-size:0.72rem;background:rgba(132,204,22,0.15);color:#BEF264;padding:2px 7px;border-radius:999px;">${s.status||'—'}</span></td>
+            <tbody>${(c.sessions || []).map(s => `<tr>
+              <td style="padding:4px 8px;color:#CBD5E1;">${s.city || '—'}</td>
+              <td style="padding:4px 8px;color:#94A3B8;max-width:180px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">${s.venue || '—'}</td>
+              <td style="padding:4px 8px;color:#CBD5E1;">${s.dates || '—'}</td>
+              <td style="padding:4px 8px;"><span style="font-size:0.72rem;background:rgba(132,204,22,0.15);color:#BEF264;padding:2px 7px;border-radius:999px;">${s.status || '—'}</span></td>
               <td style="padding:4px 8px;">
                 <button onclick="openEditSessionModal('${c.id}','${s.id}')" class="cms-action-btn cms-edit-btn" title="Edit session" style="padding:3px 7px;font-size:0.7rem;"><i class="fa-solid fa-pen"></i></button>
                 <button onclick="deleteSession('${c.id}','${s.id}')" class="cms-action-btn cms-del-btn" title="Remove session" style="padding:3px 7px;font-size:0.7rem;"><i class="fa-solid fa-trash"></i></button>
@@ -2704,7 +2703,7 @@ function openAddCourseModal() {
   _editingCourseId = null;
   document.getElementById('cmsCourseModalTitle').textContent = 'Add New Course';
   document.getElementById('cmsSaveCourseBtn').textContent = 'Save Course';
-  ['cmsCode','cmsTitle','cmsDuration','cmsFeeNGN','cmsFeeUSD','cmsAudience','cmsOutcomes'].forEach(id => { const el = document.getElementById(id); if(el) el.value = ''; });
+  ['cmsCode', 'cmsTitle', 'cmsDuration', 'cmsFeeNGN', 'cmsFeeUSD', 'cmsAudience', 'cmsOutcomes'].forEach(id => { const el = document.getElementById(id); if (el) el.value = ''; });
   document.getElementById('cmsFlagship').checked = false;
   document.getElementById('cmsCourseModal').style.display = 'flex';
 }
@@ -2721,7 +2720,7 @@ function openEditCourseModal(courseId) {
   document.getElementById('cmsFeeUSD').value = c.feeUSD || '';
   document.getElementById('cmsCategory').value = c.category || '';
   document.getElementById('cmsAudience').value = c.targetAudience || '';
-  document.getElementById('cmsOutcomes').value = (c.outcomes||[]).join('\n');
+  document.getElementById('cmsOutcomes').value = (c.outcomes || []).join('\n');
   document.getElementById('cmsFlagship').checked = !!c.flagship;
   document.getElementById('cmsCourseModal').style.display = 'flex';
 }
@@ -2742,7 +2741,7 @@ function saveCmsCourse() {
     code, title, category, feeNGN, feeUSD,
     duration: document.getElementById('cmsDuration').value.trim(),
     targetAudience: document.getElementById('cmsAudience').value.trim(),
-    outcomes: outcomesRaw ? outcomesRaw.split('\n').map(l=>l.trim()).filter(Boolean) : [],
+    outcomes: outcomesRaw ? outcomesRaw.split('\n').map(l => l.trim()).filter(Boolean) : [],
     flagship: document.getElementById('cmsFlagship').checked,
     badgeText: document.getElementById('cmsFlagship').checked ? 'Flagship Masterclass' : 'Executive Programme',
     badgeClass: document.getElementById('cmsFlagship').checked ? 'badge-flagship' : 'badge-invoice',
@@ -2778,7 +2777,7 @@ function openAddSessionModal(courseId) {
   _editingSessionCourseId = courseId;
   _editingSessionId = null;
   document.getElementById('cmsSessionModalTitle').textContent = 'Add Training Session';
-  ['cmsSessionCity','cmsSessionVenue','cmsSessionDates'].forEach(id => { const el = document.getElementById(id); if(el) el.value=''; });
+  ['cmsSessionCity', 'cmsSessionVenue', 'cmsSessionDates'].forEach(id => { const el = document.getElementById(id); if (el) el.value = ''; });
   document.getElementById('cmsSessionStatus').value = 'Open for Enrolment';
   document.getElementById('cmsSessionModal').style.display = 'flex';
 }
@@ -2786,15 +2785,15 @@ function openAddSessionModal(courseId) {
 function openEditSessionModal(courseId, sessionId) {
   const course = LIVE_COURSES.find(c => c.id === courseId);
   if (!course) return;
-  const session = (course.sessions||[]).find(s => s.id === sessionId);
+  const session = (course.sessions || []).find(s => s.id === sessionId);
   if (!session) return;
   _editingSessionCourseId = courseId;
   _editingSessionId = sessionId;
   document.getElementById('cmsSessionModalTitle').textContent = 'Edit Session';
-  document.getElementById('cmsSessionCity').value = session.city||'';
-  document.getElementById('cmsSessionVenue').value = session.venue||'';
-  document.getElementById('cmsSessionDates').value = session.dates||'';
-  document.getElementById('cmsSessionStatus').value = session.status||'Open for Enrolment';
+  document.getElementById('cmsSessionCity').value = session.city || '';
+  document.getElementById('cmsSessionVenue').value = session.venue || '';
+  document.getElementById('cmsSessionDates').value = session.dates || '';
+  document.getElementById('cmsSessionStatus').value = session.status || 'Open for Enrolment';
   document.getElementById('cmsSessionModal').style.display = 'flex';
 }
 
@@ -2808,7 +2807,8 @@ function saveCmsSession() {
 
   if (!city || !venue || !dates) { showToast('City, venue and dates are required.'); return; }
 
-  const sessionData = { city, venue, dates, status,
+  const sessionData = {
+    city, venue, dates, status,
     statusClass: status === 'Guaranteed to Run' ? 'badge-guaranteed' : status === 'Limited Seats' ? 'badge-flagship' : 'badge-invoice'
   };
 
@@ -2880,8 +2880,8 @@ function showTeamProfileModal(memberId) {
     modalTitle.textContent = `${member.name} - Profile`;
   }
 
-  const bioParagraphs = member.fullBio && member.fullBio.length > 0 
-    ? member.fullBio 
+  const bioParagraphs = member.fullBio && member.fullBio.length > 0
+    ? member.fullBio
     : [member.bio];
 
   modalBody.innerHTML = `
@@ -3071,7 +3071,7 @@ function setupTeamAutoScroll(totalCount) {
 function renderConsultingSection() {
   const container1 = document.getElementById('ebasDomainsGrid');
   const container2 = document.getElementById('ebasDomainsGridConsulting');
-  
+
   const html = EBAS_DOMAINS_DATA.map(d => `
     <div class="ebas-domain-card" onclick="showConsultingDemoModal('${d.name}')">
       <div class="domain-icon-wrapper">
@@ -3210,7 +3210,7 @@ function initWhatsappLiveChat() {
             Hello! 👋 Welcome to Ruach Business Consortia.<br><br>
             How can we assist you with our Executive Masterclasses, Training Schedule, or eBAS Consulting today?
           </div>
-          <div class="wa-bubble-time">${new Date().toLocaleTimeString([], {hour:'2-digit', minute:'2-digit'})}</div>
+          <div class="wa-bubble-time">${new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</div>
         </div>
 
         <div class="wa-quick-pills">
