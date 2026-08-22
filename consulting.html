@@ -125,6 +125,27 @@
       <div class="nav-actions">
         <a href="#request-demo" class="btn btn-lime btn-sm">Request eBAS Demo</a>
         <a href="trainings.html" class="btn btn-primary btn-sm">Training Schedule</a>
+
+        <!-- Currency Selector Button -->
+        <div class="currency-selector" id="currencySelector">
+          <button type="button" class="currency-btn" id="currencyBtn" onclick="toggleCurrencyDropdown(event)" title="Select Display Currency">
+            <span id="currBtnFlag">🇳🇬</span>
+            <span id="currBtnCode">NGN</span>
+            <i class="fa-solid fa-chevron-down" style="font-size: 0.65rem;"></i>
+          </button>
+          <div class="currency-dropdown" id="currencyDropdown">
+            <button type="button" class="currency-opt" id="currOpt-NGN" onclick="setActiveCurrency('NGN')">
+              <span>🇳🇬</span> <strong>NGN</strong> <span class="curr-desc">(₦)</span>
+            </button>
+            <button type="button" class="currency-opt" id="currOpt-USD" onclick="setActiveCurrency('USD')">
+              <span>🇺🇸</span> <strong>USD</strong> <span class="curr-desc">($)</span>
+            </button>
+            <button type="button" class="currency-opt" id="currOpt-GBP" onclick="setActiveCurrency('GBP')">
+              <span>🇬🇧</span> <strong>GBP</strong> <span class="curr-desc">(£)</span>
+            </button>
+          </div>
+        </div>
+
         <button class="mobile-nav-toggle" id="mobileNavToggle"><i class="fa-solid fa-bars"></i></button>
       </div>
     </div>

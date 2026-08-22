@@ -1347,11 +1347,21 @@ document.addEventListener('DOMContentLoaded', () => {
   renderTeamCarousel();
   setupSearchControls();
   setupModalListeners();
+  updateCurrencyButtonUI();
 
   // Route hash & window resize check
   window.addEventListener('hashchange', handleHashRouting);
   window.addEventListener('resize', () => renderTeamCarousel());
   handleHashRouting();
+});
+
+// Close currency dropdown on document click
+document.addEventListener('click', (e) => {
+  const selector = document.getElementById('currencySelector');
+  if (selector && !selector.contains(e.target)) {
+    const dd = document.getElementById('currencyDropdown');
+    if (dd) dd.classList.remove('active');
+  }
 });
 
 // 4. Navigation & Route Handler (Streamlined SPA Router)
@@ -1454,6 +1464,88 @@ function renderMegaMenu() {
   grids.forEach(g => g.innerHTML = html);
 }
 
+// ── CURRENCY SELECTION & CONVERSION SYSTEM ──────────────────────────────────
+const CURRENCIES = {
+  NGN: { code: 'NGN', symbol: '₦', flag: '🇳🇬', name: 'Nigerian Naira' },
+  USD: { code: 'USD', symbol: '$', flag: '🇺🇸', name: 'US Dollar' },
+  GBP: { code: 'GBP', symbol: '£', flag: '🇬🇧', name: 'British Pound' }
+};
+
+function getActiveCurrency() {
+  return localStorage.getItem('ruach_currency') || 'NGN';
+}
+
+function setActiveCurrency(code) {
+  if (!CURRENCIES[code]) return;
+  localStorage.setItem('ruach_currency', code);
+  updateCurrencyButtonUI();
+
+  const dd = document.getElementById('currencyDropdown');
+  if (dd) dd.classList.remove('active');
+
+  renderFeaturedCourses();
+  renderScheduleCourses();
+  if (typeof renderTrainingsPageCourses === 'function') renderTrainingsPageCourses();
+
+  showToast(`Display currency changed to ${CURRENCIES[code].name} (${CURRENCIES[code].symbol})`);
+}
+
+function toggleCurrencyDropdown(e) {
+  if (e) e.stopPropagation();
+  const dd = document.getElementById('currencyDropdown');
+  if (dd) dd.classList.toggle('active');
+}
+
+function updateCurrencyButtonUI() {
+  const code = getActiveCurrency();
+  const curr = CURRENCIES[code] || CURRENCIES.NGN;
+
+  const btnFlag = document.getElementById('currBtnFlag');
+  const btnCode = document.getElementById('currBtnCode');
+  if (btnFlag) btnFlag.textContent = curr.flag;
+  if (btnCode) btnCode.textContent = curr.code;
+
+  ['NGN', 'USD', 'GBP'].forEach(c => {
+    const opt = document.getElementById(`currOpt-${c}`);
+    if (opt) {
+      if (c === code) opt.classList.add('active');
+      else opt.classList.remove('active');
+    }
+  });
+}
+
+function formatFeeCompact(feeNGN, feeUSDOverride = null) {
+  const code = getActiveCurrency();
+  const curr = CURRENCIES[code] || CURRENCIES.NGN;
+
+  if (code === 'USD') {
+    const val = feeUSDOverride || Math.round(feeNGN / 1430);
+    return `${curr.symbol}${val.toLocaleString()}`;
+  }
+  if (code === 'GBP') {
+    const val = Math.round(feeNGN / 1850);
+    return `${curr.symbol}${val.toLocaleString()}`;
+  }
+  // Default NGN
+  if (feeNGN >= 1000000) {
+    return `${curr.symbol}${(feeNGN / 1000000).toFixed(1)}M`;
+  }
+  return `${curr.symbol}${feeNGN.toLocaleString()}`;
+}
+
+function getSecondaryFeeText(feeNGN, feeUSDOverride = null) {
+  const code = getActiveCurrency();
+  if (code === 'USD') {
+    return `₦${(feeNGN / 1000000).toFixed(1)}M NGN Equiv.`;
+  }
+  if (code === 'GBP') {
+    const usdVal = feeUSDOverride || Math.round(feeNGN / 1430);
+    return `$${usdVal.toLocaleString()} USD Equiv.`;
+  }
+  const usdVal = feeUSDOverride || Math.round(feeNGN / 1430);
+  return `$${usdVal.toLocaleString()} USD`;
+}
+
 function getCoursesCatalog() {
   return (LIVE_COURSES && LIVE_COURSES.length > 0) ? LIVE_COURSES : COURSES_DATA;
 }
@@ -1534,8 +1626,8 @@ function createCourseCardHTML(course) {
       </div>
       <div class="card-footer">
         <div class="price-tag">
-          <span class="price-amount">₦${(course.feeNGN / 1000000).toFixed(1)}M</span>
-          <span class="price-label">$${course.feeUSD.toLocaleString()} USD</span>
+          <span class="price-amount">${formatFeeCompact(course.feeNGN, course.feeUSD)}</span>
+          <span class="price-label">${getSecondaryFeeText(course.feeNGN, course.feeUSD)}</span>
         </div>
         <div class="card-actions" style="display: flex; gap: 0.4rem; flex-wrap: wrap;">
           <button class="btn btn-lime btn-sm" onclick="openProspectusModal('${course.id}')" title="Download Prospectus PDF"><i class="fa-solid fa-file-pdf"></i> Prospectus</button>
@@ -1558,8 +1650,8 @@ function createScheduleCardHTML(course) {
           <p style="font-size: 0.82rem; color: var(--text-muted); font-weight: 600;">Code: ${course.code} &bull; Duration: ${course.duration}</p>
         </div>
         <div style="text-align: right;">
-          <div style="font-size: 1.35rem; font-weight: 800; color: var(--primary-navy);">₦${(course.feeNGN / 1000000).toFixed(1)}M</div>
-          <div style="font-size: 0.75rem; color: var(--text-muted); font-weight: 600;">($${course.feeUSD.toLocaleString()} USD / Delegate)</div>
+          <div style="font-size: 1.35rem; font-weight: 800; color: var(--primary-navy);">${formatFeeCompact(course.feeNGN, course.feeUSD)}</div>
+          <div style="font-size: 0.75rem; color: var(--text-muted); font-weight: 600;">(${getSecondaryFeeText(course.feeNGN, course.feeUSD)})</div>
         </div>
       </div>
 
@@ -1722,8 +1814,8 @@ function openCourseModal(courseId) {
       <div>
         <div style="background: var(--bg-slate); border: 1px solid var(--border-light); border-radius: 10px; padding: 1.25rem; margin-bottom: 1.5rem;">
           <h4 style="font-size: 0.95rem; color: var(--primary-navy); margin-bottom: 0.75rem;">Tuition & Fees</h4>
-          <div style="font-size: 1.75rem; font-weight: 800; color: var(--primary-navy);">₦${(course.feeNGN / 1000000).toFixed(1)}M</div>
-          <div style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 1rem;">($${course.feeUSD.toLocaleString()} USD per delegate)</div>
+          <div style="font-size: 1.75rem; font-weight: 800; color: var(--primary-navy);">${formatFeeCompact(course.feeNGN, course.feeUSD)}</div>
+          <div style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 1rem;">(${getSecondaryFeeText(course.feeNGN, course.feeUSD)} per delegate)</div>
           <p style="font-size: 0.75rem; color: #475569; line-height: 1.4;">Fee includes course masterpack, executive buffet lunches, training kit, certificate of completion, and 12-month post-course alumni access.</p>
         </div>
 
