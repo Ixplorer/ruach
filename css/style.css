@@ -2225,57 +2225,59 @@ button {
 
 /* Explore 10 Training Subject Areas Section */
 .categories-grid {
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  gap: 1.25rem;
+  display: grid !important;
+  grid-template-columns: repeat(5, 1fr) !important;
+  gap: 1.25rem !important;
+  width: 100% !important;
 }
 
 .category-card {
   background: #FFFFFF;
   border: 1.5px solid var(--border-light);
   border-radius: 14px;
-  padding: 1.75rem 1rem;
+  padding: 1.75rem 0.85rem;
   text-align: center;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
-  min-height: 220px;
+  min-height: 210px;
   transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
   cursor: pointer;
   box-shadow: 0 2px 8px rgba(15, 23, 42, 0.03);
+  box-sizing: border-box;
 }
 
 /* Full Colour Invert Effect on Hover */
 .category-card:hover {
-  background: var(--primary-navy);
-  border-color: var(--accent-lime);
-  box-shadow: 0 16px 32px -8px rgba(15, 23, 42, 0.3);
-  transform: translateY(-6px);
+  background: var(--primary-navy) !important;
+  border-color: var(--accent-lime) !important;
+  box-shadow: 0 16px 32px -8px rgba(15, 23, 42, 0.3) !important;
+  transform: translateY(-6px) !important;
 }
 
 .category-icon-wrapper {
-  width: 58px;
-  height: 58px;
+  width: 54px;
+  height: 54px;
   border-radius: 14px;
   background: #DCFCE7;
   color: #166534;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1.45rem;
-  margin-bottom: 1rem;
+  font-size: 1.35rem;
+  margin-bottom: 0.85rem;
   transition: all 0.3s ease;
 }
 
 .category-card:hover .category-icon-wrapper {
-  background: var(--accent-lime);
-  color: var(--primary-navy);
-  transform: scale(1.08);
+  background: var(--accent-lime) !important;
+  color: var(--primary-navy) !important;
+  transform: scale(1.08) !important;
 }
 
 .category-card-title {
-  font-size: 1.02rem;
+  font-size: 0.95rem;
   font-weight: 700;
   color: var(--primary-navy);
   line-height: 1.35;
@@ -2284,54 +2286,43 @@ button {
 }
 
 .category-card:hover .category-card-title {
-  color: #FFFFFF;
+  color: #FFFFFF !important;
 }
 
 .category-card-count {
   background: #F1F5F9;
   color: #475569;
-  font-size: 0.78rem;
+  font-size: 0.75rem;
   font-weight: 700;
-  padding: 0.3rem 0.85rem;
+  padding: 0.25rem 0.75rem;
   border-radius: 50px;
   display: inline-block;
   transition: all 0.3s ease;
 }
 
 .category-card:hover .category-card-count {
-  background: rgba(255, 255, 255, 0.18);
-  color: var(--accent-lime);
+  background: rgba(255, 255, 255, 0.18) !important;
+  color: var(--accent-lime) !important;
 }
 
-/* Responsive 5 cards layout */
-@media (max-width: 1200px) {
+/* Responsive 5 cards layout down to 768px */
+@media (max-width: 1024px) {
   .categories-grid {
-    grid-template-columns: repeat(5, 1fr);
-    gap: 0.85rem;
+    grid-template-columns: repeat(5, 1fr) !important;
+    gap: 0.75rem !important;
   }
   .category-card {
-    padding: 1.5rem 0.6rem;
+    padding: 1.25rem 0.5rem;
+    min-height: 195px;
   }
   .category-card-title {
-    font-size: 0.95rem;
+    font-size: 0.88rem;
   }
 }
 
-@media (max-width: 991px) {
+@media (max-width: 767px) {
   .categories-grid {
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1rem;
-  }
-}
-
-@media (max-width: 640px) {
-  .categories-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-@media (max-width: 480px) {
-  .categories-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 1rem !important;
   }
 }
