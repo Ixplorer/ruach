@@ -2225,9 +2225,10 @@ button {
 
 /* Explore 10 Training Subject Areas Section */
 .categories-grid {
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  gap: 1.25rem;
+  display: grid !important;
+  grid-template-columns: repeat(5, 1fr) !important;
+  gap: 1.25rem !important;
+  width: 100% !important;
 }
 
 .category-card {

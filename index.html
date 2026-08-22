@@ -286,8 +286,57 @@
           </p>
         </div>
 
-        <div id="categoriesGrid" class="categories-grid">
-          <!-- Dynamically populated by renderCategoriesGrid() in app.js -->
+        <div id="categoriesGrid" class="categories-grid" style="display: grid; grid-template-columns: repeat(5, 1fr); gap: 1.25rem; width: 100%;">
+          <div class="category-card" onclick="filterByCategory('tech')">
+            <div class="category-icon-wrapper"><i class="fa-solid fa-laptop-code"></i></div>
+            <h3 class="category-card-title">AI &amp; Digital Transformation</h3>
+            <span class="category-card-count">12 Courses</span>
+          </div>
+          <div class="category-card" onclick="filterByCategory('finance')">
+            <div class="category-icon-wrapper"><i class="fa-solid fa-chart-line"></i></div>
+            <h3 class="category-card-title">Finance &amp; Risk Management</h3>
+            <span class="category-card-count">15 Courses</span>
+          </div>
+          <div class="category-card" onclick="filterByCategory('leadership')">
+            <div class="category-icon-wrapper"><i class="fa-solid fa-user-tie"></i></div>
+            <h3 class="category-card-title">Leadership &amp; Exec Strategy</h3>
+            <span class="category-card-count">18 Courses</span>
+          </div>
+          <div class="category-card" onclick="filterByCategory('project')">
+            <div class="category-icon-wrapper"><i class="fa-solid fa-diagram-project"></i></div>
+            <h3 class="category-card-title">Project &amp; Procurement</h3>
+            <span class="category-card-count">14 Courses</span>
+          </div>
+          <div class="category-card" onclick="filterByCategory('hr')">
+            <div class="category-icon-wrapper"><i class="fa-solid fa-users-gear"></i></div>
+            <h3 class="category-card-title">Human Resource Management</h3>
+            <span class="category-card-count">10 Courses</span>
+          </div>
+          <div class="category-card" onclick="filterByCategory('operations')">
+            <div class="category-icon-wrapper"><i class="fa-solid fa-gears"></i></div>
+            <h3 class="category-card-title">Operations &amp; Quality Control</h3>
+            <span class="category-card-count">9 Courses</span>
+          </div>
+          <div class="category-card" onclick="filterByCategory('energy')">
+            <div class="category-icon-wrapper"><i class="fa-solid fa-oil-well"></i></div>
+            <h3 class="category-card-title">Oil &amp; Gas Fiscal Economics</h3>
+            <span class="category-card-count">11 Courses</span>
+          </div>
+          <div class="category-card" onclick="filterByCategory('hse')">
+            <div class="category-icon-wrapper"><i class="fa-solid fa-shield-halved"></i></div>
+            <h3 class="category-card-title">HSE &amp; Emergency Safety</h3>
+            <span class="category-card-count">8 Courses</span>
+          </div>
+          <div class="category-card" onclick="filterByCategory('governance')">
+            <div class="category-icon-wrapper"><i class="fa-solid fa-building-columns"></i></div>
+            <h3 class="category-card-title">Public Sector Governance</h3>
+            <span class="category-card-count">10 Courses</span>
+          </div>
+          <div class="category-card" onclick="filterByCategory('strategy')">
+            <div class="category-icon-wrapper"><i class="fa-solid fa-bullhorn"></i></div>
+            <h3 class="category-card-title">Strategy &amp; Communications</h3>
+            <span class="category-card-count">9 Courses</span>
+          </div>
         </div>
       </div>
     </section>
