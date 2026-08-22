@@ -2326,3 +2326,83 @@ button {
     gap: 1rem !important;
   }
 }
+
+/* Subject Area Cards - Hardcoded Grid */
+.subj-card {
+  background: #FFFFFF;
+  border: 1.5px solid #E2E8F0;
+  border-radius: 14px;
+  padding: 1.75rem 0.85rem;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 210px;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 2px 8px rgba(15, 23, 42, 0.03);
+}
+
+.subj-card:hover {
+  background: #0F172A;
+  border-color: #84CC16;
+  box-shadow: 0 16px 32px -8px rgba(15, 23, 42, 0.3);
+  transform: translateY(-6px);
+}
+
+.subj-icon {
+  width: 56px;
+  height: 56px;
+  border-radius: 14px;
+  background: #DCFCE7;
+  color: #166534;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.4rem;
+  margin-bottom: 0.85rem;
+  transition: all 0.3s ease;
+  flex-shrink: 0;
+}
+
+.subj-card:hover .subj-icon {
+  background: #84CC16;
+  color: #0F172A;
+  transform: scale(1.08);
+}
+
+.subj-title {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #0F172A;
+  line-height: 1.35;
+  margin-bottom: 0.75rem;
+  transition: color 0.3s ease;
+}
+
+.subj-card:hover .subj-title {
+  color: #FFFFFF;
+}
+
+.subj-count {
+  background: #F1F5F9;
+  color: #475569;
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 0.25rem 0.75rem;
+  border-radius: 50px;
+  display: inline-block;
+  transition: all 0.3s ease;
+}
+
+.subj-card:hover .subj-count {
+  background: rgba(255, 255, 255, 0.18);
+  color: #84CC16;
+}
+
+@media (max-width: 767px) {
+  #subject-areas div[style*="grid-template-columns: repeat(5"] {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+}
