@@ -1212,6 +1212,112 @@ const PARTNERS_DATA = [
   { name: 'Celebrations',            type: 'Corporate Partner',               logo: 'partners/Celebrations.jfif', color: '#C026D3' }
 ];
 
+// ── STAFF AUTHENTICATION SYSTEM ────────────────────────────────────────────
+
+// Pre-defined staff accounts (username → SHA-256-style simple hash stored in LS)
+// Passwords are compared using a simple btoa encoding — adequate for internal portal.
+const STAFF_ACCOUNTS = [
+  { username: 'admin',    password: 'ruach@2026',    role: 'admin',   displayName: 'Admin Portal',       avatar: 'fa-shield-halved' },
+  { username: 'content',  password: 'training@2026', role: 'content', displayName: 'Content Manager',    avatar: 'fa-pen-ruler' },
+  { username: 'manager',  password: 'ops@2026',      role: 'admin',   displayName: 'Operations Manager', avatar: 'fa-user-tie' }
+];
+
+// Session lasts 8 hours
+const AUTH_SESSION_DURATION_MS = 8 * 60 * 60 * 1000;
+
+function getAuthState() {
+  try {
+    const raw = localStorage.getItem('ruach_staff_session');
+    if (!raw) return null;
+    const session = JSON.parse(raw);
+    if (Date.now() - session.loginTime > AUTH_SESSION_DURATION_MS) {
+      localStorage.removeItem('ruach_staff_session');
+      return null;
+    }
+    return session;
+  } catch { return null; }
+}
+
+function staffLogin(username, password) {
+  const account = STAFF_ACCOUNTS.find(
+    a => a.username === username.trim().toLowerCase() && a.password === password
+  );
+  if (!account) return { success: false, message: 'Invalid username or password.' };
+  const session = {
+    username: account.username,
+    role: account.role,
+    displayName: account.displayName,
+    avatar: account.avatar,
+    loginTime: Date.now()
+  };
+  localStorage.setItem('ruach_staff_session', JSON.stringify(session));
+  return { success: true, session };
+}
+
+function staffLogout() {
+  localStorage.removeItem('ruach_staff_session');
+  window.location.hash = '#home';
+}
+
+// ── COURSE DATA OVERRIDE (localStorage CMS persistence) ─────────────────────
+// Live editable course catalog — loaded from localStorage if staff has made changes
+let LIVE_COURSES = [];
+
+function loadCoursesOverride() {
+  const override = localStorage.getItem('ruach_courses_override');
+  if (override) {
+    try { LIVE_COURSES = JSON.parse(override); return; } catch {}
+  }
+  // Deep clone so COURSES_DATA stays pristine
+  LIVE_COURSES = JSON.parse(JSON.stringify(COURSES_DATA));
+}
+
+function saveCoursesOverride() {
+  localStorage.setItem('ruach_courses_override', JSON.stringify(LIVE_COURSES));
+}
+
+function cmsAddCourse(course) {
+  LIVE_COURSES.push(course);
+  saveCoursesOverride();
+}
+
+function cmsUpdateCourse(id, updates) {
+  const idx = LIVE_COURSES.findIndex(c => c.id === id);
+  if (idx === -1) return;
+  LIVE_COURSES[idx] = { ...LIVE_COURSES[idx], ...updates };
+  saveCoursesOverride();
+}
+
+function cmsDeleteCourse(id) {
+  LIVE_COURSES = LIVE_COURSES.filter(c => c.id !== id);
+  saveCoursesOverride();
+}
+
+function cmsAddSession(courseId, session) {
+  const course = LIVE_COURSES.find(c => c.id === courseId);
+  if (!course) return;
+  if (!course.sessions) course.sessions = [];
+  session.id = `${courseId}-s${Date.now()}`;
+  course.sessions.push(session);
+  saveCoursesOverride();
+}
+
+function cmsUpdateSession(courseId, sessionId, updates) {
+  const course = LIVE_COURSES.find(c => c.id === courseId);
+  if (!course) return;
+  const idx = course.sessions.findIndex(s => s.id === sessionId);
+  if (idx === -1) return;
+  course.sessions[idx] = { ...course.sessions[idx], ...updates };
+  saveCoursesOverride();
+}
+
+function cmsDeleteSession(courseId, sessionId) {
+  const course = LIVE_COURSES.find(c => c.id === courseId);
+  if (!course) return;
+  course.sessions = course.sessions.filter(s => s.id !== sessionId);
+  saveCoursesOverride();
+}
+
 // 2. Application Global State
 const APP_STATE = {
   currentCategoryFilter: 'all',
@@ -1226,7 +1332,9 @@ const APP_STATE = {
 };
 
 // 3. Document Initializer
+
 document.addEventListener('DOMContentLoaded', () => {
+  loadCoursesOverride();   // Load staff-edited course catalog if it exists
   initNavigation();
   renderMegaMenu();
   renderFeaturedCourses();
@@ -1239,7 +1347,6 @@ document.addEventListener('DOMContentLoaded', () => {
   renderTeamCarousel();
   setupSearchControls();
   setupModalListeners();
-  renderAdminDashboard();
 
   // Route hash & window resize check
   window.addEventListener('hashchange', handleHashRouting);
@@ -1277,6 +1384,12 @@ function handleHashRouting() {
     activeView = 'leadership';
   } else if (cleanHash === 'why-us') {
     activeView = 'about';
+  }
+
+  // ── AUTH GUARD: admin route requires login ─────────────────────
+  if (activeView === 'admin') {
+    const session = getAuthState();
+    renderAdminView(session); // renders login gate or dashboard based on session
   }
 
   views.forEach(view => {
@@ -1341,12 +1454,16 @@ function renderMegaMenu() {
   grids.forEach(g => g.innerHTML = html);
 }
 
+function getCoursesCatalog() {
+  return (LIVE_COURSES && LIVE_COURSES.length > 0) ? LIVE_COURSES : COURSES_DATA;
+}
+
 // 6. Featured Courses Renderer
 function renderFeaturedCourses() {
   const container = document.getElementById('featuredCoursesGrid');
   if (!container) return;
 
-  const flagships = COURSES_DATA.filter(c => c.flagship);
+  const flagships = getCoursesCatalog().filter(c => c.flagship);
   container.innerHTML = flagships.map(course => createCourseCardHTML(course)).join('');
 }
 
@@ -1355,7 +1472,7 @@ function renderScheduleCourses() {
   const container = document.getElementById('scheduleCoursesList');
   if (!container) return;
 
-  let filtered = COURSES_DATA.filter(course => {
+  let filtered = getCoursesCatalog().filter(course => {
     // Category filter
     if (APP_STATE.currentCategoryFilter !== 'all' && course.categoryCode !== APP_STATE.currentCategoryFilter) {
       return false;
@@ -2080,102 +2197,549 @@ function exportMailingListCSV() {
   showToast('Mailing list leads exported successfully to CSV!');
 }
 
-// 11. Staff Admin Dashboard Renderer
-function renderAdminDashboard() {
-  const container = document.getElementById('adminDashboardContent');
-  if (!container) return;
+// 11. Staff Portal — Auth Gate + Tabbed Dashboard
+function renderAdminView(session) {
+  const wrapper = document.getElementById('adminDashboardContent');
+  const header = document.getElementById('adminPortalHeader');
+  if (!wrapper) return;
 
+  if (!session) {
+    // Show login gate
+    if (header) header.style.display = 'none';
+    renderLoginGate(wrapper);
+  } else {
+    // Show authenticated dashboard
+    if (header) {
+      header.style.display = 'flex';
+      const userBadge = document.getElementById('adminUserBadge');
+      if (userBadge) userBadge.innerHTML = `
+        <i class="fa-solid ${session.avatar}" style="margin-right:0.4rem;"></i>
+        ${session.displayName}
+        <span style="background:rgba(132,204,22,0.15);color:#BEF264;font-size:0.7rem;padding:2px 8px;border-radius:999px;margin-left:0.5rem;text-transform:uppercase;">${session.role}</span>
+      `;
+    }
+    renderDashboardTabs(wrapper, session);
+  }
+}
+
+function renderLoginGate(container) {
+  container.innerHTML = `
+    <div class="admin-login-gate">
+      <div class="admin-login-card">
+        <div class="admin-login-logo">
+          <i class="fa-solid fa-shield-halved" style="font-size:2.5rem;color:#84CC16;"></i>
+          <h2 style="color:#F8FAFC;font-size:1.4rem;margin:0.75rem 0 0.25rem;">Staff Portal Login</h2>
+          <p style="color:#94A3B8;font-size:0.85rem;margin:0;">Ruach Business Consortia – Operations Dashboard</p>
+        </div>
+        <div id="loginError" class="admin-login-error" style="display:none;"></div>
+        <div class="admin-login-form">
+          <div class="admin-form-group">
+            <label class="admin-form-label"><i class="fa-solid fa-user" style="margin-right:0.4rem;opacity:0.6;"></i>Username</label>
+            <input type="text" id="loginUsername" class="admin-form-input" placeholder="Enter your username" autocomplete="username">
+          </div>
+          <div class="admin-form-group">
+            <label class="admin-form-label"><i class="fa-solid fa-lock" style="margin-right:0.4rem;opacity:0.6;"></i>Password</label>
+            <div style="position:relative;">
+              <input type="password" id="loginPassword" class="admin-form-input" placeholder="Enter your password" autocomplete="current-password"
+                onkeydown="if(event.key==='Enter')doStaffLogin()">
+              <button onclick="togglePwdVisibility()" class="admin-pwd-toggle" title="Show/hide password">
+                <i class="fa-solid fa-eye" id="pwdEyeIcon"></i>
+              </button>
+            </div>
+          </div>
+          <button class="btn btn-lime" style="width:100%;padding:0.85rem;font-size:1rem;border-radius:10px;margin-top:0.5rem;" onclick="doStaffLogin()">
+            <i class="fa-solid fa-right-to-bracket" style="margin-right:0.5rem;"></i>Sign In to Portal
+          </button>
+        </div>
+        <p style="color:#475569;font-size:0.78rem;text-align:center;margin-top:1.25rem;">
+          <i class="fa-solid fa-circle-info" style="margin-right:0.3rem;"></i>
+          Authorised Ruach staff only. Sessions expire after 8 hours.
+        </p>
+      </div>
+    </div>
+  `;
+}
+
+function doStaffLogin() {
+  const username = (document.getElementById('loginUsername')?.value || '').trim();
+  const password = document.getElementById('loginPassword')?.value || '';
+  const errBox = document.getElementById('loginError');
+
+  if (!username || !password) {
+    if (errBox) { errBox.textContent = 'Please enter both username and password.'; errBox.style.display = 'block'; }
+    return;
+  }
+
+  const result = staffLogin(username, password);
+  if (!result.success) {
+    if (errBox) { errBox.textContent = result.message; errBox.style.display = 'block'; }
+    const pwdField = document.getElementById('loginPassword');
+    if (pwdField) { pwdField.value = ''; pwdField.focus(); }
+    return;
+  }
+
+  // Success — re-render with session
+  const header = document.getElementById('adminPortalHeader');
+  const wrapper = document.getElementById('adminDashboardContent');
+  renderAdminView(result.session);
+  if (header) header.style.display = 'flex';
+  showToast(`Welcome back, ${result.session.displayName}!`);
+}
+
+function togglePwdVisibility() {
+  const field = document.getElementById('loginPassword');
+  const icon = document.getElementById('pwdEyeIcon');
+  if (!field) return;
+  if (field.type === 'password') { field.type = 'text'; if (icon) icon.className = 'fa-solid fa-eye-slash'; }
+  else { field.type = 'password'; if (icon) icon.className = 'fa-solid fa-eye'; }
+}
+
+// ── TABBED DASHBOARD ────────────────────────────────────────────────────────
+let adminActiveTab = 'overview';
+
+function renderDashboardTabs(container, session) {
+  const isAdmin = session.role === 'admin';
   const invoices = APP_STATE.invoices;
   const enrolments = APP_STATE.enrolments;
   const leads = APP_STATE.mailingList;
 
   container.innerHTML = `
-    <div class="admin-metrics-grid" style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; margin-bottom: 2rem;">
-      <div class="metric-card">
-        <div class="metric-title">Total Invoice Requests</div>
-        <div class="metric-value">${invoices.length}</div>
-      </div>
-      <div class="metric-card">
-        <div class="metric-title">Mailing List Leads &amp; Prospectus</div>
-        <div class="metric-value">${leads.length}</div>
-      </div>
-      <div class="metric-card">
-        <div class="metric-title">Self-Funded Enrolments</div>
-        <div class="metric-value">${enrolments.length}</div>
-      </div>
-      <div class="metric-card">
-        <div class="metric-title">Active Prospectus Catalog</div>
-        <div class="metric-value">${COURSES_DATA.length} Courses</div>
-      </div>
+    <div class="admin-tabs">
+      ${isAdmin ? `<button class="admin-tab-btn ${adminActiveTab==='overview'?'active':''}" onclick="switchAdminTab('overview')">
+        <i class="fa-solid fa-gauge-high"></i> Overview
+      </button>` : ''}
+      <button class="admin-tab-btn ${adminActiveTab==='courses'?'active':''}" onclick="switchAdminTab('courses')">
+        <i class="fa-solid fa-book-open"></i> Course &amp; Schedule Manager
+      </button>
+      ${isAdmin ? `<button class="admin-tab-btn ${adminActiveTab==='enrolments'?'active':''}" onclick="switchAdminTab('enrolments')">
+        <i class="fa-solid fa-users"></i> Enrolments &amp; Leads
+      </button>` : ''}
     </div>
 
-    <!-- Section 1: Mailing List & Prospectus Download Leads -->
-    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; flex-wrap: wrap; gap: 0.5rem;">
-      <h3 style="color: var(--bg-white); font-size: 1.2rem; margin: 0;">Mailing List Subscribers &amp; Prospectus Downloads (${leads.length})</h3>
-      <button class="btn btn-lime btn-sm" onclick="exportMailingListCSV()"><i class="fa-solid fa-file-csv" style="margin-right: 0.3rem;"></i> Export Mailing List (CSV)</button>
+    <!-- TAB: Overview -->
+    ${isAdmin ? `<div id="adminTab-overview" class="admin-tab-panel ${adminActiveTab==='overview'?'active':''}">
+      <div class="admin-metrics-grid">
+        <div class="metric-card"><div class="metric-title">Invoice Requests</div><div class="metric-value">${invoices.length}</div></div>
+        <div class="metric-card"><div class="metric-title">Mailing List Leads</div><div class="metric-value">${leads.length}</div></div>
+        <div class="metric-card"><div class="metric-title">Self-Funded Enrolments</div><div class="metric-value">${enrolments.length}</div></div>
+        <div class="metric-card"><div class="metric-title">Live Course Catalog</div><div class="metric-value">${LIVE_COURSES.length} Courses</div></div>
+      </div>
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem;flex-wrap:wrap;gap:0.5rem;">
+        <h3 style="color:var(--bg-white);font-size:1.1rem;margin:0;">Invoice Queue (${invoices.length})</h3>
+      </div>
+      ${invoices.length===0 ? '<p style="color:#94A3B8;font-size:0.9rem;margin-bottom:2rem;">No invoice requests yet.</p>' : `
+      <table class="admin-table" style="margin-bottom:2.5rem;">
+        <thead><tr><th>Invoice No</th><th>Organization</th><th>Staff Nominee</th><th>Course</th><th>Amount (NGN)</th><th>Status</th><th>Action</th></tr></thead>
+        <tbody>${invoices.map(inv => `<tr>
+          <td><strong>${inv.invoiceNo}</strong></td>
+          <td>${inv.orgName}</td><td>${inv.staffName}</td><td>${inv.courseTitle}</td>
+          <td>₦${inv.totalFeeNGN.toLocaleString()}</td>
+          <td><span class="badge-ribbon badge-invoice">${inv.status}</span></td>
+          <td><button style="color:#F87171;font-weight:700;" onclick='showInvoicePreviewModal(${JSON.stringify(inv)})'>View</button></td>
+        </tr>`).join('')}</tbody>
+      </table>`}
+    </div>` : ''}
+
+    <!-- TAB: Course & Schedule Manager -->
+    <div id="adminTab-courses" class="admin-tab-panel ${adminActiveTab==='courses'?'active':''}">
+      ${renderCourseManagerPanel()}
     </div>
 
-    ${leads.length === 0 ? '<p style="color: #94A3B8; font-size: 0.9rem; margin-bottom: 2rem;">No prospectus downloads / subscriber leads captured yet.</p>' : `
-      <table class="admin-table" style="margin-bottom: 2.5rem;">
-        <thead>
-          <tr>
-            <th>Lead ID</th>
-            <th>Full Name</th>
-            <th>Email Address</th>
-            <th>Phone Number</th>
-            <th>Organization</th>
-            <th>Course Prospectus</th>
-            <th>Date &amp; Time</th>
-          </tr>
-        </thead>
-        <tbody>
-          ${leads.map(l => `
-            <tr>
-              <td><strong>${l.id}</strong></td>
-              <td>${l.name}</td>
-              <td><a href="mailto:${l.email}" style="color: #60A5FA;">${l.email}</a></td>
-              <td>${l.phone}</td>
-              <td>${l.org || 'N/A'}</td>
-              <td style="max-width: 250px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">${l.courseTitle}</td>
-              <td style="font-size: 0.8rem; color: #94A3B8;">${l.date}</td>
-            </tr>
-          `).join('')}
-        </tbody>
-      </table>
-    `}
-
-    <!-- Section 2: Employer Invoices Queue -->
-    <h3 style="color: var(--bg-white); font-size: 1.2rem; margin-bottom: 1rem;">Employer Invoice Intake Queue (${invoices.length})</h3>
-    ${invoices.length === 0 ? '<p style="color: #94A3B8; font-size: 0.9rem;">No employer invoice requests logged yet.</p>' : `
+    <!-- TAB: Enrolments & Leads -->
+    ${isAdmin ? `<div id="adminTab-enrolments" class="admin-tab-panel ${adminActiveTab==='enrolments'?'active':''}">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem;flex-wrap:wrap;gap:0.5rem;">
+        <h3 style="color:var(--bg-white);font-size:1.1rem;margin:0;">Mailing List &amp; Prospectus Leads (${leads.length})</h3>
+        <button class="btn btn-lime btn-sm" onclick="exportMailingListCSV()"><i class="fa-solid fa-file-csv" style="margin-right:0.3rem;"></i>Export CSV</button>
+      </div>
+      ${leads.length===0 ? '<p style="color:#94A3B8;font-size:0.9rem;margin-bottom:2rem;">No subscriber leads yet.</p>' : `
+      <table class="admin-table" style="margin-bottom:2.5rem;">
+        <thead><tr><th>Lead ID</th><th>Name</th><th>Email</th><th>Phone</th><th>Organization</th><th>Course</th><th>Date</th></tr></thead>
+        <tbody>${leads.map(l => `<tr>
+          <td><strong>${l.id}</strong></td><td>${l.name}</td>
+          <td><a href="mailto:${l.email}" style="color:#60A5FA;">${l.email}</a></td>
+          <td>${l.phone}</td><td>${l.org||'N/A'}</td>
+          <td style="max-width:220px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">${l.courseTitle}</td>
+          <td style="font-size:0.8rem;color:#94A3B8;">${l.date}</td>
+        </tr>`).join('')}</tbody>
+      </table>`}
+      <h3 style="color:var(--bg-white);font-size:1.1rem;margin-bottom:1rem;">Self-Funded Enrolments (${enrolments.length})</h3>
+      ${enrolments.length===0 ? '<p style="color:#94A3B8;font-size:0.9rem;">No self-funded enrolments yet.</p>' : `
       <table class="admin-table">
+        <thead><tr><th>Ref</th><th>Name</th><th>Email</th><th>Course</th><th>City</th><th>Date</th></tr></thead>
+        <tbody>${enrolments.map(e => `<tr>
+          <td><strong>${e.id}</strong></td><td>${e.name}</td>
+          <td><a href="mailto:${e.email}" style="color:#60A5FA;">${e.email}</a></td>
+          <td>${e.courseTitle}</td><td>${e.city||'N/A'}</td>
+          <td style="font-size:0.8rem;color:#94A3B8;">${e.date}</td>
+        </tr>`).join('')}</tbody>
+      </table>`}
+    </div>` : ''}
+  `;
+
+  // Default tab for content role
+  if (!isAdmin) adminActiveTab = 'courses';
+}
+
+function switchAdminTab(tab) {
+  adminActiveTab = tab;
+  document.querySelectorAll('.admin-tab-panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.admin-tab-btn').forEach(b => b.classList.remove('active'));
+  const panel = document.getElementById(`adminTab-${tab}`);
+  if (panel) panel.classList.add('active');
+  const btns = document.querySelectorAll('.admin-tab-btn');
+  btns.forEach(b => { if (b.textContent.toLowerCase().includes(tab==='overview'?'overview':tab==='courses'?'course':'enrol')) b.classList.add('active'); });
+}
+
+// ── COURSE MANAGER PANEL ─────────────────────────────────────────────────────
+function renderCourseManagerPanel() {
+  const categories = ['AI, Digital Transformation & IT','Finance, Budgeting & Risk Management','Leadership & Executive Development','Project, Procurement & Contract Management','Human Resource Management & L&D','Public Sector Administration & Governance','Strategic Planning & Corporate Governance','Health, Safety & Environment (HSE)','Oil & Gas Industry Management','Monitoring, Evaluation & Learning (MEL)'];
+
+  return `
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1.25rem;flex-wrap:wrap;gap:0.75rem;">
+      <div>
+        <h3 style="color:#F8FAFC;font-size:1.15rem;margin:0 0 0.2rem;">Course & Schedule Manager</h3>
+        <p style="color:#94A3B8;font-size:0.82rem;margin:0;">${LIVE_COURSES.length} courses in catalog &bull; Changes save automatically</p>
+      </div>
+      <div style="display:flex;gap:0.5rem;flex-wrap:wrap;">
+        <button class="btn btn-lime btn-sm" onclick="openAddCourseModal()"><i class="fa-solid fa-plus" style="margin-right:0.3rem;"></i>Add Course</button>
+        <button class="btn btn-sm" style="background:rgba(239,68,68,0.15);color:#F87171;border:1px solid rgba(239,68,68,0.3);" onclick="if(confirm('Reset all course edits back to original catalog?')){localStorage.removeItem('ruach_courses_override');loadCoursesOverride();refreshCourseManager();}">
+          <i class="fa-solid fa-rotate-left" style="margin-right:0.3rem;"></i>Reset to Default
+        </button>
+      </div>
+    </div>
+
+    <div style="overflow-x:auto;">
+      <table class="admin-table cms-table">
         <thead>
           <tr>
-            <th>Invoice No</th>
-            <th>Organization</th>
-            <th>Staff Nominee</th>
+            <th style="width:80px;">Code</th>
             <th>Course Title</th>
-            <th>Amount (NGN)</th>
-            <th>Status</th>
-            <th>Action</th>
+            <th style="width:140px;">Category</th>
+            <th style="width:90px;">Duration</th>
+            <th style="width:100px;">Fee (NGN)</th>
+            <th style="width:80px;">Fee (USD)</th>
+            <th style="width:70px;">Sessions</th>
+            <th style="width:110px;">Actions</th>
           </tr>
         </thead>
-        <tbody>
-          ${invoices.map(inv => `
-            <tr>
-              <td><strong>${inv.invoiceNo}</strong></td>
-              <td>${inv.orgName}</td>
-              <td>${inv.staffName}</td>
-              <td>${inv.courseTitle}</td>
-              <td>₦${inv.totalFeeNGN.toLocaleString()}</td>
-              <td><span class="badge-ribbon badge-invoice">${inv.status}</span></td>
-              <td><button style="color: #F87171; font-weight: 700;" onclick='showInvoicePreviewModal(${JSON.stringify(inv)})'>View Invoice</button></td>
-            </tr>
-          `).join('')}
+        <tbody id="courseManagerTbody">
+          ${LIVE_COURSES.map(c => renderCourseRow(c)).join('')}
         </tbody>
       </table>
-    `}
+    </div>
+
+    <!-- Add/Edit Course Modal -->
+    <div id="cmsCourseModal" class="cms-modal-overlay" style="display:none;">
+      <div class="cms-modal-box">
+        <div class="cms-modal-header">
+          <h3 id="cmsCourseModalTitle" style="margin:0;font-size:1.1rem;color:#F8FAFC;">Add New Course</h3>
+          <button onclick="closeCmsCourseModal()" style="background:none;border:none;color:#94A3B8;font-size:1.4rem;cursor:pointer;">&times;</button>
+        </div>
+        <div class="cms-modal-body" id="cmsCourseModalBody">
+          <div class="cms-form-grid">
+            <div class="cms-form-group">
+              <label class="cms-label">Course Code *</label>
+              <input id="cmsCode" class="cms-input" placeholder="e.g. RU-FIN-701">
+            </div>
+            <div class="cms-form-group">
+              <label class="cms-label">Duration</label>
+              <input id="cmsDuration" class="cms-input" placeholder="e.g. 5 Days (30 Hours)">
+            </div>
+            <div class="cms-form-group" style="grid-column:1/-1;">
+              <label class="cms-label">Course Title *</label>
+              <input id="cmsTitle" class="cms-input" placeholder="Full course title">
+            </div>
+            <div class="cms-form-group" style="grid-column:1/-1;">
+              <label class="cms-label">Category *</label>
+              <select id="cmsCategory" class="cms-input">
+                ${categories.map(cat => `<option value="${cat}">${cat}</option>`).join('')}
+              </select>
+            </div>
+            <div class="cms-form-group">
+              <label class="cms-label">Fee (NGN) *</label>
+              <input id="cmsFeeNGN" class="cms-input" type="number" placeholder="e.g. 3500000">
+            </div>
+            <div class="cms-form-group">
+              <label class="cms-label">Fee (USD)</label>
+              <input id="cmsFeeUSD" class="cms-input" type="number" placeholder="e.g. 2500">
+            </div>
+            <div class="cms-form-group" style="grid-column:1/-1;">
+              <label class="cms-label">Target Audience</label>
+              <textarea id="cmsAudience" class="cms-input" rows="2" placeholder="Who is this course for?"></textarea>
+            </div>
+            <div class="cms-form-group" style="grid-column:1/-1;">
+              <label class="cms-label">Key Outcomes (one per line)</label>
+              <textarea id="cmsOutcomes" class="cms-input" rows="3" placeholder="Each line becomes one outcome bullet point"></textarea>
+            </div>
+            <div class="cms-form-group" style="display:flex;align-items:center;gap:0.5rem;">
+              <input type="checkbox" id="cmsFlagship" style="width:16px;height:16px;accent-color:#84CC16;">
+              <label for="cmsFlagship" class="cms-label" style="margin:0;">Mark as Flagship Masterclass</label>
+            </div>
+          </div>
+        </div>
+        <div class="cms-modal-footer">
+          <button class="btn btn-sm" style="background:#1E293B;color:#94A3B8;border:1px solid #334155;" onclick="closeCmsCourseModal()">Cancel</button>
+          <button class="btn btn-lime btn-sm" id="cmsSaveCourseBtn" onclick="saveCmsCourse()">
+            <i class="fa-solid fa-floppy-disk" style="margin-right:0.3rem;"></i>Save Course
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Add/Edit Session Modal -->
+    <div id="cmsSessionModal" class="cms-modal-overlay" style="display:none;">
+      <div class="cms-modal-box" style="max-width:540px;">
+        <div class="cms-modal-header">
+          <h3 id="cmsSessionModalTitle" style="margin:0;font-size:1.1rem;color:#F8FAFC;">Add Training Session</h3>
+          <button onclick="closeCmsSessionModal()" style="background:none;border:none;color:#94A3B8;font-size:1.4rem;cursor:pointer;">&times;</button>
+        </div>
+        <div class="cms-modal-body">
+          <input type="hidden" id="cmsSessionCourseId">
+          <input type="hidden" id="cmsSessionId">
+          <div class="cms-form-grid">
+            <div class="cms-form-group">
+              <label class="cms-label">City *</label>
+              <input id="cmsSessionCity" class="cms-input" placeholder="e.g. Abuja, Nigeria">
+            </div>
+            <div class="cms-form-group">
+              <label class="cms-label">Dates *</label>
+              <input id="cmsSessionDates" class="cms-input" placeholder="e.g. 15 Sep - 19 Sep 2026">
+            </div>
+            <div class="cms-form-group" style="grid-column:1/-1;">
+              <label class="cms-label">Venue *</label>
+              <input id="cmsSessionVenue" class="cms-input" placeholder="e.g. Transcorp Hilton, Abuja">
+            </div>
+            <div class="cms-form-group" style="grid-column:1/-1;">
+              <label class="cms-label">Status</label>
+              <select id="cmsSessionStatus" class="cms-input">
+                <option value="Open for Enrolment">Open for Enrolment</option>
+                <option value="Guaranteed to Run">Guaranteed to Run</option>
+                <option value="Limited Seats">Limited Seats</option>
+                <option value="Closed">Closed</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class="cms-modal-footer">
+          <button class="btn btn-sm" style="background:#1E293B;color:#94A3B8;border:1px solid #334155;" onclick="closeCmsSessionModal()">Cancel</button>
+          <button class="btn btn-lime btn-sm" onclick="saveCmsSession()">
+            <i class="fa-solid fa-floppy-disk" style="margin-right:0.3rem;"></i>Save Session
+          </button>
+        </div>
+      </div>
+    </div>
   `;
 }
+
+function renderCourseRow(c) {
+  return `
+    <tr id="crow-${c.id}">
+      <td><code style="font-size:0.75rem;color:#BEF264;">${c.code||'—'}</code></td>
+      <td>
+        <div style="font-weight:600;color:#F1F5F9;font-size:0.88rem;">${c.title}</div>
+        ${c.flagship ? '<span style="font-size:0.7rem;background:rgba(132,204,22,0.15);color:#BEF264;padding:1px 6px;border-radius:999px;">Flagship</span>' : ''}
+      </td>
+      <td style="font-size:0.78rem;color:#94A3B8;">${(c.category||'').split('&')[0].trim()}</td>
+      <td style="font-size:0.8rem;color:#CBD5E1;">${c.duration||'—'}</td>
+      <td style="font-size:0.8rem;">₦${(c.feeNGN||0).toLocaleString()}</td>
+      <td style="font-size:0.8rem;">$${(c.feeUSD||0).toLocaleString()}</td>
+      <td style="text-align:center;">
+        <button onclick="toggleSessions('${c.id}')" style="background:rgba(99,102,241,0.15);color:#A5B4FC;border:1px solid rgba(99,102,241,0.3);border-radius:6px;padding:3px 10px;font-size:0.76rem;cursor:pointer;">
+          ${(c.sessions||[]).length} <i class="fa-solid fa-chevron-down" style="font-size:0.65rem;"></i>
+        </button>
+      </td>
+      <td>
+        <div style="display:flex;gap:0.4rem;flex-wrap:wrap;">
+          <button onclick="openEditCourseModal('${c.id}')" class="cms-action-btn cms-edit-btn" title="Edit course"><i class="fa-solid fa-pen"></i></button>
+          <button onclick="openAddSessionModal('${c.id}')" class="cms-action-btn cms-add-btn" title="Add session"><i class="fa-solid fa-calendar-plus"></i></button>
+          <button onclick="deleteCourse('${c.id}')" class="cms-action-btn cms-del-btn" title="Delete course"><i class="fa-solid fa-trash"></i></button>
+        </div>
+      </td>
+    </tr>
+    <tr id="sessions-${c.id}" style="display:none;">
+      <td colspan="8" style="padding:0;background:rgba(15,23,42,0.5);">
+        <div style="padding:0.75rem 1rem;">
+          ${(c.sessions||[]).length===0 ? '<p style="color:#475569;font-size:0.82rem;margin:0.5rem 0;">No sessions scheduled. Click the <strong>calendar+</strong> button above to add one.</p>' :
+          `<table style="width:100%;border-collapse:collapse;font-size:0.82rem;">
+            <thead><tr>
+              <th style="text-align:left;padding:4px 8px;color:#64748B;font-weight:600;">City</th>
+              <th style="text-align:left;padding:4px 8px;color:#64748B;font-weight:600;">Venue</th>
+              <th style="text-align:left;padding:4px 8px;color:#64748B;font-weight:600;">Dates</th>
+              <th style="text-align:left;padding:4px 8px;color:#64748B;font-weight:600;">Status</th>
+              <th style="padding:4px 8px;color:#64748B;font-weight:600;">Actions</th>
+            </tr></thead>
+            <tbody>${(c.sessions||[]).map(s => `<tr>
+              <td style="padding:4px 8px;color:#CBD5E1;">${s.city||'—'}</td>
+              <td style="padding:4px 8px;color:#94A3B8;max-width:180px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">${s.venue||'—'}</td>
+              <td style="padding:4px 8px;color:#CBD5E1;">${s.dates||'—'}</td>
+              <td style="padding:4px 8px;"><span style="font-size:0.72rem;background:rgba(132,204,22,0.15);color:#BEF264;padding:2px 7px;border-radius:999px;">${s.status||'—'}</span></td>
+              <td style="padding:4px 8px;">
+                <button onclick="openEditSessionModal('${c.id}','${s.id}')" class="cms-action-btn cms-edit-btn" title="Edit session" style="padding:3px 7px;font-size:0.7rem;"><i class="fa-solid fa-pen"></i></button>
+                <button onclick="deleteSession('${c.id}','${s.id}')" class="cms-action-btn cms-del-btn" title="Remove session" style="padding:3px 7px;font-size:0.7rem;"><i class="fa-solid fa-trash"></i></button>
+              </td>
+            </tr>`).join('')}</tbody>
+          </table>`}
+        </div>
+      </td>
+    </tr>
+  `;
+}
+
+function toggleSessions(courseId) {
+  const row = document.getElementById(`sessions-${courseId}`);
+  if (row) row.style.display = row.style.display === 'none' ? 'table-row' : 'none';
+}
+
+function refreshCourseManager() {
+  const tbody = document.getElementById('courseManagerTbody');
+  if (tbody) tbody.innerHTML = LIVE_COURSES.map(c => renderCourseRow(c)).join('');
+  renderFeaturedCourses();
+  renderScheduleCourses();
+}
+
+// ── Course CRUD ──────────────────────────────────────────────────────────────
+let _editingCourseId = null;
+
+function openAddCourseModal() {
+  _editingCourseId = null;
+  document.getElementById('cmsCourseModalTitle').textContent = 'Add New Course';
+  document.getElementById('cmsSaveCourseBtn').textContent = 'Save Course';
+  ['cmsCode','cmsTitle','cmsDuration','cmsFeeNGN','cmsFeeUSD','cmsAudience','cmsOutcomes'].forEach(id => { const el = document.getElementById(id); if(el) el.value = ''; });
+  document.getElementById('cmsFlagship').checked = false;
+  document.getElementById('cmsCourseModal').style.display = 'flex';
+}
+
+function openEditCourseModal(courseId) {
+  const c = LIVE_COURSES.find(x => x.id === courseId);
+  if (!c) return;
+  _editingCourseId = courseId;
+  document.getElementById('cmsCourseModalTitle').textContent = 'Edit Course';
+  document.getElementById('cmsCode').value = c.code || '';
+  document.getElementById('cmsTitle').value = c.title || '';
+  document.getElementById('cmsDuration').value = c.duration || '';
+  document.getElementById('cmsFeeNGN').value = c.feeNGN || '';
+  document.getElementById('cmsFeeUSD').value = c.feeUSD || '';
+  document.getElementById('cmsCategory').value = c.category || '';
+  document.getElementById('cmsAudience').value = c.targetAudience || '';
+  document.getElementById('cmsOutcomes').value = (c.outcomes||[]).join('\n');
+  document.getElementById('cmsFlagship').checked = !!c.flagship;
+  document.getElementById('cmsCourseModal').style.display = 'flex';
+}
+
+function closeCmsCourseModal() { document.getElementById('cmsCourseModal').style.display = 'none'; }
+
+function saveCmsCourse() {
+  const code = document.getElementById('cmsCode').value.trim();
+  const title = document.getElementById('cmsTitle').value.trim();
+  const category = document.getElementById('cmsCategory').value;
+  const feeNGN = parseInt(document.getElementById('cmsFeeNGN').value) || 0;
+  const feeUSD = parseInt(document.getElementById('cmsFeeUSD').value) || 0;
+
+  if (!title || !feeNGN) { showToast('Course title and NGN fee are required.'); return; }
+
+  const outcomesRaw = document.getElementById('cmsOutcomes').value.trim();
+  const updates = {
+    code, title, category, feeNGN, feeUSD,
+    duration: document.getElementById('cmsDuration').value.trim(),
+    targetAudience: document.getElementById('cmsAudience').value.trim(),
+    outcomes: outcomesRaw ? outcomesRaw.split('\n').map(l=>l.trim()).filter(Boolean) : [],
+    flagship: document.getElementById('cmsFlagship').checked,
+    badgeText: document.getElementById('cmsFlagship').checked ? 'Flagship Masterclass' : 'Executive Programme',
+    badgeClass: document.getElementById('cmsFlagship').checked ? 'badge-flagship' : 'badge-invoice',
+  };
+
+  if (_editingCourseId) {
+    cmsUpdateCourse(_editingCourseId, updates);
+    showToast(`"${title}" updated successfully.`);
+  } else {
+    const newId = `course-${Date.now()}`;
+    cmsAddCourse({ id: newId, sessions: [], ...updates });
+    showToast(`"${title}" added to catalog.`);
+  }
+
+  closeCmsCourseModal();
+  refreshCourseManager();
+}
+
+function deleteCourse(courseId) {
+  const c = LIVE_COURSES.find(x => x.id === courseId);
+  if (!c) return;
+  if (!confirm(`Delete "${c.title}"? This cannot be undone.`)) return;
+  cmsDeleteCourse(courseId);
+  refreshCourseManager();
+  showToast('Course deleted from catalog.');
+}
+
+// ── Session CRUD ─────────────────────────────────────────────────────────────
+let _editingSessionCourseId = null;
+let _editingSessionId = null;
+
+function openAddSessionModal(courseId) {
+  _editingSessionCourseId = courseId;
+  _editingSessionId = null;
+  document.getElementById('cmsSessionModalTitle').textContent = 'Add Training Session';
+  ['cmsSessionCity','cmsSessionVenue','cmsSessionDates'].forEach(id => { const el = document.getElementById(id); if(el) el.value=''; });
+  document.getElementById('cmsSessionStatus').value = 'Open for Enrolment';
+  document.getElementById('cmsSessionModal').style.display = 'flex';
+}
+
+function openEditSessionModal(courseId, sessionId) {
+  const course = LIVE_COURSES.find(c => c.id === courseId);
+  if (!course) return;
+  const session = (course.sessions||[]).find(s => s.id === sessionId);
+  if (!session) return;
+  _editingSessionCourseId = courseId;
+  _editingSessionId = sessionId;
+  document.getElementById('cmsSessionModalTitle').textContent = 'Edit Session';
+  document.getElementById('cmsSessionCity').value = session.city||'';
+  document.getElementById('cmsSessionVenue').value = session.venue||'';
+  document.getElementById('cmsSessionDates').value = session.dates||'';
+  document.getElementById('cmsSessionStatus').value = session.status||'Open for Enrolment';
+  document.getElementById('cmsSessionModal').style.display = 'flex';
+}
+
+function closeCmsSessionModal() { document.getElementById('cmsSessionModal').style.display = 'none'; }
+
+function saveCmsSession() {
+  const city = document.getElementById('cmsSessionCity').value.trim();
+  const venue = document.getElementById('cmsSessionVenue').value.trim();
+  const dates = document.getElementById('cmsSessionDates').value.trim();
+  const status = document.getElementById('cmsSessionStatus').value;
+
+  if (!city || !venue || !dates) { showToast('City, venue and dates are required.'); return; }
+
+  const sessionData = { city, venue, dates, status,
+    statusClass: status === 'Guaranteed to Run' ? 'badge-guaranteed' : status === 'Limited Seats' ? 'badge-flagship' : 'badge-invoice'
+  };
+
+  if (_editingSessionId) {
+    cmsUpdateSession(_editingSessionCourseId, _editingSessionId, sessionData);
+    showToast('Session updated.');
+  } else {
+    cmsAddSession(_editingSessionCourseId, sessionData);
+    showToast('Session added.');
+  }
+
+  closeCmsSessionModal();
+  refreshCourseManager();
+  toggleSessions(_editingSessionCourseId);
+}
+
+function deleteSession(courseId, sessionId) {
+  if (!confirm('Remove this training session?')) return;
+  cmsDeleteSession(courseId, sessionId);
+  refreshCourseManager();
+  toggleSessions(courseId);
+  showToast('Session removed.');
+}
+
+// Keep old renderAdminDashboard as alias for any legacy calls
+function renderAdminDashboard() {
+  const session = getAuthState();
+  renderAdminView(session);
+}
+
+
 
 // 12. Helper Utilities
 function showToast(msg) {

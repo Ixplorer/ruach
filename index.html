@@ -902,13 +902,19 @@
        ========================================================================== -->
   <div id="view-admin" class="admin-section" style="display: none;">
     <div class="container">
-      <div class="admin-header">
+      <div class="admin-header" id="adminPortalHeader" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
         <div>
-          <h2 style="font-size: 1.75rem; color: var(--bg-white);">Ruach Operations Staff Portal</h2>
-          <p style="color: #94A3B8; font-size: 0.9rem;">Review employer invoice requests, track self-funded enrolments, and audit active sessions.</p>
+          <h2 style="font-size: 1.75rem; color: var(--bg-white); margin-bottom: 0.25rem;">Ruach Operations Staff Portal</h2>
+          <div id="adminUserBadge" style="color: #94A3B8; font-size: 0.9rem; display: flex; align-items: center;"></div>
         </div>
-        <a href="#home" class="btn btn-outline-green"
-          style="color: var(--bg-white); border-color: rgba(255,255,255,0.2);">Return to Public Site</a>
+        <div style="display: flex; gap: 0.75rem; align-items: center;">
+          <button onclick="staffLogout()" class="btn btn-sm" style="background: rgba(239, 68, 68, 0.15); color: #F87171; border: 1px solid rgba(239, 68, 68, 0.3);">
+            <i class="fa-solid fa-right-from-bracket" style="margin-right: 0.4rem;"></i>Sign Out
+          </button>
+          <a href="#home" class="btn btn-outline-green btn-sm" style="color: var(--bg-white); border-color: rgba(255,255,255,0.2);">
+            <i class="fa-solid fa-globe" style="margin-right: 0.4rem;"></i>Public Site
+          </a>
+        </div>
       </div>
 
       <div id="adminDashboardContent">
